@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almanca Zamanlar (Die Zeitformen)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background-color: #3d4d5c;
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        .flags {
+            margin-top: 10px;
+            font-size: 2em;
+        }
+
+        .tenses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .tense-card {
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            color: white;
+        }
+
+        .tense-card h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .tense-card .subtitle {
+            font-style: italic;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .example-box {
+            background-color: white;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .example-box .main-example {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .example-box .translation {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .example-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .example-box li {
+            padding: 5px 0;
+            color: #555;
+        }
+
+        .example-box li:before {
+            content: "• ";
+            font-weight: bold;
+            color: #333;
+        }
+
+        .prasens { background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%); }
+        .prateritum { background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%); }
+        .perfekt { background: linear-gradient(135deg, #48bb78 0%, #38a169 100%); }
+        .plusquamperfekt { background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%); }
+        .futur1 { background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%); }
+        .futur2 { background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%); }
+
+        .expressions-section {
+            background-color: #3d4d5c;
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .expressions-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .expressions-section .flag-icon {
+            font-size: 1.5em;
+        }
+
+        .expressions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .expression-box {
+            background-color: #e8f4f8;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .expression-box h3 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .expression-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .expression-box li {
+            padding: 8px 0;
+            color: #555;
+            border-bottom: 1px solid #cbd5e0;
+        }
+
+        .expression-box li:last-child {
+            border-bottom: none;
+        }
+
+        .expression-box li:before {
+            content: "• ";
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .tenses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .expressions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Almanca Zamanlar (Die Zeitformen)</h1>
+        </div>
+
+        <div class="tenses-grid">
+            <!-- Präsens -->
+            <div class="tense-card prasens">
+                <h2>1. Präsens</h2>
+                <p class="subtitle">(Şimdiki/Geniş Zaman)</p>
+                <div class="example-box">
+                    <div class="main-example">Ich lese ein Buch.</div>
+                    <div class="translation">(Kitap okuyorum/okurum.)</div>
+                    <ul>
+                        <li>Şimdiki olaylar</li>
+                        <li>Genel doğrular</li>
+                        <li>Alışkanlıklar</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Präteritum -->
+            <div class="tense-card prateritum">
+                <h2>2. Präteritum</h2>
+                <p class="subtitle">(Geçmiş Zaman - Yazılı)</p>
+                <div class="example-box">
+                    <div class="main-example">Ich las ein Buch.</div>
+                    <div class="translation">(Kitap okudum.)</div>
+                    <ul>
+                        <li>Hikaye anlatımı</li>
+                        <li>Resmi yazılar</li>
+                        <li>Edebi metinler</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Perfekt -->
+            <div class="tense-card perfekt">
+                <h2>3. Perfekt</h2>
+                <p class="subtitle">(Geçmiş Zaman - Sözlü)</p>
+                <div class="example-box">
+                    <div class="main-example">Ich habe ein Buch gelesen.</div>
+                    <div class="translation">(Kitap okudum.)</div>
+                    <ul>
+                        <li>Günlük konuşma</li>
+                        <li>Bitmiş eylemler</li>
+                        <li>haben/sein + Partizip II</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Plusquamperfekt -->
+            <div class="tense-card plusquamperfekt">
+                <h2>4. Plusquamperfekt</h2>
+                <p class="subtitle">(Miş'li Geçmiş Zaman)</p>
+                <div class="example-box">
+                    <div class="main-example">Ich hatte das Buch gelesen.</div>
+                    <div class="translation">(Kitabı okumuştum.)</div>
+                    <ul>
+                        <li>Daha önceki geçmiş</li>
+                        <li>İki geçmiş olay</li>
+                        <li>hatte/war + Partizip II</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Futur I -->
+            <div class="tense-card futur1">
+                <h2>5. Futur I</h2>
+                <p class="subtitle">(Gelecek Zaman)</p>
+                <div class="example-box">
+                    <div class="main-example">Ich werde ein Buch lesen.</div>
+                    <div class="translation">(Kitap okuyacağım.)</div>
+                    <ul>
+                        <li>Gelecek planlar</li>
+                        <li>Tahminler</li>
+                        <li>werden + Infinitiv</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Futur II -->
+            <div class="tense-card futur2">
+                <h2>6. Futur II</h2>
+                <p class="subtitle">(Gelecekte Bitmiş Zaman)</p>
+                <div class="example-box">
+                    <div class="main-example">Ich werde das Buch gelesen haben.</div>
+                    <div class="translation">(Kitabı okumuş olacağım.)</div>
+                    <ul>
+                        <li>Gelecekte bitmiş eylemler</li>
+                        <li>Tahminler</li>
+                        <li>werden + Partizip II + haben</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expressions Section -->
+        <div class="expressions-section">
+            <h2>📅 Sık Kullanılan Zaman İfadeleri </h2>
+            <div class="expressions-grid">
+                <!-- Temel İfadeler -->
+                <div class="expression-box">
+                    <h3>Temel İfadeler</h3>
+                    <ul>
+                        <li>jetzt (şimdi)</li>
+                        <li>heute (bugün)</li>
+                        <li>morgen (yarın)</li>
+                        <li>gestern (dün)</li>
+                        <li>übermorgen (yarından sonra)</li>
+                        <li>vorgestern (dünden önce)</li>
+                    </ul>
+                </div>
+
+                <!-- Sıklık İfadeleri -->
+                <div class="expression-box">
+                    <h3>Sıklık İfadeleri</h3>
+                    <ul>
+                        <li>immer (her zaman)</li>
+                        <li>oft (sık sık)</li>
+                        <li>manchmal (bazen)</li>
+                        <li>selten (nadiren)</li>
+                        <li>nie (hiçbir zaman)</li>
+                        <li>normalerweise (genellikle)</li>
+                    </ul>
+                </div>
+
+                <!-- Periyot İfadeleri -->
+                <div class="expression-box">
+                    <h3>Periyot İfadeleri</h3>
+                    <ul>
+                        <li>diese Woche (bu hafta)</li>
+                        <li>nächstes Jahr (gelecek yıl)</li>
+                        <li>letzten Monat (geçen ay)</li>
+                        <li>vor einer Woche (bir hafta önce)</li>
+                        <li>in zwei Tagen (iki gün içinde)</li>
+                        <li>seit gestern (dünden beri)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
