@@ -63,6 +63,37 @@
             margin-bottom: 25px;
         }
 
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .sections-grid .section {
+            margin-bottom: 0;
+        }
+
+        .countries-sections-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            margin: 20px 0;
+            align-items: start;
+        }
+
+        .countries-sections-grid .section {
+            margin-bottom: 0;
+        }
+
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
         h2 {
             color: #2c3e50;
             font-size: 1.3em;
@@ -123,6 +154,11 @@
             text-align: center;
             margin-bottom: 4px;
             font-family: 'Courier New', monospace;
+            display: none;
+        }
+
+        .letter-pronunciation.show {
+            display: block;
         }
 
         .letter-turkish {
@@ -279,6 +315,59 @@
             color: #2c3e50;
             font-weight: 500;
             white-space: nowrap;
+            position: relative;
+            cursor: help;
+        }
+
+        .toggle-label.tooltip-trigger {
+            position: relative;
+        }
+
+        .toggle-label.tooltip-trigger::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            padding: 12px 16px;
+            background-color: #2c3e50;
+            color: #fff;
+            font-size: 0.85em;
+            font-weight: normal;
+            line-height: 1.5;
+            white-space: normal;
+            width: 320px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 1000;
+            pointer-events: none;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .toggle-label.tooltip-trigger::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 2px;
+            border: 6px solid transparent;
+            border-bottom-color: #2c3e50;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 1001;
+            pointer-events: none;
+        }
+
+        .toggle-label.tooltip-trigger:hover::after,
+        .toggle-label.tooltip-trigger:hover::before {
+            opacity: 1;
+            visibility: visible;
         }
 
         @media (max-width: 768px) {
@@ -301,6 +390,12 @@
                 justify-content: space-between;
             }
 
+            .toggle-label.tooltip-trigger::after {
+                width: 280px;
+                font-size: 0.8em;
+                padding: 10px 12px;
+            }
+
             .container {
                 padding: 15px;
             }
@@ -321,6 +416,21 @@
             .rules-grid {
                 grid-template-columns: 1fr;
             }
+
+            .sections-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .countries-sections-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .regions-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
         }
     </style>
 </head>
@@ -330,12 +440,21 @@
             <div class="header-text">
                 <h1>Buchstabieralphabet<span id="titleTR" style="display: none;"> (Harflerin Telaffuzları ve Telefon Kodlaması)</span></h1>
             </div>
-            <div class="toggle-container">
-                <span class="toggle-label">TR</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="toggleTurkish">
-                    <span class="toggle-slider"></span>
-                </label>
+            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                <div class="toggle-container">
+                    <span class="toggle-label tooltip-trigger" data-tooltip="Uluslararası Fonetik Alfabe (IPA), dünya dillerindeki her sesi benzersiz bir sembolle temsil eden standart bir fonetik gösterim sistemidir. Dilbilimciler, dil öğretmenleri ve ses terapistleri gibi profesyoneller tarafından kullanılan IPA, bir kelimenin tam telaffuzunu göstermek için tasarlanmıştır. IPA, her sembolün yalnızca bir doğru okunuşa sahip olmasıyla geleneksel alfabelerden ayrılır.">IPA</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggleIPA">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-container">
+                    <span class="toggle-label">TR</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggleTurkish">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
             </div>
         </div>
     </div>
@@ -407,7 +526,7 @@
                     <div class="letter-code">Julius</div>
                     <div class="letter-pronunciation">[jɔt]</div>
                     <div class="letter-turkish">yot</div>
-                    <div class="letter-explanation">Harfin kendisi "yot" olarak söylenir. Örnek: joghurt</div>
+                    <div class="letter-explanation">Harfin kendisi "yot" olarak söylenir. Örnek: Joghurt</div>
                 </div>
                 <div class="letter-box consonant">
                     <div class="letter-header">K/k</div>
@@ -450,7 +569,7 @@
                     <div class="letter-code">Quelle</div>
                     <div class="letter-pronunciation">[ku:]</div>
                     <div class="letter-turkish">Kuu</div>
-                    <div class="letter-explanation">Q harfi kendinden sonra u harfini alırsa kv olarak telaffuz edilir. Örnek: Quadrat (Kvatgat)</div>
+                    <div class="letter-explanation">Q harfi kendinden sonra u harfini alırsa kv olarak telaffuz edilir. Örnek: Quadrat (Kvadrat)</div>
                 </div>
                 <div class="letter-box consonant">
                     <div class="letter-header">R/r</div>
@@ -520,7 +639,7 @@
                 <div class="letter-box vowel">
                     <div class="letter-header">Ä/ä</div>
                     <div class="letter-code">Ärger</div>
-                    <div class="letter-pronunciation">[ε:]</div>
+                    <div class="letter-pronunciation">[ɛ:]</div>
                     <div class="letter-turkish">ee</div>
                     <div class="letter-explanation">Bizdeki e harfinin karşılığı, ağzınızı açarak e derseniz tam bu olur. a-Umlaut</div>
                 </div>
@@ -541,17 +660,32 @@
             </div>
         </div>
 
-        <!-- Eszett -->
-        <div class="section">
-            <h2>ẞ (Eszett - Scharfes S) - Özel Harf<span id="eszettTR" style="display: none;"> (Special Letter)</span></h2>
-            <div class="compact-box">
-                <div style="margin-bottom: 8px;"><strong>Estset</strong></div>
-                <ul>
-                    <li>Büyük hali yoktur (2017'ye kadar)<span id="eszett1TR" style="display: none;"> (No uppercase until 2017)</span></li>
-                    <li>Kelime başında kullanılmaz<span id="eszett2TR" style="display: none;"> (Not at word start)</span></li>
-                    <li>"ss" yerine kullanılır<span id="eszett3TR" style="display: none;"> (Instead of "ss")</span></li>
-                    <li>Örnekler: Fuß (ayak), heiß (sıcak), Straße (sokak), weiß (beyaz)<span id="eszett4TR" style="display: none;"> (Examples: Fuß, heiß, Straße, weiß)</span></li>
-                </ul>
+        <!-- Kompakt Bilgi Bölümleri - İki Sütun -->
+        <div class="sections-grid">
+            <!-- Eszett -->
+            <div class="section">
+                <h2>ẞ (Eszett - Scharfes S) - Özel Harf<span id="eszettTR" style="display: none;"> (Special Letter)</span></h2>
+                <div class="compact-box">
+                    <div style="margin-bottom: 8px;"><strong>Eszett</strong></div>
+                    <ul>
+                        <li>Büyük hali yoktur (2017'ye kadar)<span id="eszett1TR" style="display: none;"> (No uppercase until 2017)</span></li>
+                        <li>Kelime başında kullanılmaz<span id="eszett2TR" style="display: none;"> (Not at word start)</span></li>
+                        <li>"ss" yerine kullanılır<span id="eszett3TR" style="display: none;"> (Instead of "ss")</span></li>
+                        <li>Örnekler: Fuß (ayak), heiß (sıcak), Straße (sokak), weiß (beyaz)<span id="eszett4TR" style="display: none;"> (Examples: Fuß, heiß, Straße, weiß)</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Önemli Bilgiler -->
+            <div class="section">
+                <h2>Önemli Bilgiler<span id="infoTR" style="display: none;"> (Important Information)</span></h2>
+                <div class="info-box">
+                    <ul>
+                        <li>En sık kullanılan harf: <strong>E</strong><span id="info1TR" style="display: none;"> (Most used: E)</span></li>
+                        <li>En az kullanılan harf: <strong>Q</strong><span id="info2TR" style="display: none;"> (Least used: Q)</span></li>
+                        <li>Tüm harflerin artikeli: "das" (das A, das B...)<span id="info3TR" style="display: none;"> (Article: "das")</span></li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -563,7 +697,7 @@
                 <div class="rule-item"><strong>eu</strong> → 'oy' (heute, neu)<span id="rule2TR" style="display: none;"> (like 'oy')</span></div>
                 <div class="rule-item"><strong>au</strong> → 'av' (Haus, auch)<span id="rule3TR" style="display: none;"> (like 'av')</span></div>
                 <div class="rule-item"><strong>sch</strong> → 'ş' (schön, Schule)<span id="rule4TR" style="display: none;"> (like 'sh')</span></div>
-                <div class="rule-item"><strong>ch</strong> → 'kalın h' (ich, auch)<span id="rule5TR" style="display: none;"> (guttural 'h')</span></div>
+                <div class="rule-item"><strong>ch</strong> → 'kalın h' (Acht, Loch) veya 'yumuşak h' (ich, Milch, auch)<span id="rule5TR" style="display: none;"> (guttural 'h' or soft 'h')</span></div>
                 <div class="rule-item"><strong>ie</strong> → 'uzun i' (sie, wie)<span id="rule6TR" style="display: none;"> (long 'i')</span></div>
                 <div class="rule-item"><strong>st/sp</strong> → başta 'şt/şp' (Stadt, Sport)<span id="rule7TR" style="display: none;"> (at start 'sht/shp')</span></div>
                 <div class="rule-item"><strong>ck</strong> → 'kalın k' (Ecke, Glück)<span id="rule8TR" style="display: none;"> (guttural 'k')</span></div>
@@ -571,50 +705,102 @@
             </div>
         </div>
 
-        <!-- Ülkeler -->
-        <div class="section">
-            <h2>Alman Alfabesi Kullanılan Ülkeler<span id="countriesTR" style="display: none;"> (Countries)</span></h2>
-            <div class="countries-grid">
-                <div class="country-item">
-                    <div style="font-size: 1.8em; margin-bottom: 5px;">🇩🇪</div>
-                    <div><strong>Deutschland</strong><span id="country1TR" style="display: none;"> (Germany)</span></div>
+        <!-- Ülkeler - İki Sütun -->
+        <div class="countries-sections-grid">
+            <!-- Ülkeler -->
+            <div class="section">
+                <h2>Alman Alfabesi Kullanılan Ülkeler<span id="countriesTR" style="display: none;"> (Countries)</span></h2>
+                <div class="countries-grid">
+                    <div class="country-item">
+                        <div style="font-size: 1.8em; margin-bottom: 5px;">🇩🇪</div>
+                        <div><strong>Deutschland</strong><span id="country1TR" style="display: none;"> (Germany)</span></div>
+                    </div>
+                    <div class="country-item">
+                        <div style="font-size: 1.8em; margin-bottom: 5px;">🇦🇹</div>
+                        <div><strong>Österreich</strong><span id="country2TR" style="display: none;"> (Austria)</span></div>
+                    </div>
+                    <div class="country-item">
+                        <div style="font-size: 1.8em; margin-bottom: 5px;">🇨🇭</div>
+                        <div><strong>Schweiz</strong><span id="country3TR" style="display: none;"> (Switzerland)</span></div>
+                    </div>
+                    <div class="country-item">
+                        <div style="font-size: 1.8em; margin-bottom: 5px;">🇱🇺</div>
+                        <div><strong>Luxemburg</strong><span id="country4TR" style="display: none;"> (Luxembourg)</span></div>
+                    </div>
+                    <div class="country-item">
+                        <div style="font-size: 1.8em; margin-bottom: 5px;">🇱🇮</div>
+                        <div><strong>Liechtenstein</strong><span id="country5TR" style="display: none;"> (Liechtenstein)</span></div>
+                    </div>
                 </div>
-                <div class="country-item">
-                    <div style="font-size: 1.8em; margin-bottom: 5px;">🇦🇹</div>
-                    <div><strong>Österreich</strong><span id="country2TR" style="display: none;"> (Austria)</span></div>
-                </div>
-                <div class="country-item">
-                    <div style="font-size: 1.8em; margin-bottom: 5px;">🇨🇭</div>
-                    <div><strong>Schweiz</strong><span id="country3TR" style="display: none;"> (Switzerland)</span></div>
-                </div>
-                <div class="country-item">
-                    <div style="font-size: 1.8em; margin-bottom: 5px;">🇱🇺</div>
-                    <div><strong>Luxemburg</strong><span id="country4TR" style="display: none;"> (Luxembourg)</span></div>
-                </div>
-                <div class="country-item">
-                    <div style="font-size: 1.8em; margin-bottom: 5px;">🇱🇮</div>
-                    <div><strong>Liechtenstein</strong><span id="country5TR" style="display: none;"> (Liechtenstein)</span></div>
+                <div class="compact-box" style="margin-top: 12px;">
+                    <strong>Not:</strong> İsviçre ve Lihtenştayn'da ẞ yerine ss kullanılır<span id="noteTR" style="display: none;"> (Note: In Switzerland and Liechtenstein, 'ss' instead of 'ẞ')</span>
                 </div>
             </div>
-            <div class="compact-box" style="margin-top: 12px;">
-                <strong>Not:</strong> İsviçre ve Lihtenştayn'da ẞ yerine ss kullanılır<span id="noteTR" style="display: none;"> (Note: In Switzerland and Liechtenstein, 'ss' instead of 'ẞ')</span>
-            </div>
-        </div>
 
-        <!-- Önemli Bilgiler -->
-        <div class="section">
-            <h2>Önemli Bilgiler<span id="infoTR" style="display: none;"> (Important Information)</span></h2>
-            <div class="info-box">
-                <ul>
-                    <li>En sık kullanılan harf: <strong>E</strong><span id="info1TR" style="display: none;"> (Most used: E)</span></li>
-                    <li>En az kullanılan harf: <strong>Q</strong><span id="info2TR" style="display: none;"> (Least used: Q)</span></li>
-                    <li>Tüm harflerin artikeli: "das" (das A, das B...)<span id="info3TR" style="display: none;"> (Article: "das")</span></li>
-                </ul>
+            <!-- Almanca Konuşulan Bölgeler -->
+            <div class="section">
+                <h2>Almanca Konuşulan Bölgeler<span id="regionsTR" style="display: none;"> (German-Speaking Regions)</span></h2>
+                <div class="regions-grid">
+                    <div class="country-item">
+                        <div style="font-size: 1.8em; margin-bottom: 5px;">🇧🇪</div>
+                        <div><strong>Belgien</strong><span id="region1TR" style="display: none;"> (Belçika)</span></div>
+                        <div style="font-size: 0.85em; color: #7f8c8d; margin-top: 4px;">Ostkantone<span id="region1DetailTR" style="display: none;"> (Doğu Kantonlar)</span></div>
+                    </div>
+                    <div class="country-item">
+                        <div style="font-size: 1.8em; margin-bottom: 5px;">🇮🇹</div>
+                        <div><strong>Italien</strong><span id="region2TR" style="display: none;"> (İtalya)</span></div>
+                        <div style="font-size: 0.85em; color: #7f8c8d; margin-top: 4px;">Südtirol<span id="region2DetailTR" style="display: none;"> (Güney Tirol)</span></div>
+                    </div>
+                    <div class="country-item">
+                        <div style="font-size: 1.8em; margin-bottom: 5px;">🇩🇰</div>
+                        <div><strong>Dänemark</strong><span id="region3TR" style="display: none;"> (Danimarka)</span></div>
+                        <div style="font-size: 0.85em; color: #7f8c8d; margin-top: 4px;">Nordschleswig<span id="region3DetailTR" style="display: none;"> (Kuzey Schleswig)</span></div>
+                    </div>
+                    <div class="country-item">
+                        <div style="font-size: 1.8em; margin-bottom: 5px;">🇫🇷</div>
+                        <div><strong>Frankreich</strong><span id="region4TR" style="display: none;"> (Fransa)</span></div>
+                        <div style="font-size: 0.85em; color: #7f8c8d; margin-top: 4px;">Elsass-Lothringen<span id="region4DetailTR" style="display: none;"> (Alsas-Loren)</span></div>
+                    </div>
+                    <div class="country-item">
+                        <div style="font-size: 1.8em; margin-bottom: 5px;">🇵🇱</div>
+                        <div><strong>Polen</strong><span id="region5TR" style="display: none;"> (Polonya)</span></div>
+                        <div style="font-size: 0.85em; color: #7f8c8d; margin-top: 4px;">Schlesien<span id="region5DetailTR" style="display: none;"> (Silezya)</span></div>
+                    </div>
+                    <div class="country-item">
+                        <div style="font-size: 1.8em; margin-bottom: 5px;">🇨🇿</div>
+                        <div><strong>Tschechien</strong><span id="region6TR" style="display: none;"> (Çek Cumhuriyeti)</span></div>
+                        <div style="font-size: 0.85em; color: #7f8c8d; margin-top: 4px;">Sudetenland<span id="region6DetailTR" style="display: none;"> (Sudetenland)</span></div>
+                    </div>
+                    <div class="country-item">
+                        <div style="font-size: 1.8em; margin-bottom: 5px;">🇷🇴</div>
+                        <div><strong>Rumänien</strong><span id="region7TR" style="display: none;"> (Romanya)</span></div>
+                        <div style="font-size: 0.85em; color: #7f8c8d; margin-top: 4px;">Siebenbürgen<span id="region7DetailTR" style="display: none;"> (Erdel)</span></div>
+                    </div>
+                    <div class="country-item">
+                        <div style="font-size: 1.8em; margin-bottom: 5px;">🇭🇺</div>
+                        <div><strong>Ungarn</strong><span id="region8TR" style="display: none;"> (Macaristan)</span></div>
+                        <div style="font-size: 0.85em; color: #7f8c8d; margin-top: 4px;">Ungarndeutsche<span id="region8DetailTR" style="display: none;"> (Alman Macarlar)</span></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        document.getElementById('toggleIPA').addEventListener('change', function() {
+            const ipaElements = document.querySelectorAll('.letter-pronunciation');
+            
+            if (this.checked) {
+                ipaElements.forEach(function(element) {
+                    element.classList.add('show');
+                });
+            } else {
+                ipaElements.forEach(function(element) {
+                    element.classList.remove('show');
+                });
+            }
+        });
+
         document.getElementById('toggleTurkish').addEventListener('change', function() {
             const turkishElements = document.querySelectorAll('.letter-turkish');
             const explanationElements = document.querySelectorAll('.letter-explanation');
@@ -643,6 +829,23 @@
             const country4TR = document.getElementById('country4TR');
             const country5TR = document.getElementById('country5TR');
             const noteTR = document.getElementById('noteTR');
+            const regionsTR = document.getElementById('regionsTR');
+            const region1TR = document.getElementById('region1TR');
+            const region1DetailTR = document.getElementById('region1DetailTR');
+            const region2TR = document.getElementById('region2TR');
+            const region2DetailTR = document.getElementById('region2DetailTR');
+            const region3TR = document.getElementById('region3TR');
+            const region3DetailTR = document.getElementById('region3DetailTR');
+            const region4TR = document.getElementById('region4TR');
+            const region4DetailTR = document.getElementById('region4DetailTR');
+            const region5TR = document.getElementById('region5TR');
+            const region5DetailTR = document.getElementById('region5DetailTR');
+            const region6TR = document.getElementById('region6TR');
+            const region6DetailTR = document.getElementById('region6DetailTR');
+            const region7TR = document.getElementById('region7TR');
+            const region7DetailTR = document.getElementById('region7DetailTR');
+            const region8TR = document.getElementById('region8TR');
+            const region8DetailTR = document.getElementById('region8DetailTR');
             const info1TR = document.getElementById('info1TR');
             const info2TR = document.getElementById('info2TR');
             const info3TR = document.getElementById('info3TR');
@@ -679,6 +882,23 @@
                 if (country4TR) country4TR.style.display = 'inline';
                 if (country5TR) country5TR.style.display = 'inline';
                 if (noteTR) noteTR.style.display = 'inline';
+                if (regionsTR) regionsTR.style.display = 'inline';
+                if (region1TR) region1TR.style.display = 'inline';
+                if (region1DetailTR) region1DetailTR.style.display = 'inline';
+                if (region2TR) region2TR.style.display = 'inline';
+                if (region2DetailTR) region2DetailTR.style.display = 'inline';
+                if (region3TR) region3TR.style.display = 'inline';
+                if (region3DetailTR) region3DetailTR.style.display = 'inline';
+                if (region4TR) region4TR.style.display = 'inline';
+                if (region4DetailTR) region4DetailTR.style.display = 'inline';
+                if (region5TR) region5TR.style.display = 'inline';
+                if (region5DetailTR) region5DetailTR.style.display = 'inline';
+                if (region6TR) region6TR.style.display = 'inline';
+                if (region6DetailTR) region6DetailTR.style.display = 'inline';
+                if (region7TR) region7TR.style.display = 'inline';
+                if (region7DetailTR) region7DetailTR.style.display = 'inline';
+                if (region8TR) region8TR.style.display = 'inline';
+                if (region8DetailTR) region8DetailTR.style.display = 'inline';
                 if (info1TR) info1TR.style.display = 'inline';
                 if (info2TR) info2TR.style.display = 'inline';
                 if (info3TR) info3TR.style.display = 'inline';
@@ -714,6 +934,23 @@
                 if (country4TR) country4TR.style.display = 'none';
                 if (country5TR) country5TR.style.display = 'none';
                 if (noteTR) noteTR.style.display = 'none';
+                if (regionsTR) regionsTR.style.display = 'none';
+                if (region1TR) region1TR.style.display = 'none';
+                if (region1DetailTR) region1DetailTR.style.display = 'none';
+                if (region2TR) region2TR.style.display = 'none';
+                if (region2DetailTR) region2DetailTR.style.display = 'none';
+                if (region3TR) region3TR.style.display = 'none';
+                if (region3DetailTR) region3DetailTR.style.display = 'none';
+                if (region4TR) region4TR.style.display = 'none';
+                if (region4DetailTR) region4DetailTR.style.display = 'none';
+                if (region5TR) region5TR.style.display = 'none';
+                if (region5DetailTR) region5DetailTR.style.display = 'none';
+                if (region6TR) region6TR.style.display = 'none';
+                if (region6DetailTR) region6DetailTR.style.display = 'none';
+                if (region7TR) region7TR.style.display = 'none';
+                if (region7DetailTR) region7DetailTR.style.display = 'none';
+                if (region8TR) region8TR.style.display = 'none';
+                if (region8DetailTR) region8DetailTR.style.display = 'none';
                 if (info1TR) info1TR.style.display = 'none';
                 if (info2TR) info2TR.style.display = 'none';
                 if (info3TR) info3TR.style.display = 'none';
