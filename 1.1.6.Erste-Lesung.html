@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.6 Lesung | Okuma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 30px 20px;
+            margin: 0 auto;
+        }
+
+        .conversation {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .message.left {
+            justify-content: flex-start;
+        }
+
+        .message.right {
+            justify-content: flex-end;
+        }
+
+        .message:nth-child(1) { animation-delay: 0.1s; }
+        .message:nth-child(2) { animation-delay: 0.3s; }
+        .message:nth-child(3) { animation-delay: 0.5s; }
+        .message:nth-child(4) { animation-delay: 0.7s; }
+        .message:nth-child(5) { animation-delay: 0.9s; }
+        .message:nth-child(6) { animation-delay: 1.1s; }
+        .message:nth-child(7) { animation-delay: 1.3s; }
+        .message:nth-child(8) { animation-delay: 1.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .avatar.belin {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .avatar.ana {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .message-content {
+            max-width: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .message.left .message-content {
+            align-items: flex-start;
+        }
+
+        .message.right .message-content {
+            align-items: flex-end;
+        }
+
+        .speaker-name {
+            font-size: 0.75em;
+            font-weight: 600;
+            color: #7f8c8d;
+            padding: 0 8px;
+            margin-bottom: 4px;
+        }
+
+        .message.left .speaker-name {
+            color: #667eea;
+        }
+
+        .message.right .speaker-name {
+            color: #f5576c;
+        }
+
+        .bubble {
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+
+        .message.left .bubble {
+            background-color: #e8f4f8;
+            border-bottom-left-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .message.right .bubble {
+            background-color: #fff0f5;
+            border-bottom-right-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .bubble-text {
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+
+        .bubble-translation {
+            font-size: 0.85em;
+            color: #27ae60;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed #bdc3c7;
+            display: none;
+        }
+
+        .bubble-translation.show {
+            display: block;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #27ae60;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        .toggle-label {
+            font-size: 0.85em;
+            color: #2c3e50;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .toggle-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .conversation {
+                gap: 15px;
+            }
+
+            .message-content {
+                max-width: 80%;
+            }
+
+            .avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 1em;
+            }
+
+            .bubble {
+                padding: 10px 14px;
+            }
+
+            .bubble-text {
+                font-size: 0.95em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .message-content {
+                max-width: 85%;
+            }
+
+            .avatar {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9em;
+            }
+
+            .bubble {
+                padding: 8px 12px;
+                border-radius: 16px;
+            }
+
+            .bubble-text {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Lesung<span id="titleTR" style="display: none;"> (Okuma)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="conversation">
+            <div class="message left">
+                <div class="avatar belin">B</div>
+                <div class="message-content">
+                    <div class="speaker-name">Belin</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Guten Tag.</div>
+                        <div class="bubble-translation">İyi günler.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message right">
+                <div class="avatar ana">A</div>
+                <div class="message-content">
+                    <div class="speaker-name">Ana</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Guten Tag.</div>
+                        <div class="bubble-translation">İyi günler.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message left">
+                <div class="avatar belin">B</div>
+                <div class="message-content">
+                    <div class="speaker-name">Belin</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Ich heiße Belin. Wie heißen Sie?</div>
+                        <div class="bubble-translation">Benim adım Belin. Sizin adınız nedir?</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message right">
+                <div class="avatar ana">A</div>
+                <div class="message-content">
+                    <div class="speaker-name">Ana</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Ich heiße Ana.</div>
+                        <div class="bubble-translation">Benim adım Ana.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message left">
+                <div class="avatar belin">B</div>
+                <div class="message-content">
+                    <div class="speaker-name">Belin</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Woher kommen Sie?</div>
+                        <div class="bubble-translation">Nereden geliyorsunuz?</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message right">
+                <div class="avatar ana">A</div>
+                <div class="message-content">
+                    <div class="speaker-name">Ana</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Ich komme aus Portugal. Und Sie?</div>
+                        <div class="bubble-translation">Portekiz'den geliyorum. Ya siz?</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message left">
+                <div class="avatar belin">B</div>
+                <div class="message-content">
+                    <div class="speaker-name">Belin</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Ich komme aus der Türkei.</div>
+                        <div class="bubble-translation">Türkiye'den geliyorum.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const turkishElements = document.querySelectorAll('.bubble-translation');
+            const titleTR = document.getElementById('titleTR');
+            
+            if (this.checked) {
+                turkishElements.forEach(function(element) {
+                    element.classList.add('show');
+                });
+                if (titleTR) titleTR.style.display = 'inline';
+            } else {
+                turkishElements.forEach(function(element) {
+                    element.classList.remove('show');
+                });
+                if (titleTR) titleTR.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+
