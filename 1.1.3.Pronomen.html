@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.3 Pronomen | Zamirler</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 0.85em;
+            margin: 3px 0 0 0;
+        }
+
+        .intro {
+            background-color: #e8f4f8;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .intro p {
+            font-size: 0.9em;
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        table th {
+            background-color: #3498db;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        table tr:hover {
+            background-color: #e8f4f8;
+        }
+
+        .pronoun-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .pronoun-box {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .pronoun-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border-color: #3498db;
+        }
+
+        .pronoun-box.nominativ {
+            border-left: 4px solid #e74c3c;
+        }
+
+        .pronoun-box.akkusativ {
+            border-left: 4px solid #3498db;
+        }
+
+        .pronoun-box.dativ {
+            border-left: 4px solid #27ae60;
+        }
+
+        .pronoun-header {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 8px;
+            padding: 5px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .pronoun-case {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .pronoun-example {
+            font-size: 0.9em;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .pronoun-turkish {
+            font-size: 0.85em;
+            color: #27ae60;
+            text-align: center;
+            padding-top: 6px;
+            border-top: 1px solid #ecf0f1;
+            display: none;
+        }
+
+        .pronoun-turkish.show {
+            display: block;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #27ae60;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        .toggle-label {
+            font-size: 0.85em;
+            color: #2c3e50;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .subtitle {
+                font-size: 0.8em;
+            }
+
+            .toggle-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .intro {
+                padding: 10px 12px;
+            }
+
+            .intro p {
+                font-size: 0.85em;
+            }
+
+            .pronoun-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 10px;
+            }
+
+            .pronoun-box {
+                padding: 10px;
+            }
+
+            .pronoun-header {
+                font-size: 1.4em;
+            }
+
+            .pronoun-case,
+            .pronoun-example,
+            .pronoun-turkish {
+                font-size: 0.75em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            table th,
+            table td {
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pronoun-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 8px;
+            }
+
+            .pronoun-box {
+                padding: 8px;
+            }
+
+            .pronoun-header {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Pronomen<span id="titleTR" style="display: none;"> (Zamirler)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <p><strong>Pronomen</strong> sind Wörter, die für Nomen stehen.<span id="introTR" style="display: none;"> <strong>Zamirler</strong> isimlerin yerine kullanılan kelimelerdir.</span></p>
+        </div>
+
+        <div class="section">
+            <h2>Personalpronomen<span id="personalTR" style="display: none;"> (Kişi Zamirleri)</span></h2>
+            
+            <h3>Nominativ<span id="nominativTR" style="display: none;"> (Yalın Hali)</span></h3>
+            <div class="pronoun-grid">
+                <div class="pronoun-box nominativ">
+                    <div class="pronoun-header">ich</div>
+                    <div class="pronoun-case">1. Person Singular</div>
+                    <div class="pronoun-example">Ich bin müde.</div>
+                    <div class="pronoun-turkish">ben - yorgunum</div>
+                </div>
+                <div class="pronoun-box nominativ">
+                    <div class="pronoun-header">du</div>
+                    <div class="pronoun-case">2. Person Singular</div>
+                    <div class="pronoun-example">Du bist schön.</div>
+                    <div class="pronoun-turkish">sen - güzelsin</div>
+                </div>
+                <div class="pronoun-box nominativ">
+                    <div class="pronoun-header">er</div>
+                    <div class="pronoun-case">3. Person Singular (m)</div>
+                    <div class="pronoun-example">Er kommt heute.</div>
+                    <div class="pronoun-turkish">o (erkek) - bugün geliyor</div>
+                </div>
+                <div class="pronoun-box nominativ">
+                    <div class="pronoun-header">sie</div>
+                    <div class="pronoun-case">3. Person Singular (f)</div>
+                    <div class="pronoun-example">Sie liest ein Buch.</div>
+                    <div class="pronoun-turkish">o (kadın) - kitap okuyor</div>
+                </div>
+                <div class="pronoun-box nominativ">
+                    <div class="pronoun-header">es</div>
+                    <div class="pronoun-case">3. Person Singular (n)</div>
+                    <div class="pronoun-example">Es regnet.</div>
+                    <div class="pronoun-turkish">o (nötr) - yağmur yağıyor</div>
+                </div>
+                <div class="pronoun-box nominativ">
+                    <div class="pronoun-header">wir</div>
+                    <div class="pronoun-case">1. Person Plural</div>
+                    <div class="pronoun-example">Wir gehen ins Kino.</div>
+                    <div class="pronoun-turkish">biz - sinemaya gidiyoruz</div>
+                </div>
+                <div class="pronoun-box nominativ">
+                    <div class="pronoun-header">ihr</div>
+                    <div class="pronoun-case">2. Person Plural</div>
+                    <div class="pronoun-example">Ihr seid Freunde.</div>
+                    <div class="pronoun-turkish">siz - arkadaşsınız</div>
+                </div>
+                <div class="pronoun-box nominativ">
+                    <div class="pronoun-header">sie</div>
+                    <div class="pronoun-case">3. Person Plural</div>
+                    <div class="pronoun-example">Sie kommen morgen.</div>
+                    <div class="pronoun-turkish">onlar - yarın geliyorlar</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const turkishElements = document.querySelectorAll('.pronoun-turkish');
+            const titleTR = document.getElementById('titleTR');
+            const introTR = document.getElementById('introTR');
+            const personalTR = document.getElementById('personalTR');
+            const nominativTR = document.getElementById('nominativTR');
+            
+            if (this.checked) {
+                turkishElements.forEach(function(element) {
+                    element.classList.add('show');
+                });
+                if (titleTR) titleTR.style.display = 'inline';
+                if (introTR) introTR.style.display = 'inline';
+                if (personalTR) personalTR.style.display = 'inline';
+                if (nominativTR) nominativTR.style.display = 'inline';
+            } else {
+                turkishElements.forEach(function(element) {
+                    element.classList.remove('show');
+                });
+                if (titleTR) titleTR.style.display = 'none';
+                if (introTR) introTR.style.display = 'none';
+                if (personalTR) personalTR.style.display = 'none';
+                if (nominativTR) nominativTR.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+
