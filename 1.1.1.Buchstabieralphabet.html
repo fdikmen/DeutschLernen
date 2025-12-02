@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buchstabieralphabet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .alphabet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .letter-box {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .letter-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border-color: #3498db;
+        }
+
+        .letter-box.vowel {
+            border-left: 4px solid #e74c3c;
+        }
+
+        .letter-box.consonant {
+            border-left: 4px solid #3498db;
+        }
+
+        .letter-header {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .letter-code {
+            font-size: 0.95em;
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .letter-pronunciation {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .letter-turkish {
+            font-size: 0.8em;
+            color: #27ae60;
+            text-align: center;
+            padding-top: 4px;
+            border-top: 1px solid #ecf0f1;
+            display: none;
+        }
+
+        .letter-turkish.show {
+            display: block;
+        }
+
+        .letter-explanation {
+            font-size: 0.75em;
+            color: #666;
+            text-align: center;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .letter-explanation.show {
+            display: block;
+        }
+
+        .compact-box {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .compact-box h3 {
+            font-size: 1.1em;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .compact-box ul {
+            margin-left: 20px;
+            font-size: 0.9em;
+        }
+
+        .compact-box li {
+            margin-bottom: 5px;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .rule-item {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 3px solid #3498db;
+            font-size: 0.85em;
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .country-item {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 0.9em;
+        }
+
+        .info-box {
+            background-color: #fff;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid #27ae60;
+            font-size: 0.9em;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        .info-box li {
+            margin-bottom: 5px;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #27ae60;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        .toggle-label {
+            font-size: 0.85em;
+            color: #2c3e50;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .toggle-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .alphabet-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 10px;
+            }
+
+            .letter-box {
+                padding: 8px;
+            }
+
+            .letter-header {
+                font-size: 1.4em;
+            }
+
+            .rules-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Buchstabieralphabet<span id="titleTR" style="display: none;"> (Harflerin Telaffuzları ve Telefon Kodlaması)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Alman Alfabesi -->
+        <div class="section">
+            <div class="alphabet-grid">
+                <div class="letter-box vowel">
+                    <div class="letter-header">A/a</div>
+                    <div class="letter-code">Anton</div>
+                    <div class="letter-pronunciation">[a:]</div>
+                    <div class="letter-turkish">A(a)</div>
+                    <div class="letter-explanation">İki okunuşu var: kısa (acht) ve uzun (ameise - aa gibi)</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">B/b</div>
+                    <div class="letter-code">Berta</div>
+                    <div class="letter-pronunciation">[be:]</div>
+                    <div class="letter-turkish">Be(e)</div>
+                    <div class="letter-explanation">be değil bee şeklinde uzatılır, e harfi ı ile i arası ses</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">C/c</div>
+                    <div class="letter-code">Cäsar</div>
+                    <div class="letter-pronunciation">[tse:]</div>
+                    <div class="letter-turkish">Tse(e)</div>
+                    <div class="letter-explanation">İki farklı: e/i/ö/ü sonra s (Cent), a/o/u sonra k (Computer)</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">D/d</div>
+                    <div class="letter-code">Dora</div>
+                    <div class="letter-pronunciation">[de:]</div>
+                    <div class="letter-turkish">De(e)</div>
+                </div>
+                <div class="letter-box vowel">
+                    <div class="letter-header">E/e</div>
+                    <div class="letter-code">Emil</div>
+                    <div class="letter-pronunciation">[e:]</div>
+                    <div class="letter-turkish">E(e)</div>
+                    <div class="letter-explanation">i ile e arasında bir ses verir</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">F/f</div>
+                    <div class="letter-code">Friedrich</div>
+                    <div class="letter-pronunciation">[ɛf]</div>
+                    <div class="letter-turkish">Ef</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">G/g</div>
+                    <div class="letter-code">Gustav</div>
+                    <div class="letter-pronunciation">[ge:]</div>
+                    <div class="letter-turkish">Ge(e)</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">H/h</div>
+                    <div class="letter-code">Heinrich</div>
+                    <div class="letter-pronunciation">[ha:]</div>
+                    <div class="letter-turkish">Ha(a)</div>
+                </div>
+                <div class="letter-box vowel">
+                    <div class="letter-header">I/i</div>
+                    <div class="letter-code">Ida</div>
+                    <div class="letter-pronunciation">[i:]</div>
+                    <div class="letter-turkish">i(i)</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">J/j</div>
+                    <div class="letter-code">Julius</div>
+                    <div class="letter-pronunciation">[jɔt]</div>
+                    <div class="letter-turkish">yot</div>
+                    <div class="letter-explanation">Harfin kendisi "yot" olarak söylenir. Örnek: joghurt</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">K/k</div>
+                    <div class="letter-code">Kaufmann</div>
+                    <div class="letter-pronunciation">[ka:]</div>
+                    <div class="letter-turkish">Ka(a)</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">L/l</div>
+                    <div class="letter-code">Ludwig</div>
+                    <div class="letter-pronunciation">[ɛl]</div>
+                    <div class="letter-turkish">El</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">M/m</div>
+                    <div class="letter-code">Martha</div>
+                    <div class="letter-pronunciation">[ɛm]</div>
+                    <div class="letter-turkish">Em</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">N/n</div>
+                    <div class="letter-code">Nordpol</div>
+                    <div class="letter-pronunciation">[ɛn]</div>
+                    <div class="letter-turkish">En</div>
+                </div>
+                <div class="letter-box vowel">
+                    <div class="letter-header">O/o</div>
+                    <div class="letter-code">Otto</div>
+                    <div class="letter-pronunciation">[o:]</div>
+                    <div class="letter-turkish">Oo</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">P/p</div>
+                    <div class="letter-code">Paula</div>
+                    <div class="letter-pronunciation">[pe:]</div>
+                    <div class="letter-turkish">Pe(e)</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">Q/q</div>
+                    <div class="letter-code">Quelle</div>
+                    <div class="letter-pronunciation">[ku:]</div>
+                    <div class="letter-turkish">Kuu</div>
+                    <div class="letter-explanation">Q harfi kendinden sonra u harfini alırsa kv olarak telaffuz edilir. Örnek: Quadrat (Kvatgat)</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">R/r</div>
+                    <div class="letter-code">Richard</div>
+                    <div class="letter-pronunciation">[ɛr]</div>
+                    <div class="letter-turkish">Er</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">S/s</div>
+                    <div class="letter-code">Samuel</div>
+                    <div class="letter-pronunciation">[ɛs]</div>
+                    <div class="letter-turkish">Es</div>
+                    <div class="letter-explanation">3 farklı: Kelime başında z, kelime sonunda s, iki ss yan yana s</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">T/t</div>
+                    <div class="letter-code">Theodor</div>
+                    <div class="letter-pronunciation">[te:]</div>
+                    <div class="letter-turkish">Te(e)</div>
+                </div>
+                <div class="letter-box vowel">
+                    <div class="letter-header">U/u</div>
+                    <div class="letter-code">Ulrich</div>
+                    <div class="letter-pronunciation">[u:]</div>
+                    <div class="letter-turkish">U(u)</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">V/v</div>
+                    <div class="letter-code">Viktor</div>
+                    <div class="letter-pronunciation">[faʊ]</div>
+                    <div class="letter-turkish">Fau (Vau)</div>
+                    <div class="letter-explanation">Almanlar Vau olarak bilir</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">W/w</div>
+                    <div class="letter-code">Wilhelm</div>
+                    <div class="letter-pronunciation">[ve:]</div>
+                    <div class="letter-turkish">Ve(e)</div>
+                    <div class="letter-explanation">Türkçedeki v gibi telaffuz edilir, örn.: wurst (vurst), wie (vii)</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">X/x</div>
+                    <div class="letter-code">Xanthippe</div>
+                    <div class="letter-pronunciation">[ɪks]</div>
+                    <div class="letter-turkish">iks</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">Y/y</div>
+                    <div class="letter-code">Ypsilon</div>
+                    <div class="letter-pronunciation">[ˈʏpsilɔn]</div>
+                    <div class="letter-turkish">üpzilon</div>
+                    <div class="letter-explanation">Üç şekilde: Handy (Handi), Yacht (Yaht), Typ (Tüp)</div>
+                </div>
+                <div class="letter-box consonant">
+                    <div class="letter-header">Z/z</div>
+                    <div class="letter-code">Zacharias</div>
+                    <div class="letter-pronunciation">[tsɛt]</div>
+                    <div class="letter-turkish">Tset</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Özel Karakterler -->
+        <div class="section">
+            <h2>Özel Karakterler (Umlaute + Eszett)<span id="specialTR" style="display: none;"> (Special Characters)</span></h2>
+            <div class="alphabet-grid">
+                <div class="letter-box vowel">
+                    <div class="letter-header">Ä/ä</div>
+                    <div class="letter-code">Ärger</div>
+                    <div class="letter-pronunciation">[ε:]</div>
+                    <div class="letter-turkish">ee</div>
+                    <div class="letter-explanation">Bizdeki e harfinin karşılığı, ağzınızı açarak e derseniz tam bu olur. a-Umlaut</div>
+                </div>
+                <div class="letter-box vowel">
+                    <div class="letter-header">Ö/ö</div>
+                    <div class="letter-code">Ökonom</div>
+                    <div class="letter-pronunciation">[ø:]</div>
+                    <div class="letter-turkish">öö</div>
+                    <div class="letter-explanation">o-Umlaut</div>
+                </div>
+                <div class="letter-box vowel">
+                    <div class="letter-header">Ü/ü</div>
+                    <div class="letter-code">Übermut</div>
+                    <div class="letter-pronunciation">[y:]</div>
+                    <div class="letter-turkish">üü</div>
+                    <div class="letter-explanation">u-Umlaut</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Eszett -->
+        <div class="section">
+            <h2>ẞ (Eszett - Scharfes S) - Özel Harf<span id="eszettTR" style="display: none;"> (Special Letter)</span></h2>
+            <div class="compact-box">
+                <div style="margin-bottom: 8px;"><strong>Estset</strong></div>
+                <ul>
+                    <li>Büyük hali yoktur (2017'ye kadar)<span id="eszett1TR" style="display: none;"> (No uppercase until 2017)</span></li>
+                    <li>Kelime başında kullanılmaz<span id="eszett2TR" style="display: none;"> (Not at word start)</span></li>
+                    <li>"ss" yerine kullanılır<span id="eszett3TR" style="display: none;"> (Instead of "ss")</span></li>
+                    <li>Örnekler: Fuß (ayak), heiß (sıcak), Straße (sokak), weiß (beyaz)<span id="eszett4TR" style="display: none;"> (Examples: Fuß, heiß, Straße, weiß)</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Telaffuz Kuralları -->
+        <div class="section">
+            <h2>Telaffuz Kuralları (Aussprache)<span id="rulesTR" style="display: none;"> (Pronunciation Rules)</span></h2>
+            <div class="rules-grid">
+                <div class="rule-item"><strong>ei</strong> → 'ay' (wie, mein)<span id="rule1TR" style="display: none;"> (like 'ay')</span></div>
+                <div class="rule-item"><strong>eu</strong> → 'oy' (heute, neu)<span id="rule2TR" style="display: none;"> (like 'oy')</span></div>
+                <div class="rule-item"><strong>au</strong> → 'av' (Haus, auch)<span id="rule3TR" style="display: none;"> (like 'av')</span></div>
+                <div class="rule-item"><strong>sch</strong> → 'ş' (schön, Schule)<span id="rule4TR" style="display: none;"> (like 'sh')</span></div>
+                <div class="rule-item"><strong>ch</strong> → 'kalın h' (ich, auch)<span id="rule5TR" style="display: none;"> (guttural 'h')</span></div>
+                <div class="rule-item"><strong>ie</strong> → 'uzun i' (sie, wie)<span id="rule6TR" style="display: none;"> (long 'i')</span></div>
+                <div class="rule-item"><strong>st/sp</strong> → başta 'şt/şp' (Stadt, Sport)<span id="rule7TR" style="display: none;"> (at start 'sht/shp')</span></div>
+                <div class="rule-item"><strong>ck</strong> → 'kalın k' (Ecke, Glück)<span id="rule8TR" style="display: none;"> (guttural 'k')</span></div>
+                <div class="rule-item"><strong>V:</strong> DE'de 'f' (vier), yabancıda 'v' (Video)<span id="rule9TR" style="display: none;"> (DE: 'f', foreign: 'v')</span></div>
+            </div>
+        </div>
+
+        <!-- Ülkeler -->
+        <div class="section">
+            <h2>Alman Alfabesi Kullanılan Ülkeler<span id="countriesTR" style="display: none;"> (Countries)</span></h2>
+            <div class="countries-grid">
+                <div class="country-item">
+                    <div style="font-size: 1.8em; margin-bottom: 5px;">🇩🇪</div>
+                    <div><strong>Deutschland</strong><span id="country1TR" style="display: none;"> (Germany)</span></div>
+                </div>
+                <div class="country-item">
+                    <div style="font-size: 1.8em; margin-bottom: 5px;">🇦🇹</div>
+                    <div><strong>Österreich</strong><span id="country2TR" style="display: none;"> (Austria)</span></div>
+                </div>
+                <div class="country-item">
+                    <div style="font-size: 1.8em; margin-bottom: 5px;">🇨🇭</div>
+                    <div><strong>Schweiz</strong><span id="country3TR" style="display: none;"> (Switzerland)</span></div>
+                </div>
+                <div class="country-item">
+                    <div style="font-size: 1.8em; margin-bottom: 5px;">🇱🇺</div>
+                    <div><strong>Luxemburg</strong><span id="country4TR" style="display: none;"> (Luxembourg)</span></div>
+                </div>
+                <div class="country-item">
+                    <div style="font-size: 1.8em; margin-bottom: 5px;">🇱🇮</div>
+                    <div><strong>Liechtenstein</strong><span id="country5TR" style="display: none;"> (Liechtenstein)</span></div>
+                </div>
+            </div>
+            <div class="compact-box" style="margin-top: 12px;">
+                <strong>Not:</strong> İsviçre ve Lihtenştayn'da ẞ yerine ss kullanılır<span id="noteTR" style="display: none;"> (Note: In Switzerland and Liechtenstein, 'ss' instead of 'ẞ')</span>
+            </div>
+        </div>
+
+        <!-- Önemli Bilgiler -->
+        <div class="section">
+            <h2>Önemli Bilgiler<span id="infoTR" style="display: none;"> (Important Information)</span></h2>
+            <div class="info-box">
+                <ul>
+                    <li>En sık kullanılan harf: <strong>E</strong><span id="info1TR" style="display: none;"> (Most used: E)</span></li>
+                    <li>En az kullanılan harf: <strong>Q</strong><span id="info2TR" style="display: none;"> (Least used: Q)</span></li>
+                    <li>Tüm harflerin artikeli: "das" (das A, das B...)<span id="info3TR" style="display: none;"> (Article: "das")</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const turkishElements = document.querySelectorAll('.letter-turkish');
+            const explanationElements = document.querySelectorAll('.letter-explanation');
+            const titleTR = document.getElementById('titleTR');
+            const specialTR = document.getElementById('specialTR');
+            const eszettTR = document.getElementById('eszettTR');
+            const rulesTR = document.getElementById('rulesTR');
+            const countriesTR = document.getElementById('countriesTR');
+            const infoTR = document.getElementById('infoTR');
+            const eszett1TR = document.getElementById('eszett1TR');
+            const eszett2TR = document.getElementById('eszett2TR');
+            const eszett3TR = document.getElementById('eszett3TR');
+            const eszett4TR = document.getElementById('eszett4TR');
+            const rule1TR = document.getElementById('rule1TR');
+            const rule2TR = document.getElementById('rule2TR');
+            const rule3TR = document.getElementById('rule3TR');
+            const rule4TR = document.getElementById('rule4TR');
+            const rule5TR = document.getElementById('rule5TR');
+            const rule6TR = document.getElementById('rule6TR');
+            const rule7TR = document.getElementById('rule7TR');
+            const rule8TR = document.getElementById('rule8TR');
+            const rule9TR = document.getElementById('rule9TR');
+            const country1TR = document.getElementById('country1TR');
+            const country2TR = document.getElementById('country2TR');
+            const country3TR = document.getElementById('country3TR');
+            const country4TR = document.getElementById('country4TR');
+            const country5TR = document.getElementById('country5TR');
+            const noteTR = document.getElementById('noteTR');
+            const info1TR = document.getElementById('info1TR');
+            const info2TR = document.getElementById('info2TR');
+            const info3TR = document.getElementById('info3TR');
+            
+            if (this.checked) {
+                turkishElements.forEach(function(element) {
+                    element.classList.add('show');
+                });
+                explanationElements.forEach(function(element) {
+                    element.classList.add('show');
+                });
+                if (titleTR) titleTR.style.display = 'inline';
+                if (specialTR) specialTR.style.display = 'inline';
+                if (eszettTR) eszettTR.style.display = 'inline';
+                if (rulesTR) rulesTR.style.display = 'inline';
+                if (countriesTR) countriesTR.style.display = 'inline';
+                if (infoTR) infoTR.style.display = 'inline';
+                if (eszett1TR) eszett1TR.style.display = 'inline';
+                if (eszett2TR) eszett2TR.style.display = 'inline';
+                if (eszett3TR) eszett3TR.style.display = 'inline';
+                if (eszett4TR) eszett4TR.style.display = 'inline';
+                if (rule1TR) rule1TR.style.display = 'inline';
+                if (rule2TR) rule2TR.style.display = 'inline';
+                if (rule3TR) rule3TR.style.display = 'inline';
+                if (rule4TR) rule4TR.style.display = 'inline';
+                if (rule5TR) rule5TR.style.display = 'inline';
+                if (rule6TR) rule6TR.style.display = 'inline';
+                if (rule7TR) rule7TR.style.display = 'inline';
+                if (rule8TR) rule8TR.style.display = 'inline';
+                if (rule9TR) rule9TR.style.display = 'inline';
+                if (country1TR) country1TR.style.display = 'inline';
+                if (country2TR) country2TR.style.display = 'inline';
+                if (country3TR) country3TR.style.display = 'inline';
+                if (country4TR) country4TR.style.display = 'inline';
+                if (country5TR) country5TR.style.display = 'inline';
+                if (noteTR) noteTR.style.display = 'inline';
+                if (info1TR) info1TR.style.display = 'inline';
+                if (info2TR) info2TR.style.display = 'inline';
+                if (info3TR) info3TR.style.display = 'inline';
+            } else {
+                turkishElements.forEach(function(element) {
+                    element.classList.remove('show');
+                });
+                explanationElements.forEach(function(element) {
+                    element.classList.remove('show');
+                });
+                if (titleTR) titleTR.style.display = 'none';
+                if (specialTR) specialTR.style.display = 'none';
+                if (eszettTR) eszettTR.style.display = 'none';
+                if (rulesTR) rulesTR.style.display = 'none';
+                if (countriesTR) countriesTR.style.display = 'none';
+                if (infoTR) infoTR.style.display = 'none';
+                if (eszett1TR) eszett1TR.style.display = 'none';
+                if (eszett2TR) eszett2TR.style.display = 'none';
+                if (eszett3TR) eszett3TR.style.display = 'none';
+                if (eszett4TR) eszett4TR.style.display = 'none';
+                if (rule1TR) rule1TR.style.display = 'none';
+                if (rule2TR) rule2TR.style.display = 'none';
+                if (rule3TR) rule3TR.style.display = 'none';
+                if (rule4TR) rule4TR.style.display = 'none';
+                if (rule5TR) rule5TR.style.display = 'none';
+                if (rule6TR) rule6TR.style.display = 'none';
+                if (rule7TR) rule7TR.style.display = 'none';
+                if (rule8TR) rule8TR.style.display = 'none';
+                if (rule9TR) rule9TR.style.display = 'none';
+                if (country1TR) country1TR.style.display = 'none';
+                if (country2TR) country2TR.style.display = 'none';
+                if (country3TR) country3TR.style.display = 'none';
+                if (country4TR) country4TR.style.display = 'none';
+                if (country5TR) country5TR.style.display = 'none';
+                if (noteTR) noteTR.style.display = 'none';
+                if (info1TR) info1TR.style.display = 'none';
+                if (info2TR) info2TR.style.display = 'none';
+                if (info3TR) info3TR.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

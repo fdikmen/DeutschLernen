@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inhaltsverzeichnis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.8;
+            color: #000;
+            background-color: #fff;
+            margin: 0;
+            padding: 40px 60px;
+        }
+
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .toc-section {
+            margin-bottom: 25px;
+        }
+
+        .toc-section h2 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .toc-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .toc-item {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .toc-number {
+            font-weight: normal;
+            margin-right: 8px;
+            min-width: 60px;
+        }
+
+        .toc-item a {
+            text-decoration: none;
+            color: #000;
+            flex: 1;
+        }
+
+        .toc-item a:hover {
+            text-decoration: underline;
+        }
+
+        .toc-dots {
+            flex: 1;
+            border-bottom: 1px dotted #000;
+            margin: 0 8px;
+            height: 1em;
+        }
+
+        .toc-page {
+            font-weight: normal;
+            min-width: 30px;
+            text-align: right;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 16pt;
+            }
+
+            .toc-section h2 {
+                font-size: 12pt;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Inhaltsverzeichnis</h1>
+
+    <div class="toc-section">
+        <h2>1.1 Alphabet und Aussprache</h2>
+        <ul class="toc-list">
+            <li class="toc-item">
+                <span class="toc-number">1.1.1</span>
+                <a href="1.1.1.Buchstabieralphabet.html">Buchstabieralphabet</a>
+                <span class="toc-dots"></span>
+                <span class="toc-page"></span>
+            </li>
+            <li class="toc-item">
+                <span class="toc-number">1.1.2</span>
+                <a href="1.1.2.Das-Alphabet.html">Das Alphabet</a>
+                <span class="toc-dots"></span>
+                <span class="toc-page"></span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

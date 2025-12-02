@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almanca Telaffuz Kuralları - Das deutsche Alphabet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 0.85em;
+            margin: 3px 0 0 0;
+        }
+
+        .intro {
+            background-color: #e8f4f8;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .intro p {
+            font-size: 0.9em;
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        table th {
+            background-color: #3498db;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        table tr:hover {
+            background-color: #e8f4f8;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .rule-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #27ae60;
+        }
+
+        .rule-box h4 {
+            color: #27ae60;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .example {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border: 1px solid #dee2e6;
+        }
+
+        .example strong {
+            color: #e74c3c;
+        }
+
+        ul {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+            line-height: 1.8;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .note strong {
+            color: #856404;
+        }
+
+        .compact-note {
+            background-color: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 3px solid #3498db;
+            font-size: 0.9em;
+        }
+
+        .compact-note-item {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .compact-note-item strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .alphabet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .letter-box {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .letter-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border-color: #3498db;
+        }
+
+        .letter-box.vowel {
+            border-left: 4px solid #e74c3c;
+        }
+
+        .letter-box.vowel:hover {
+            border-left-color: #c0392b;
+        }
+
+        .letter-box.consonant {
+            border-left: 4px solid #3498db;
+        }
+
+        .letter-box.consonant:hover {
+            border-left-color: #2980b9;
+        }
+
+        .letter-box.special {
+            border-left: 4px solid #27ae60;
+            background-color: #f8fff9;
+        }
+
+        .letter-box.special:hover {
+            border-left-color: #229954;
+        }
+
+        .letter-header {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 8px;
+            padding: 5px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .letter-pronunciation {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 6px;
+            line-height: 1.3;
+            min-height: 32px;
+        }
+
+        .letter-example {
+            font-size: 0.9em;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .letter-turkish {
+            font-size: 0.85em;
+            color: #27ae60;
+            text-align: center;
+            padding-top: 6px;
+            border-top: 1px solid #ecf0f1;
+            display: none;
+        }
+
+        .letter-turkish.show {
+            display: block;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #27ae60;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        .toggle-label {
+            font-size: 0.85em;
+            color: #2c3e50;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .subtitle {
+                font-size: 0.8em;
+            }
+
+            .toggle-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .intro {
+                padding: 10px 12px;
+            }
+
+            .intro p {
+                font-size: 0.85em;
+            }
+
+            .alphabet-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 10px;
+            }
+
+            .letter-box {
+                padding: 10px;
+            }
+
+            .letter-header {
+                font-size: 1.4em;
+            }
+
+            .letter-pronunciation,
+            .letter-example,
+            .letter-turkish {
+                font-size: 0.75em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            table th,
+            table td {
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .alphabet-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 8px;
+            }
+
+            .letter-box {
+                padding: 8px;
+            }
+
+            .letter-header {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Das Alphabet</h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <p><strong>Deutsch zu lesen ist nicht schwer.</strong> Jeder Buchstabe wird ausgesprochen. Meistens werden die Buchstaben wie im Türkischen ausgesprochen. Aber es gibt auch einige Ausnahmen.</p>
+            <p id="introTR" style="display: none; margin-top: 8px;"><strong>Almanca okumak zor değil.</strong> Her harf söylenir. Genellikle harfler Türkçedeki gibi telaffuz edilir. Ama bir kaç istisna da var.</p>
+            <p style="margin-top: 8px; font-size: 0.85em;"><span style="color: #e74c3c; font-weight: bold;">●</span> Vokale<span id="vokaleTR" style="display: none;"> (Ünlüler)</span> | <span style="color: #3498db; font-weight: bold;">●</span> Konsonanten<span id="konsonantenTR" style="display: none;"> (Ünsüzler)</span> | <span style="color: #27ae60; font-weight: bold;">●</span> Kombinationen<span id="ozelTR" style="display: none;"> (Özel Kombinasyonlar)</span></p>
+        </div>
+
+        <div class="section">
+            <div class="alphabet-grid">
+                <!-- A -->
+                <div class="letter-box vowel">
+                    <div class="letter-header">A</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">hallo, fahren, Tag</div>
+                    <div class="letter-turkish">merhaba, gitmek, gün</div>
+                </div>
+                <!-- Ä -->
+                <div class="letter-box vowel">
+                    <div class="letter-header">Ä</div>
+                    <div class="letter-pronunciation">Türkçe açık e gibi (ağzı açarak)</div>
+                    <div class="letter-example">ändern</div>
+                    <div class="letter-turkish">değiştirmek</div>
+                </div>
+                <!-- B -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">B</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">Buch</div>
+                    <div class="letter-turkish">kitap</div>
+                </div>
+                <!-- C -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">C</div>
+                    <div class="letter-pronunciation">e/i/ä/ö/ü önünde => [ts]<br>Yoksa (a/o/u) => k</div>
+                    <div class="letter-example">Celsius, Cafe</div>
+                    <div class="letter-turkish">santigrat, kafe</div>
+                </div>
+                <!-- D -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">D</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">Tag</div>
+                    <div class="letter-turkish">gün</div>
+                </div>
+                <!-- E -->
+                <div class="letter-box vowel">
+                    <div class="letter-header">E</div>
+                    <div class="letter-pronunciation">e/i arası</div>
+                    <div class="letter-example">geben, haben</div>
+                    <div class="letter-turkish">vermek, sahip olmak</div>
+                </div>
+                <!-- F -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">F</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">fahren</div>
+                    <div class="letter-turkish">gitmek</div>
+                </div>
+                <!-- G -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">G</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">geben</div>
+                    <div class="letter-turkish">vermek</div>
+                </div>
+                <!-- H -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">H</div>
+                    <div class="letter-pronunciation">Başta: TR H gibi | Ortada: Önceki harfi uzatır ve okunmaz</div>
+                    <div class="letter-example">gehen, sehen, Haus</div>
+                    <div class="letter-turkish">gitmek, görmek, ev</div>
+                </div>
+                <!-- I -->
+                <div class="letter-box vowel">
+                    <div class="letter-header">I</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">ich</div>
+                    <div class="letter-turkish">ben</div>
+                </div>
+                <!-- J -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">J</div>
+                    <div class="letter-pronunciation">Türkçe y gibi</div>
+                    <div class="letter-example">ja</div>
+                    <div class="letter-turkish">evet</div>
+                </div>
+                <!-- K -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">K</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">können</div>
+                    <div class="letter-turkish">yapabilmek</div>
+                </div>
+                <!-- L -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">L</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">Loch</div>
+                    <div class="letter-turkish">delik</div>
+                </div>
+                <!-- M -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">M</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">Mispel</div>
+                    <div class="letter-turkish">muşmula</div>
+                </div>
+                <!-- N -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">N</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">nehmen</div>
+                    <div class="letter-turkish">almak</div>
+                </div>
+                <!-- O -->
+                <div class="letter-box vowel">
+                    <div class="letter-header">O</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">kostet</div>
+                    <div class="letter-turkish">maliyeti var</div>
+                </div>
+                <!-- Ö -->
+                <div class="letter-box vowel">
+                    <div class="letter-header">Ö</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">können</div>
+                    <div class="letter-turkish">yapabilmek</div>
+                </div>
+                <!-- P -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">P</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">Physik</div>
+                    <div class="letter-turkish">fizik</div>
+                </div>
+                <!-- Q -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">Q</div>
+                    <div class="letter-pronunciation">Genellikle u ile kullanılır, qu => kv (qııv gibi)</div>
+                    <div class="letter-example">Qualle, Quadrat, Qualität</div>
+                    <div class="letter-turkish">denizanası, kare, kalite</div>
+                </div>
+                <!-- R -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">R</div>
+                    <div class="letter-pronunciation">TR'de önden kullanılırken, DE'de ise daha çok gırtlaktan</div>
+                    <div class="letter-example">Rück</div>
+                    <div class="letter-turkish">geri</div>
+                </div>
+                <!-- S -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">S</div>
+                    <div class="letter-pronunciation">Başta z, içte s</div>
+                    <div class="letter-example">Sahne, Hose</div>
+                    <div class="letter-turkish">sahne, pantolon</div>
+                </div>
+                <!-- ß -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">ß</div>
+                    <div class="letter-pronunciation">Türkçe s gibi</div>
+                    <div class="letter-example">Fuß</div>
+                    <div class="letter-turkish">ayak</div>
+                </div>
+                <!-- T -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">T</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">Tag</div>
+                    <div class="letter-turkish">gün</div>
+                </div>
+                <!-- U -->
+                <div class="letter-box vowel">
+                    <div class="letter-header">U</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">unten</div>
+                    <div class="letter-turkish">aşağı</div>
+                </div>
+                <!-- Ü -->
+                <div class="letter-box vowel">
+                    <div class="letter-header">Ü</div>
+                    <div class="letter-pronunciation">Türkçedeki gibi</div>
+                    <div class="letter-example">zurück</div>
+                    <div class="letter-turkish">geri</div>
+                </div>
+                <!-- V -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">V</div>
+                    <div class="letter-pronunciation">f gibi (yabancı kelimede v)</div>
+                    <div class="letter-example">Vogel, Vase</div>
+                    <div class="letter-turkish">kuş, vazo</div>
+                </div>
+                <!-- W -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">W</div>
+                    <div class="letter-pronunciation">Türkçe v gibi</div>
+                    <div class="letter-example">wo</div>
+                    <div class="letter-turkish">nerede</div>
+                </div>
+                <!-- X -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">X</div>
+                    <div class="letter-pronunciation">ks gibi</div>
+                    <div class="letter-example">Luxus</div>
+                    <div class="letter-turkish">lüks</div>
+                </div>
+                <!-- Y -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">Y</div>
+                    <div class="letter-pronunciation">ü, ii veya y gibi okunur</div>
+                    <div class="letter-example">Typ (tüüp), Yacht (y), Handy (ii)</div>
+                    <div class="letter-turkish">tip, yat, cep telefonu</div>
+                </div>
+                <!-- Z -->
+                <div class="letter-box consonant">
+                    <div class="letter-header">Z</div>
+                    <div class="letter-pronunciation">Yılan tıslaması gibi ts sesi ile okunur</div>
+                    <div class="letter-example">Zeit</div>
+                    <div class="letter-turkish">zaman</div>
+                </div>
+                <!-- Özel Kombinasyonlar -->
+                <div class="letter-box vowel special">
+                    <div class="letter-header">ei, ai</div>
+                    <div class="letter-pronunciation">Türkçe ay gibi</div>
+                    <div class="letter-example">mein, Seiler, Zeit, Ei, heiß, Hai, Mai, Kaiser</div>
+                    <div class="letter-turkish">benim, halatçı, zaman, yumurta, sıcak, köpekbalığı, mayıs, imparator</div>
+                </div>
+                <div class="letter-box vowel special">
+                    <div class="letter-header">eu, äu</div>
+                    <div class="letter-pronunciation">Türkçe oy gibi</div>
+                    <div class="letter-example">Euro, Eule, euer, heute, Häuser, Bäume</div>
+                    <div class="letter-turkish">euro, baykuş, sizin, bugün, evler, ağaçlar</div>
+                </div>
+                <div class="letter-box vowel special">
+                    <div class="letter-header">ie</div>
+                    <div class="letter-pronunciation">Uzun i gibi okunur<br>-e sona gelirse ı gibi okunur</div>
+                    <div class="letter-example">Miete, Liete, dieses</div>
+                    <div class="letter-turkish">kira, liste, bu</div>
+                </div>
+                <div class="letter-box consonant special">
+                    <div class="letter-header">ch</div>
+                    <div class="letter-pronunciation">Türkçe hh gibi okunur.<br>a/o/u+ch => Sesli,kaba-gırtlaktan H (ahşap)<br>diğerlerinde => yumuşak-kibar-boğazdan (ihtiyaç)<br>yabancı kelimede => k (Chaos)</div>
+                    <div class="letter-example">Acht, Loch, Doch | Ich, Milch, Kirche | Chaos</div>
+                    <div class="letter-turkish">sekiz, delik, yine de, ben, süt, kilise, kaos</div>
+                </div>
+                <div class="letter-box consonant special">
+                    <div class="letter-header">sch</div>
+                    <div class="letter-pronunciation">Türkçe ş gibi ama TR'deki gibi önde değil, gülümsemedeki gibi gırtlaktan/boğazdan</div>
+                    <div class="letter-example">Fisch, Menschen, falsch, Schule</div>
+                    <div class="letter-turkish">balık, insanlar, yanlış, okul</div>
+                </div>
+                <div class="letter-box consonant special">
+                    <div class="letter-header">chs</div>
+                    <div class="letter-pronunciation">[ks] gibi</div>
+                    <div class="letter-example">sechs, Fuchs, erwachsen</div>
+                    <div class="letter-turkish">altı, tilki, yetişkin</div>
+                </div>
+                <div class="letter-box consonant special">
+                    <div class="letter-header">tsch</div>
+                    <div class="letter-pronunciation">Daima ç gibi okunur</div>
+                    <div class="letter-example">Deutschland, Tschüs, Quatsch</div>
+                    <div class="letter-turkish">Almanya, hoşça kal, saçmalık</div>
+                </div>
+                <div class="letter-box consonant special">
+                    <div class="letter-header">ck</div>
+                    <div class="letter-pronunciation">Çift kk yerine</div>
+                    <div class="letter-example">Hacke</div>
+                    <div class="letter-turkish">akraba</div>
+                </div>
+                <div class="letter-box consonant special">
+                    <div class="letter-header">ph</div>
+                    <div class="letter-pronunciation">f gibi</div>
+                    <div class="letter-example">Physik</div>
+                    <div class="letter-turkish">fisika</div>
+                </div>
+                <div class="letter-box consonant special">
+                    <div class="letter-header">sp</div>
+                    <div class="letter-pronunciation">Başta şp, içte sp</div>
+                    <div class="letter-example">Sport, Mispel</div>
+                    <div class="letter-turkish">spor, muşmula</div>
+                </div>
+                <div class="letter-box consonant special">
+                    <div class="letter-header">st</div>
+                    <div class="letter-pronunciation">Başta şt, içte st</div>
+                    <div class="letter-example">Straße, fast</div>
+                    <div class="letter-turkish">cadde, neredeyse</div>
+                </div>
+                <div class="letter-box consonant special">
+                    <div class="letter-header">ng</div>
+                    <div class="letter-pronunciation">İngilizce ng gibi</div>
+                    <div class="letter-example">entschuldigung</div>
+                    <div class="letter-turkish">özür dilerim</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Not</h2>
+            <div class="compact-note">
+                <div class="compact-note-item">
+                    <strong>-ig:</strong> Kelime sonu -ig ile bitiyorsa "h" gibi okunur → <strong>lustig</strong>
+                </div>
+                <div class="compact-note-item">
+                    <strong>-er:</strong> -er sona gelirse "a" gibi okunur → <strong>Lehrer, Seiler</strong>
+                </div>
+                <div class="compact-note-item">
+                    <strong>Sesli harfler yan yana:</strong> Uzun okunur → <strong>Aachen</strong> (uzun), <strong>acht</strong> (kısa)
+                </div>
+                <div class="compact-note-item">
+                    <strong>2 sessiz harf yan yana:</strong> Tek okunur → <strong>Anna</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const turkishElements = document.querySelectorAll('.letter-turkish');
+            const introTR = document.getElementById('introTR');
+            const vokaleTR = document.getElementById('vokaleTR');
+            const konsonantenTR = document.getElementById('konsonantenTR');
+            const ozelTR = document.getElementById('ozelTR');
+            
+            if (this.checked) {
+                turkishElements.forEach(function(element) {
+                    element.classList.add('show');
+                });
+                if (introTR) introTR.style.display = 'block';
+                if (vokaleTR) vokaleTR.style.display = 'inline';
+                if (konsonantenTR) konsonantenTR.style.display = 'inline';
+                if (ozelTR) ozelTR.style.display = 'inline';
+            } else {
+                turkishElements.forEach(function(element) {
+                    element.classList.remove('show');
+                });
+                if (introTR) introTR.style.display = 'none';
+                if (vokaleTR) vokaleTR.style.display = 'none';
+                if (konsonantenTR) konsonantenTR.style.display = 'none';
+                if (ozelTR) ozelTR.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+
