@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.3 Zahlen bis 20 | 20'ye Kadar Sayılar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .intro {
+            background-color: #e8f4f8;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .intro p {
+            font-size: 0.9em;
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .number-box {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .number-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border-color: #3498db;
+        }
+
+        .number-box.zero-ten {
+            border-left: 4px solid #e74c3c;
+        }
+
+        .number-box.eleven-twenty {
+            border-left: 4px solid #3498db;
+        }
+
+        .number-header {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 8px;
+            padding: 5px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .number-word {
+            font-size: 1.1em;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .toggle-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .intro {
+                padding: 10px 12px;
+            }
+
+            .intro p {
+                font-size: 0.85em;
+            }
+
+            .numbers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 10px;
+            }
+
+            .number-box {
+                padding: 10px;
+            }
+
+            .number-header {
+                font-size: 1.4em;
+            }
+
+            .number-word {
+                font-size: 0.75em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .numbers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 8px;
+            }
+
+            .number-box {
+                padding: 8px;
+            }
+
+            .number-header {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Zahlen bis 20</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <p><strong>Zahlen</strong> sind wichtig im Deutschen.</p>
+        </div>
+
+        <div class="section">
+            <h2>0 - 10</h2>
+            <div class="numbers-grid">
+                <div class="number-box zero-ten">
+                    <div class="number-header">0</div>
+                    <div class="number-word">null</div>
+                </div>
+                <div class="number-box zero-ten">
+                    <div class="number-header">1</div>
+                    <div class="number-word">eins</div>
+                </div>
+                <div class="number-box zero-ten">
+                    <div class="number-header">2</div>
+                    <div class="number-word">zwei</div>
+                </div>
+                <div class="number-box zero-ten">
+                    <div class="number-header">3</div>
+                    <div class="number-word">drei</div>
+                </div>
+                <div class="number-box zero-ten">
+                    <div class="number-header">4</div>
+                    <div class="number-word">vier</div>
+                </div>
+                <div class="number-box zero-ten">
+                    <div class="number-header">5</div>
+                    <div class="number-word">fünf</div>
+                </div>
+                <div class="number-box zero-ten">
+                    <div class="number-header">6</div>
+                    <div class="number-word">sechs</div>
+                </div>
+                <div class="number-box zero-ten">
+                    <div class="number-header">7</div>
+                    <div class="number-word">sieben</div>
+                </div>
+                <div class="number-box zero-ten">
+                    <div class="number-header">8</div>
+                    <div class="number-word">acht</div>
+                </div>
+                <div class="number-box zero-ten">
+                    <div class="number-header">9</div>
+                    <div class="number-word">neun</div>
+                </div>
+                <div class="number-box zero-ten">
+                    <div class="number-header">10</div>
+                    <div class="number-word">zehn</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>11 - 20</h2>
+            <div class="numbers-grid">
+                <div class="number-box eleven-twenty">
+                    <div class="number-header">11</div>
+                    <div class="number-word">elf</div>
+                </div>
+                <div class="number-box eleven-twenty">
+                    <div class="number-header">12</div>
+                    <div class="number-word">zwölf</div>
+                </div>
+                <div class="number-box eleven-twenty">
+                    <div class="number-header">13</div>
+                    <div class="number-word">dreizehn</div>
+                </div>
+                <div class="number-box eleven-twenty">
+                    <div class="number-header">14</div>
+                    <div class="number-word">vierzehn</div>
+                </div>
+                <div class="number-box eleven-twenty">
+                    <div class="number-header">15</div>
+                    <div class="number-word">fünfzehn</div>
+                </div>
+                <div class="number-box eleven-twenty">
+                    <div class="number-header">16</div>
+                    <div class="number-word">sechzehn</div>
+                </div>
+                <div class="number-box eleven-twenty">
+                    <div class="number-header">17</div>
+                    <div class="number-word">siebzehn</div>
+                </div>
+                <div class="number-box eleven-twenty">
+                    <div class="number-header">18</div>
+                    <div class="number-word">achtzehn</div>
+                </div>
+                <div class="number-box eleven-twenty">
+                    <div class="number-header">19</div>
+                    <div class="number-word">neunzehn</div>
+                </div>
+                <div class="number-box eleven-twenty">
+                    <div class="number-header">20</div>
+                    <div class="number-word">zwanzig</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
