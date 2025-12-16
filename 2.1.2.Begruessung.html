@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.2 Begrüßung | Selamlaşma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-label {
+            font-size: 0.9em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #3498db;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .intro {
+            background-color: #e8f4f8;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .intro p {
+            font-size: 0.9em;
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .greetings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .greeting-box {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .greeting-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border-color: #3498db;
+        }
+
+        .greeting-header {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .greeting-turkish {
+            color: #e74c3c;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        .greeting-usage {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .youth-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .youth-item {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 12px;
+            border-left: 3px solid #9b59b6;
+        }
+
+        .youth-german {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+
+        .youth-turkish {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .regional-section {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #f39c12;
+        }
+
+        .regional-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .regional-item {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .regional-german {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .regional-turkish {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .info-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .toggle-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .intro {
+                padding: 10px 12px;
+            }
+
+            .intro p {
+                font-size: 0.85em;
+            }
+
+            .greetings-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 10px;
+            }
+
+            .youth-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .greetings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .youth-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Begrüßung<span id="titleTR" style="display: none;"> (Selamlaşma)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Grundlegende Begrüßungen<span id="basicTR" style="display: none;"> (Temel Selamlaşmalar)</span></h2>
+            <div class="greetings-grid">
+                <div class="greeting-box">
+                    <div class="greeting-header">Hallo</div>
+                    <div class="greeting-turkish">Merhaba, Selam</div>
+                    <div class="greeting-usage">En yaygın, her durumda güvenli<span id="halloTR" style="display: none;"> (Most common, safe in all situations)</span></div>
+                </div>
+                <div class="greeting-box">
+                    <div class="greeting-header">Guten Morgen</div>
+                    <div class="greeting-turkish">Günaydın</div>
+                    <div class="greeting-usage">Sabah selamı (05:00-11:00)<span id="morgenTR" style="display: none;"> (Morning greeting)</span></div>
+                </div>
+                <div class="greeting-box">
+                    <div class="greeting-header">Guten Tag</div>
+                    <div class="greeting-turkish">İyi günler</div>
+                    <div class="greeting-usage">Gün içi selamı (11:00-18:00)<span id="tagTR" style="display: none;"> (Daytime greeting)</span></div>
+                </div>
+                <div class="greeting-box">
+                    <div class="greeting-header">Guten Abend</div>
+                    <div class="greeting-turkish">İyi akşamlar</div>
+                    <div class="greeting-usage">Akşam selamı (18:00-22:00)<span id="abendTR" style="display: none;"> (Evening greeting)</span></div>
+                </div>
+                <div class="greeting-box">
+                    <div class="greeting-header">Gute Nacht</div>
+                    <div class="greeting-turkish">İyi geceler</div>
+                    <div class="greeting-usage">Sadece vedalaşmada, yatarken<span id="nachtTR" style="display: none;"> (Only when saying goodbye, before sleep)</span></div>
+                </div>
+                <div class="greeting-box">
+                    <div class="greeting-header">Auf Wiedersehen</div>
+                    <div class="greeting-turkish">Hoşça kalın, Güle güle</div>
+                    <div class="greeting-usage">Resmi vedalaşma<span id="wiedersehenTR" style="display: none;"> (Formal farewell)</span></div>
+                </div>
+                <div class="greeting-box">
+                    <div class="greeting-header">Tschüss</div>
+                    <div class="greeting-turkish">Hoşça kal, Güle güle</div>
+                    <div class="greeting-usage">Günlük vedalaşma<span id="tschussTR" style="display: none;"> (Casual farewell)</span></div>
+                </div>
+                <div class="greeting-box">
+                    <div class="greeting-header">Bis bald</div>
+                    <div class="greeting-turkish">Yakında görüşürüz</div>
+                    <div class="greeting-usage">Samimi veda<span id="bisbaldTR" style="display: none;"> (Friendly farewell)</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Begrüßung unter Jugendlichen<span id="youthGreetTR" style="display: none;"> (Gençler Arasında Selamlaşma)</span></h2>
+            <div class="info-box">
+                Bu ifadeler genellikle hiyerarşi kurallarından bağımsız ve dinamiktir.<span id="youthInfoTR" style="display: none;"> These expressions are generally independent of hierarchy rules and dynamic.</span>
+            </div>
+            <div class="youth-grid">
+                <div class="youth-item">
+                    <div class="youth-german">Was geht?</div>
+                    <div class="youth-turkish">Ne haber, nötr genç selamı</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Wazzup?</div>
+                    <div class="youth-turkish">İngilizce 'What's up'tan türeyen genç selamı</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Hallo! / Hi! / Hey!</div>
+                    <div class="youth-turkish">En yaygın ve samimi selamlar</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Na?</div>
+                    <div class="youth-turkish">N'aber? Çok yaygın ve kısa</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Alles fit? / Alles klar?</div>
+                    <div class="youth-turkish">Her şey yolunda mı? Spor kültüründen gelir</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Talahon</div>
+                    <div class="youth-turkish">Arapça 'Buraya gel'den türemiş popüler hitap/kimlik etiketi</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Yurr / Sheesh</div>
+                    <div class="youth-turkish">Amerikan kültürü/TikTok'tan; Onaylama/Şaşkınlık belirtir</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Aura</div>
+                    <div class="youth-turkish">Kişinin karizmasını tanımlayan statü belirleme</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Auf Lock</div>
+                    <div class="youth-turkish">Rahat ol anlamında, gerginliği azaltmak için kullanılır</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Moin / Moin Moin</div>
+                    <div class="youth-turkish">Kuzey Almanya'da günün her saati kullanılan evrensel selam</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Servus</div>
+                    <div class="youth-turkish">Güneyde Bavyera ve Avusturya'da samimi 'Merhaba' ve 'Güle güle' anlamında</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Gude</div>
+                    <div class="youth-turkish">Aşağı Frankonya'da kullanılan Hessen lehçesinden kısaltma</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Sali / Salü / Hoi</div>
+                    <div class="youth-turkish">İsviçre'de arkadaşlar arasında kullanılan samimi selamlar</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Populäre Anreden<span id="addressTR" style="display: none;"> (Popüler Hitap Şekilleri)</span></h2>
+            <div class="info-box">
+                Selamın ayrılmaz parçası olan hitap şekilleri<span id="addressInfoTR" style="display: none;"> Forms of address that are an integral part of greeting</span>
+            </div>
+            <div class="youth-grid">
+                <div class="youth-item">
+                    <div class="youth-german">Digga / Diggah</div>
+                    <div class="youth-turkish">Dostum/Kardeşim anlamında, selamın ayrılmaz parçası</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Akh / Akhi</div>
+                    <div class="youth-turkish">Arapça kökenli 'Kardeşim', etnik köken bağımsız kullanılır</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Verabschiedung unter Jugendlichen<span id="youthFarewellTR" style="display: none;"> (Gençler Arasında Vedalaşma)</span></h2>
+            <div class="youth-grid">
+                <div class="youth-item">
+                    <div class="youth-german">Tschüss!</div>
+                    <div class="youth-turkish">Günlük dilde en çok kullanılan veda</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Ciao!</div>
+                    <div class="youth-turkish">İtalyanca kökenli, samimi ortamlarda kullanılır</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Bis später!</div>
+                    <div class="youth-turkish">Aynı gün içinde 'Sonra görüşürüz'</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Bis dann!</div>
+                    <div class="youth-turkish">O zaman görüşürüz, geleceğe atıf yapar</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Bis bald!</div>
+                    <div class="youth-turkish">Yakında görüşürüz, samimi veda</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Bis morgen!</div>
+                    <div class="youth-turkish">Yarın görüşürüz</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Mach's gut!</div>
+                    <div class="youth-turkish">Samimi ortamlarda 'Kendine iyi bak'</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Wir sehen uns! / Man sieht sich!</div>
+                    <div class="youth-turkish">Görüşürüz, samimi</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">Gute Nacht!</div>
+                    <div class="youth-turkish">Kesin bir vedalaşma, sadece gün biterken/uyurken söylenir</div>
+                </div>
+                <div class="youth-item">
+                    <div class="youth-german">LG / VG</div>
+                    <div class="youth-turkish">Liebe Grüße/Viele Grüße kısaltmaları; dijital yazışmalarda kullanılır</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Regionale Begrüßungen<span id="regionalTR" style="display: none;"> (Bölgesel Selamlaşmalar)</span></h2>
+            <p style="margin-bottom: 20px; color: #7f8c8d; font-size: 0.95em;">Almanya'nın farklı bölgelerinde yerel selamlaşma gelenekleri vardır. Bu ifadeleri bilmek, o bölgede daha kolay entegre olmanıza yardımcı olur.<span id="regionalIntroTR" style="display: none;"> Different regions of Germany have local greeting traditions. Knowing these expressions helps you integrate more easily in that region.</span></p>
+
+            <div class="regional-section">
+                <div class="regional-title">Kuzey Almanya: Moin<span id="northTR" style="display: none;"> (Northern Germany)</span></div>
+                <div class="regional-item">
+                    <div class="regional-german">Moin / Moin Moin</div>
+                    <div class="regional-turkish">Hamburg, Bremen, Schleswig-Holstein bölgelerinde kullanılır. Günün her saatinde kullanılabilir. "Morgen" (sabah) kelimesinden gelmez, Aşağı Almanca "moi" (güzel, iyi) kelimesinden gelir. Hem merhaba hem hoşça kal anlamında.</div>
+                </div>
+            </div>
+
+            <div class="regional-section">
+                <div class="regional-title">Güney Almanya und Österreich: Grüß Gott und Servus<span id="southTR" style="display: none;"> (Southern Germany and Austria)</span></div>
+                <div class="regional-item">
+                    <div class="regional-german">Grüß Gott</div>
+                    <div class="regional-turkish">"Tanrı selamlasın" - Bavyera ve Avusturya'da en yaygın selamdır. Süpermarketten iş toplantısına kadar her yerde kullanılır.</div>
+                </div>
+                <div class="regional-item">
+                    <div class="regional-german">Servus</div>
+                    <div class="regional-turkish">Latince kökenlidir ve "hizmetçi" anlamına gelir. Ancak kullanımı "Hizmetinizdeyim" ifadesinden gelir. Hem merhaba hem hoşça kal için kullanılır. Bavyera, Avusturya'da çok yaygın. Arkadaşlar arasında samimi, iş ortamında da kullanılabilir.</div>
+                </div>
+                <div class="regional-item">
+                    <div class="regional-german">Pfiat di / Pfiat Gott</div>
+                    <div class="regional-turkish">Tanrı'ya emanet ol (Bavyera)</div>
+                </div>
+                <div class="regional-item">
+                    <div class="regional-german">Habe die Ehre</div>
+                    <div class="regional-turkish">Onur duyarım (çok eski, nadiren kullanılır)</div>
+                </div>
+            </div>
+
+            <div class="regional-section">
+                <div class="regional-title">Schweiz: Grüezi, Salü, Hoi<span id="swissTR" style="display: none;"> (Switzerland)</span></div>
+                <div class="regional-item">
+                    <div class="regional-german">Grüezi / Grüezi wohl</div>
+                    <div class="regional-turkish">Sizi selamlıyorum (resmi, en yaygın)</div>
+                </div>
+                <div class="regional-item">
+                    <div class="regional-german">Salü</div>
+                    <div class="regional-turkish">Selam (Fransızca etkisi, samimi)</div>
+                </div>
+                <div class="regional-item">
+                    <div class="regional-german">Hoi</div>
+                    <div class="regional-turkish">Merhaba (çok samimi)</div>
+                </div>
+                <div class="regional-item">
+                    <div class="regional-german">Uf Wiederluege</div>
+                    <div class="regional-turkish">Görüşmek üzere (vedalaşma)</div>
+                </div>
+                <div class="regional-item">
+                    <div class="regional-german">Tschau zäme</div>
+                    <div class="regional-turkish">Herkese hoşça kal</div>
+                </div>
+            </div>
+
+            <div class="regional-section">
+                <div class="regional-title">Andere regionale Ausdrücke<span id="otherTR" style="display: none;"> (Diğer Bölgesel İfadeler)</span></div>
+                <div class="regional-item">
+                    <div class="regional-german">Gude</div>
+                    <div class="regional-turkish">Hessen bölgesi (Frankfurt çevresi), "Guten" kelimesinin kısaltması</div>
+                </div>
+                <div class="regional-item">
+                    <div class="regional-german">Ei Gude, wie?</div>
+                    <div class="regional-turkish">İyi misin, nasılsın? (Hessen lehçesi)</div>
+                </div>
+                <div class="regional-item">
+                    <div class="regional-german">Ade / Adieu</div>
+                    <div class="regional-turkish">Güneybatı Almanya, Fransızca etkisi</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const trElements = document.querySelectorAll('[id$="TR"]');
+            trElements.forEach(el => {
+                el.style.display = this.checked ? 'inline' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+
