@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.4 Dialoge | Diyaloglar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-label {
+            font-size: 0.9em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #3498db;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 30px 20px;
+            margin: 0 auto;
+        }
+
+        .dialog-section {
+            margin-bottom: 50px;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .dialog-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .conversation {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .message.left {
+            justify-content: flex-start;
+        }
+
+        .message.right {
+            justify-content: flex-end;
+        }
+
+        .message:nth-child(1) { animation-delay: 0.1s; }
+        .message:nth-child(2) { animation-delay: 0.2s; }
+        .message:nth-child(3) { animation-delay: 0.3s; }
+        .message:nth-child(4) { animation-delay: 0.4s; }
+        .message:nth-child(5) { animation-delay: 0.5s; }
+        .message:nth-child(6) { animation-delay: 0.6s; }
+        .message:nth-child(7) { animation-delay: 0.7s; }
+        .message:nth-child(8) { animation-delay: 0.8s; }
+        .message:nth-child(9) { animation-delay: 0.9s; }
+        .message:nth-child(10) { animation-delay: 1.0s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .avatar.weber {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .avatar.klein {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .avatar.lisa {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .avatar.max {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .avatar.customer {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .avatar.seller {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+        }
+
+        .avatar.secretary {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #2c3e50;
+        }
+
+        .avatar.caller {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #2c3e50;
+        }
+
+        .message-content {
+            max-width: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .message.left .message-content {
+            align-items: flex-start;
+        }
+
+        .message.right .message-content {
+            align-items: flex-end;
+        }
+
+        .speaker-name {
+            font-size: 0.75em;
+            font-weight: 600;
+            color: #7f8c8d;
+            padding: 0 8px;
+            margin-bottom: 4px;
+        }
+
+        .message.left .speaker-name {
+            color: #667eea;
+        }
+
+        .message.right .speaker-name {
+            color: #f5576c;
+        }
+
+        .bubble {
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+
+        .message.left .bubble {
+            background-color: #e8f4f8;
+            border-bottom-left-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .message.right .bubble {
+            background-color: #fff0f5;
+            border-bottom-right-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .bubble-text {
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+
+        .bubble-translation {
+            font-size: 0.85em;
+            color: #27ae60;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed #bdc3c7;
+            display: none;
+        }
+
+        .bubble-translation.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .dialog-section {
+                padding: 15px;
+            }
+
+            .message-content {
+                max-width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Dialoge<span id="titleTR" style="display: none;"> (Diyaloglar)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Dialog 1: İş Yerinde Sabah Karşılaşma -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 1: İş Yerinde Sabah Karşılaşma<span id="dialog1TR" style="display: none;"> (Dialogue 1: Morning Meeting at Work)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar weber">W</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Herr Weber</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Guten Morgen, Frau Klein!</div>
+                            <div class="bubble-translation">Günaydın, Bayan Klein!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar klein">K</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Frau Klein</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Guten Morgen, Herr Weber! Wie geht es Ihnen?</div>
+                            <div class="bubble-translation">Günaydın, Bay Weber! Nasılsınız?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar weber">W</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Herr Weber</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Danke, sehr gut. Und Ihnen?</div>
+                            <div class="bubble-translation">Teşekkürler, çok iyiyim. Ya siz?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar klein">K</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Frau Klein</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Auch gut, danke. Schönen Tag noch!</div>
+                            <div class="bubble-translation">Ben de iyiyim, teşekkürler. İyi günler dilerim!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar weber">W</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Herr Weber</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Danke, gleichfalls!</div>
+                            <div class="bubble-translation">Teşekkürler, size de!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialog 2: Arkadaşlar Arasında -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 2: Arkadaşlar Arasında<span id="dialog2TR" style="display: none;"> (Dialogue 2: Between Friends)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar lisa">L</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Lisa</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Hi Max! Wie geht's?</div>
+                            <div class="bubble-translation">Selam Max! Nasılsın?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar max">M</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Max</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Hey Lisa! Gut, und dir?</div>
+                            <div class="bubble-translation">Hey Lisa! İyiyim, ya sen?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar lisa">L</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Lisa</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Super! Was machst du heute?</div>
+                            <div class="bubble-translation">Süper! Bugün ne yapıyorsun?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar max">M</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Max</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich gehe später ins Kino. Kommst du mit?</div>
+                            <div class="bubble-translation">Sonra sinemaya gideceğim. Gelir misin?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar lisa">L</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Lisa</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Gerne! Bis später dann!</div>
+                            <div class="bubble-translation">Tabii! O zaman sonra görüşürüz!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar max">M</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Max</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Bis später! Tschüss!</div>
+                            <div class="bubble-translation">Sonra görüşürüz! Hoşça kal!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialog 3: Mağazada -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 3: Mağazada<span id="dialog3TR" style="display: none;"> (Dialogue 3: At the Store)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar customer">M</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Müşteri</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Guten Tag!</div>
+                            <div class="bubble-translation">İyi günler!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar seller">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Satıcı</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Guten Tag! Wie kann ich Ihnen helfen?</div>
+                            <div class="bubble-translation">İyi günler! Size nasıl yardımcı olabilirim?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar customer">M</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Müşteri</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich suche eine Jacke.</div>
+                            <div class="bubble-translation">Bir ceket arıyorum.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar seller">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Satıcı</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Sehr gerne. Hier entlang, bitte.</div>
+                            <div class="bubble-translation">Tabii ki. Buradan, lütfen.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar seller">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Satıcı</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Vielen Dank! Schönen Tag noch!</div>
+                            <div class="bubble-translation">Çok teşekkürler! İyi günler dilerim!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar customer">M</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Müşteri</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Danke, gleichfalls! Auf Wiedersehen!</div>
+                            <div class="bubble-translation">Teşekkürler, size de! Hoşça kalın!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialog 4: Telefon Görüşmesi -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 4: Telefon Görüşmesi<span id="dialog4TR" style="display: none;"> (Dialogue 4: Phone Call)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar secretary">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sekreter</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Guten Tag, Firma Schmidt. Wie kann ich Ihnen helfen?</div>
+                            <div class="bubble-translation">İyi günler, Schmidt Firması. Size nasıl yardımcı olabilirim?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar caller">A</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Arayan</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Guten Tag. Hier ist Herr Yılmaz. Ich möchte gerne mit Frau Weber sprechen.</div>
+                            <div class="bubble-translation">İyi günler. Ben Bay Yılmaz. Bayan Weber ile konuşmak istiyorum.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar secretary">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sekreter</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Einen Moment bitte, ich verbinde Sie.</div>
+                            <div class="bubble-translation">Bir dakika lütfen, bağlıyorum.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar secretary">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sekreter</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Vielen Dank für Ihren Anruf. Auf Wiederhören!</div>
+                            <div class="bubble-translation">Aramanız için çok teşekkürler. Tekrar görüşmek üzere!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar caller">A</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Arayan</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Auf Wiederhören!</div>
+                            <div class="bubble-translation">Tekrar görüşmek üzere!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const translations = document.querySelectorAll('.bubble-translation');
+            translations.forEach(translation => {
+                if (this.checked) {
+                    translation.classList.add('show');
+                } else {
+                    translation.classList.remove('show');
+                }
+            });
+            
+            const trElements = document.querySelectorAll('[id$="TR"]');
+            trElements.forEach(el => {
+                el.style.display = this.checked ? 'inline' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+

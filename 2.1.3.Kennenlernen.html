@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.3 Kennenlernen | Tanışma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-label {
+            font-size: 0.9em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #3498db;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .intro {
+            background-color: #e8f4f8;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .intro p {
+            font-size: 0.9em;
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .phrases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .phrase-box {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .phrase-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border-color: #3498db;
+        }
+
+        .phrase-header {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .phrase-turkish {
+            color: #e74c3c;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .phrase-usage {
+            color: #7f8c8d;
+            font-size: 0.85em;
+            font-style: italic;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .email-section {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #9b59b6;
+        }
+
+        .email-category {
+            margin-bottom: 20px;
+        }
+
+        .email-category-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .email-item {
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border-left: 3px solid #9b59b6;
+        }
+
+        .email-german {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .email-turkish {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .toggle-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .intro {
+                padding: 10px 12px;
+            }
+
+            .intro p {
+                font-size: 0.85em;
+            }
+
+            .phrases-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .phrases-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Kennenlernen<span id="titleTR" style="display: none;"> (Tanışma)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <p>Almanca tanışmak ve kendini tanıtmak için kullanılan temel kalıplar.<span id="introTR" style="display: none;"> Basic phrases for meeting and introducing yourself in German.</span></p>
+        </div>
+
+        <div class="section">
+            <h2>Sich vorstellen<span id="introduceTR" style="display: none;"> (Kendinizi Tanıtma)</span></h2>
+            <div class="phrases-grid">
+                <div class="phrase-box">
+                    <div class="phrase-header">Ich heiße…</div>
+                    <div class="phrase-turkish">Benim adım…</div>
+                    <div class="phrase-usage">En yaygın kullanım<span id="heißeTR" style="display: none;"> (Most common)</span></div>
+                </div>
+                <div class="phrase-box">
+                    <div class="phrase-header">Ich bin…</div>
+                    <div class="phrase-turkish">Ben…</div>
+                    <div class="phrase-usage">Samimi<span id="binTR" style="display: none;"> (Casual)</span></div>
+                </div>
+                <div class="phrase-box">
+                    <div class="phrase-header">Mein Name ist…</div>
+                    <div class="phrase-turkish">Adım…</div>
+                    <div class="phrase-usage">Resmi<span id="nameTR" style="display: none;"> (Formal)</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Nach dem Namen fragen<span id="askNameTR" style="display: none;"> (Karşıdakinin Adını Sorma)</span></h2>
+            <div class="phrases-grid">
+                <div class="phrase-box">
+                    <div class="phrase-header">Wie heißen Sie?</div>
+                    <div class="phrase-turkish">Adınız ne?</div>
+                    <div class="phrase-usage">Resmi<span id="heissenSieTR" style="display: none;"> (Formal)</span></div>
+                </div>
+                <div class="phrase-box">
+                    <div class="phrase-header">Wie heißt du?</div>
+                    <div class="phrase-turkish">Adın ne?</div>
+                    <div class="phrase-usage">Samimi<span id="heisstDuTR" style="display: none;"> (Casual)</span></div>
+                </div>
+                <div class="phrase-box">
+                    <div class="phrase-header">Wie ist Ihr Name?</div>
+                    <div class="phrase-turkish">İsminiz nedir?</div>
+                    <div class="phrase-usage">Çok resmi<span id="nameFormalTR" style="display: none;"> (Very formal)</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Freut mich, Sie kennenzulernen<span id="pleasedTR" style="display: none;"> (Tanıştığıma Memnun Oldum)</span></h2>
+            <div class="phrases-grid">
+                <div class="phrase-box">
+                    <div class="phrase-header">Freut mich!</div>
+                    <div class="phrase-turkish">Memnun oldum!</div>
+                    <div class="phrase-usage">Samimi<span id="freutTR" style="display: none;"> (Casual)</span></div>
+                </div>
+                <div class="phrase-box">
+                    <div class="phrase-header">Angenehm!</div>
+                    <div class="phrase-turkish">Memnunum!</div>
+                    <div class="phrase-usage">Daha resmi<span id="angenehmTR" style="display: none;"> (More formal)</span></div>
+                </div>
+                <div class="phrase-box">
+                    <div class="phrase-header">Sehr erfreut!</div>
+                    <div class="phrase-turkish">Çok memnun oldum!</div>
+                    <div class="phrase-usage">Resmi<span id="erfreutTR" style="display: none;"> (Formal)</span></div>
+                </div>
+                <div class="phrase-box">
+                    <div class="phrase-header">Es freut mich, Sie kennenzulernen.</div>
+                    <div class="phrase-turkish">Sizinle tanıştığıma memnun oldum.</div>
+                    <div class="phrase-usage">Çok resmi<span id="kennenzulernenTR" style="display: none;"> (Very formal)</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>E-Mail und Schriftliche Kommunikation<span id="emailTR" style="display: none;"> (E-posta ve Yazılı İletişim)</span></h2>
+            
+            <div class="email-section">
+                <div class="email-category">
+                    <div class="email-category-title">E-Mail Başlangıçları<span id="emailStartTR" style="display: none;"> (E-mail Beginnings)</span></div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: #2c3e50;">Resmi:<span id="formalTR" style="display: none;"> (Formal)</span></strong>
+                        <div class="email-item">
+                            <div class="email-german">Sehr geehrte Damen und Herren,</div>
+                            <div class="email-turkish">(İsim bilinmiyorsa)</div>
+                        </div>
+                        <div class="email-item">
+                            <div class="email-german">Sehr geehrte Frau Müller,</div>
+                            <div class="email-turkish">(Bay/Bayan + Soyadı)</div>
+                        </div>
+                        <div class="email-item">
+                            <div class="email-german">Sehr geehrter Herr Schmidt,</div>
+                            <div class="email-turkish"></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: #2c3e50;">Yarı Resmi:<span id="semiFormalTR" style="display: none;"> (Semi-formal)</span></strong>
+                        <div class="email-item">
+                            <div class="email-german">Liebe Frau Müller,</div>
+                            <div class="email-turkish"></div>
+                        </div>
+                        <div class="email-item">
+                            <div class="email-german">Lieber Herr Schmidt,</div>
+                            <div class="email-turkish"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <strong style="color: #2c3e50;">Samimi:<span id="casualTR" style="display: none;"> (Casual)</span></strong>
+                        <div class="email-item">
+                            <div class="email-german">Hallo Herr Schmidt,</div>
+                            <div class="email-turkish"></div>
+                        </div>
+                        <div class="email-item">
+                            <div class="email-german">Hi Max,</div>
+                            <div class="email-turkish"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="email-category">
+                    <div class="email-category-title">E-Mail Bitişleri<span id="emailEndTR" style="display: none;"> (E-mail Endings)</span></div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: #2c3e50;">Resmi:<span id="formalEndTR" style="display: none;"> (Formal)</span></strong>
+                        <div class="email-item">
+                            <div class="email-german">Mit freundlichen Grüßen</div>
+                            <div class="email-turkish">(En standart)</div>
+                        </div>
+                        <div class="email-item">
+                            <div class="email-german">Mit besten Grüßen</div>
+                            <div class="email-turkish"></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: #2c3e50;">Yarı Resmi / Modern:<span id="semiModernTR" style="display: none;"> (Semi-formal / Modern)</span></strong>
+                        <div class="email-item">
+                            <div class="email-german">Beste Grüße</div>
+                            <div class="email-turkish"></div>
+                        </div>
+                        <div class="email-item">
+                            <div class="email-german">Viele Grüße</div>
+                            <div class="email-turkish"></div>
+                        </div>
+                        <div class="email-item">
+                            <div class="email-german">Freundliche Grüße</div>
+                            <div class="email-turkish"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <strong style="color: #2c3e50;">Samimi:<span id="casualEndTR" style="display: none;"> (Casual)</span></strong>
+                        <div class="email-item">
+                            <div class="email-german">Liebe Grüße</div>
+                            <div class="email-turkish"></div>
+                        </div>
+                        <div class="email-item">
+                            <div class="email-german">LG</div>
+                            <div class="email-turkish">(Sadece çok samimi)</div>
+                        </div>
+                        <div class="email-item">
+                            <div class="email-german">VG</div>
+                            <div class="email-turkish">(Viele Grüße – şirket içi)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const trElements = document.querySelectorAll('[id$="TR"]');
+            trElements.forEach(el => {
+                el.style.display = this.checked ? 'inline' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+
