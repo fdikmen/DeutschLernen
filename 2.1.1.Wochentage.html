@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.1 Wochentage | Günler</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-label {
+            font-size: 0.9em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #3498db;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .intro {
+            background-color: #e8f4f8;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .intro p {
+            font-size: 0.9em;
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .day-box {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid #9b59b6;
+        }
+
+        .day-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border-color: #9b59b6;
+        }
+
+        .day-header {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .day-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .day-info-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95em;
+        }
+
+        .day-article {
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .day-abbreviation {
+            color: #3498db;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .day-turkish {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+
+        .day-pronunciation {
+            color: #27ae60;
+            font-style: italic;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .preposition-box {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #f39c12;
+        }
+
+        .preposition-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .preposition-example {
+            margin: 8px 0;
+            padding: 8px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        .preposition-example strong {
+            color: #3498db;
+        }
+
+        .expressions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .expression-item {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .expression-german {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.95em;
+        }
+
+        .expression-turkish {
+            color: #7f8c8d;
+            font-size: 0.85em;
+        }
+
+        .examples-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .examples-list li {
+            background-color: #f8f9fa;
+            border-left: 3px solid #3498db;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .example-german {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .example-turkish {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .toggle-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .intro {
+                padding: 10px 12px;
+            }
+
+            .intro p {
+                font-size: 0.85em;
+            }
+
+            .days-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 10px;
+            }
+
+            .day-box {
+                padding: 12px;
+            }
+
+            .day-header {
+                font-size: 1.2em;
+            }
+
+            .expressions-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .days-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .expressions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Wochentage<span id="titleTR" style="display: none;"> (Günler)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <p>Almanca haftanın günleri, büyük harfle başlar. Çoğu günün sonunda bulunan <strong>-tag</strong> eki, <strong>-gün</strong> anlamına gelir.<span id="introTR" style="display: none;"> German days of the week start with a capital letter. The suffix <strong>-tag</strong> at the end of most days means <strong>day</strong>.</span></p>
+        </div>
+
+        <div class="section">
+            <h2>Die Wochentage<span id="daysTR" style="display: none;"> (Haftanın Günleri)</span></h2>
+            <div class="days-grid">
+                <div class="day-box">
+                    <div class="day-header">Montag</div>
+                    <div class="day-info">
+                        <div class="day-info-row">
+                            <span class="day-article">der</span>
+                            <span class="day-abbreviation">Mo.</span>
+                            <span class="day-turkish">Pazartesi</span>
+                        </div>
+                        <div class="day-pronunciation">Mon-tak</div>
+                    </div>
+                </div>
+                <div class="day-box">
+                    <div class="day-header">Dienstag</div>
+                    <div class="day-info">
+                        <div class="day-info-row">
+                            <span class="day-article">der</span>
+                            <span class="day-abbreviation">Di.</span>
+                            <span class="day-turkish">Salı</span>
+                        </div>
+                        <div class="day-pronunciation">Dins-tak</div>
+                    </div>
+                </div>
+                <div class="day-box">
+                    <div class="day-header">Mittwoch</div>
+                    <div class="day-info">
+                        <div class="day-info-row">
+                            <span class="day-article">der</span>
+                            <span class="day-abbreviation">Mi.</span>
+                            <span class="day-turkish">Çarşamba</span>
+                        </div>
+                        <div class="day-pronunciation">Mit-voh</div>
+                    </div>
+                </div>
+                <div class="day-box">
+                    <div class="day-header">Donnerstag</div>
+                    <div class="day-info">
+                        <div class="day-info-row">
+                            <span class="day-article">der</span>
+                            <span class="day-abbreviation">Do.</span>
+                            <span class="day-turkish">Perşembe</span>
+                        </div>
+                        <div class="day-pronunciation">Donners-tak</div>
+                    </div>
+                </div>
+                <div class="day-box">
+                    <div class="day-header">Freitag</div>
+                    <div class="day-info">
+                        <div class="day-info-row">
+                            <span class="day-article">der</span>
+                            <span class="day-abbreviation">Fr.</span>
+                            <span class="day-turkish">Cuma</span>
+                        </div>
+                        <div class="day-pronunciation">Fray-tak</div>
+                    </div>
+                </div>
+                <div class="day-box">
+                    <div class="day-header">Samstag</div>
+                    <div class="day-info">
+                        <div class="day-info-row">
+                            <span class="day-article">der</span>
+                            <span class="day-abbreviation">Sa.</span>
+                            <span class="day-turkish">Cumartesi</span>
+                        </div>
+                        <div class="day-pronunciation">Zams-tak</div>
+                        <div style="font-size: 0.85em; color: #7f8c8d; margin-top: 5px;">oder Sonnabend<span id="samstagTR" style="display: none;"> (veya Sonnabend)</span></div>
+                    </div>
+                </div>
+                <div class="day-box">
+                    <div class="day-header">Sonntag</div>
+                    <div class="day-info">
+                        <div class="day-info-row">
+                            <span class="day-article">der</span>
+                            <span class="day-abbreviation">So.</span>
+                            <span class="day-turkish">Pazar</span>
+                        </div>
+                        <div class="day-pronunciation">Zon-tak</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Präpositionen mit Wochentagen<span id="prepositionsTR" style="display: none;"> (Günlerle Kullanılan Edatlar)</span></h2>
+            <div class="preposition-box">
+                <div class="preposition-title">am<span id="amTR" style="display: none;"> (an dem kısaltması)</span></div>
+                <p style="margin-bottom: 10px; font-size: 0.95em;">Almancada günlerden bahsederken en yaygın kullanılan edat <strong>am</strong>'dır. <strong>Am</strong>, "an dem" kelimelerinin kısaltmasıdır ve gün adlarından önce gelir.<span id="amDescTR" style="display: none;"> The most common preposition used when talking about days in German is <strong>am</strong>. <strong>Am</strong> is the abbreviation of "an dem" and comes before day names.</span></p>
+                <div class="preposition-example">
+                    <strong>Am Montag</strong> (Pazartesi günü)<span id="ex1TR" style="display: none;"> (on Monday)</span>
+                </div>
+                <div class="preposition-example">
+                    <strong>Am Dienstag</strong> (Salı günü)<span id="ex2TR" style="display: none;"> (on Tuesday)</span>
+                </div>
+                <div class="preposition-example">
+                    <strong>Am Wochenende</strong> (Hafta sonu)<span id="ex3TR" style="display: none;"> (on the weekend)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Wichtige Ausdrücke<span id="expressionsTR" style="display: none;"> (Önemli İfadeler)</span></h2>
+            <div class="expressions-grid">
+                <div class="expression-item">
+                    <div class="expression-german">Der Tag</div>
+                    <div class="expression-turkish">Gün</div>
+                </div>
+                <div class="expression-item">
+                    <div class="expression-german">Die Woche</div>
+                    <div class="expression-turkish">Hafta</div>
+                </div>
+                <div class="expression-item">
+                    <div class="expression-german">Das Wochenende</div>
+                    <div class="expression-turkish">Hafta sonu</div>
+                </div>
+                <div class="expression-item">
+                    <div class="expression-german">Jeden Tag</div>
+                    <div class="expression-turkish">Her gün</div>
+                </div>
+                <div class="expression-item">
+                    <div class="expression-german">Morgen</div>
+                    <div class="expression-turkish">Yarın</div>
+                </div>
+                <div class="expression-item">
+                    <div class="expression-german">Übermorgen</div>
+                    <div class="expression-turkish">Yarından sonraki gün</div>
+                </div>
+                <div class="expression-item">
+                    <div class="expression-german">Gestern</div>
+                    <div class="expression-turkish">Dün</div>
+                </div>
+                <div class="expression-item">
+                    <div class="expression-german">Vorgestern</div>
+                    <div class="expression-turkish">Dünden önceki gün</div>
+                </div>
+                <div class="expression-item">
+                    <div class="expression-german">Nächste Woche</div>
+                    <div class="expression-turkish">Gelecek hafta</div>
+                </div>
+                <div class="expression-item">
+                    <div class="expression-german">Letzte Woche</div>
+                    <div class="expression-turkish">Geçen hafta</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Beispielsätze<span id="examplesTR" style="display: none;"> (Örnek Cümleler)</span></h2>
+            <ul class="examples-list">
+                <li>
+                    <div class="example-german">Heute ist Mittwoch.</div>
+                    <div class="example-turkish">Bugün Çarşamba.</div>
+                </li>
+                <li>
+                    <div class="example-german">Heute ist Montag.</div>
+                    <div class="example-turkish">Bugün Pazartesi.</div>
+                </li>
+                <li>
+                    <div class="example-german">Nächsten Mittwoch habe ich Geburtstag.</div>
+                    <div class="example-turkish">Gelecek Çarşamba doğum günüm var.</div>
+                </li>
+                <li>
+                    <div class="example-german">Gestern war Dienstag.</div>
+                    <div class="example-turkish">Dün Salıydı.</div>
+                </li>
+                <li>
+                    <div class="example-german">Vorgestern war Montag.</div>
+                    <div class="example-turkish">Dünden önceki gün Pazartesiydi.</div>
+                </li>
+                <li>
+                    <div class="example-german">Übermorgen ist Samstag.</div>
+                    <div class="example-turkish">Yarından sonraki gün Cumartesi.</div>
+                </li>
+                <li>
+                    <div class="example-german">Am Freitag treffe ich meine Freunde.</div>
+                    <div class="example-turkish">Cuma günü arkadaşımla buluşuyorum.</div>
+                </li>
+                <li>
+                    <div class="example-german">Ich habe am Samstag Zeit.</div>
+                    <div class="example-turkish">Cumartesi günü vaktim var.</div>
+                </li>
+                <li>
+                    <div class="example-german">Wir fahren am Sonntag nach Berlin.</div>
+                    <div class="example-turkish">Pazar günü Berlin'e gidiyoruz.</div>
+                </li>
+                <li>
+                    <div class="example-german">Am Dienstag habe ich einen Arzttermin.</div>
+                    <div class="example-turkish">Salı günü doktor randevum var.</div>
+                </li>
+                <li>
+                    <div class="example-german">Mittwoch ist die Mitte der Woche.</div>
+                    <div class="example-turkish">Çarşamba haftanın ortasıdır.</div>
+                </li>
+                <li>
+                    <div class="example-german">Am Donnerstag lernen wir zusammen Deutsch.</div>
+                    <div class="example-turkish">Perşembe günü birlikte Almanca öğreniyoruz.</div>
+                </li>
+                <li>
+                    <div class="example-german">Am Freitag gehe ich ins Kino.</div>
+                    <div class="example-turkish">Cuma günü sinemaya gidiyorum.</div>
+                </li>
+                <li>
+                    <div class="example-german">Am Samstag machen wir einen Ausflug.</div>
+                    <div class="example-turkish">Cumartesi günü gezi yapıyoruz.</div>
+                </li>
+                <li>
+                    <div class="example-german">Am Sonntag besuche ich meine Eltern.</div>
+                    <div class="example-turkish">Pazar günü ailemi ziyaret ediyorum.</div>
+                </li>
+                <li>
+                    <div class="example-german">Ich arbeite von Montag bis Freitag.</div>
+                    <div class="example-turkish">Pazartesiden Cumaya kadar çalışıyorum.</div>
+                </li>
+                <li>
+                    <div class="example-german">Am Wochenende möchte ich mich ausruhen.</div>
+                    <div class="example-turkish">Hafta sonunda dinlenmek istiyorum.</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const trElements = document.querySelectorAll('[id$="TR"]');
+            trElements.forEach(el => {
+                el.style.display = this.checked ? 'inline' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+
