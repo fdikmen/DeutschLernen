@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.5 Artikeller | Artikeller</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-label {
+            font-size: 0.9em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #3498db;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .intro {
+            background-color: #e8f4f8;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .intro p {
+            font-size: 0.9em;
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .article-type-box {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+
+        .article-type-box.belirli {
+            border-left-color: #3498db;
+        }
+
+        .article-type-box.belirsiz {
+            border-left-color: #2ecc71;
+        }
+
+        .article-type-box.olumsuz {
+            border-left-color: #e74c3c;
+        }
+
+        .article-type-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .article-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .article-item {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .article-word {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .article-meaning {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .info-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .warning-box {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .examples-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .examples-list li {
+            background-color: #f8f9fa;
+            border-left: 3px solid #3498db;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .example-german {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .example-turkish {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+
+        .example-explanation {
+            color: #27ae60;
+            font-size: 0.85em;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .usage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .usage-item {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid #9b59b6;
+        }
+
+        .usage-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .usage-desc {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .toggle-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .intro {
+                padding: 10px 12px;
+            }
+
+            .intro p {
+                font-size: 0.85em;
+            }
+
+            .article-examples {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .usage-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .article-examples {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Artikeller<span id="titleTR" style="display: none;"> (Artikeller)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <p>Almanca'da isimlerin önüne eklenen belirteçlere "artikel" denir. Bu belirteçler, cinsiyete, sayıya ve ismin bulunduğu bağlama göre değişir. Almanca'da üç çeşit artikel vardır: "der" (eril), "die" (dişil) ve "das" (nötr).<span id="introTR" style="display: none;"> In German, the determiners placed before nouns are called "artikel". These determiners change according to gender, number, and the context in which the noun is used. German has three types of articles: "der" (masculine), "die" (feminine), and "das" (neuter).</span></p>
+        </div>
+
+        <div class="section">
+            <h2>Artikeller (der, die, das) Kurallar & Örnekler<span id="rulesTR" style="display: none;"> (Rules & Examples)</span></h2>
+            <p style="margin-bottom: 20px; color: #7f8c8d; font-size: 0.95em; line-height: 1.6;">Almanca tanımlık yani artikeller (der, die, das), dilin temel yapı taşlarından biridir. Başlangıçta zor görünse de, aslında bir kimlik kartı gibidir – nasıl ki her insanın bir kimliği varsa, Almancada da her isim (Nomen) olan kelimenin bir artikeli vardır.<span id="introDescTR" style="display: none;"> German articles (der, die, das) are one of the fundamental building blocks of the language. Although they may seem difficult at first, they are actually like an identity card - just as every person has an identity, every noun (Nomen) in German has an article.</span></p>
+            
+            <div class="info-box">
+                <strong>Nullartikel:</strong> Nullartikel denilen bir durum da vardır; burada isimler, artikel olmadan kullanılır. Örneğin firma isimleri Siemens, Bosch; özel isimler Hans, Helga, Ahmet gibi.<span id="nullartikelTR" style="display: none;"> <strong>Nullartikel:</strong> There is also a situation called Nullartikel; here, nouns are used without articles. For example, company names like Siemens, Bosch; proper names like Hans, Helga, Ahmet.</span>
+            </div>
+
+            <p style="margin-bottom: 20px; color: #7f8c8d; font-size: 0.95em; line-height: 1.6;">Artikel üç temel türe ayrılır: <strong>Belirli, Belirsiz ve Olumsuz Artikeller</strong><span id="threeTypesTR" style="display: none;"> Articles are divided into three basic types: <strong>Definite, Indefinite, and Negative Articles</strong></span></p>
+        </div>
+
+        <div class="section">
+            <h2>1. Belirli Artikel (der, die, das)<span id="definiteTR" style="display: none;"> (Definite Articles)</span></h2>
+            <div class="article-type-box belirli">
+                <div class="article-type-title">
+                    <span>Belirli Artikel</span>
+                    <span style="font-size: 0.7em; color: #7f8c8d; font-weight: normal;">(der, die, das)</span>
+                </div>
+                <p style="margin-bottom: 15px; line-height: 1.6;">Bunlarda (der, die, das) bahsedilen şey/kişi kesin, tanımlı, net, belli ve bilinen bir şeydir.<span id="definiteDescTR" style="display: none;"> In these (der, die, das), the thing/person mentioned is definite, specific, clear, certain, and known.</span></p>
+                <p style="margin-bottom: 15px; line-height: 1.6;">Bunların her biri Türkçede "ŞU", "BU" veya "O" anlamına gelir. Ancak Türkçeye çevirirken istersek çevirmeyebiliriz. Yani? "Şu masa" değil de "masa"; "Bu masa" değil de "masa"; "O masa" değil de "masa" şeklinde çevirebiliriz. İngilizcedeki karşılıkları "THE" kelimesidir.<span id="definiteMeaningTR" style="display: none;"> Each of these means "THAT", "THIS" or "THAT" in Turkish. However, when translating into Turkish, we can choose not to translate them. So? We can translate as "masa" (table) instead of "Şu masa" (that table); "masa" instead of "Bu masa" (this table); "masa" instead of "O masa" (that table). Their English equivalent is the word "THE".</span></p>
+                
+                <div class="article-examples">
+                    <div class="article-item">
+                        <div class="article-word">der</div>
+                        <div class="article-meaning">Eril (Masculine)</div>
+                    </div>
+                    <div class="article-item">
+                        <div class="article-word">die</div>
+                        <div class="article-meaning">Dişil (Feminine)</div>
+                    </div>
+                    <div class="article-item">
+                        <div class="article-word">das</div>
+                        <div class="article-meaning">Nötr (Neuter)</div>
+                    </div>
+                </div>
+
+                <div class="examples-list" style="margin-top: 20px;">
+                    <li>
+                        <div class="example-german">Der Stift ist blau.</div>
+                        <div class="example-turkish">O kalem mavi. / Kalem mavi.</div>
+                        <div class="example-explanation">[Hangi kalem? → Bildiğimiz, belli olan kalem. Konuşan ve dinleyen kişi hangi kalemden bahsedildiğini bilir – bu nedenle 'belirli artikel' denir.]</div>
+                    </li>
+                </div>
+
+                <div class="warning-box" style="margin-top: 15px;">
+                    <strong>Önemli Not:</strong> Almancada "der," "die," ve "das" artikellerinin hangi kelimeye neden verildiğini anlamak genellikle zordur. Hatta ana dili Almanca olanlar bile bu konuda kesin bir açıklama yapamazlar. Örneğin, Türkiye'nin artikeli "die Türkei"dir; ancak neden "der" değil de "die" olduğu net değildir. Benzer şekilde, "Deutschland" (Almanya) kelimesinin neden artikeli yok, bu da ayrı bir merak konusudur.<span id="importantNoteTR" style="display: none;"> <strong>Important Note:</strong> In German, it is generally difficult to understand why "der," "die," and "das" articles are given to which word. Even native German speakers cannot give a definitive explanation on this subject. For example, Turkey's article is "die Türkei"; however, it is not clear why it is "die" and not "der". Similarly, why "Deutschland" (Germany) has no article is another matter of curiosity.</span>
+                </div>
+
+                <div class="info-box" style="margin-top: 15px;">
+                    Bu tür soruların kesin cevapları olmasa da, artikellerin mantığını anlamaya çalışmak yerine, kelimeleri öğrenirken artikelleriyle birlikte ezberlemek en etkili yöntemdir. Kısacası, kelime öğrenirken artikelini de öğrenmeye özen gösterin!<span id="learningTipTR" style="display: none;"> Although there are no definitive answers to such questions, instead of trying to understand the logic of articles, memorizing words together with their articles when learning them is the most effective method. In short, make sure to learn the article when learning a word!</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2. Belirsiz Artikel (ein, eine)<span id="indefiniteTR" style="display: none;"> (Indefinite Articles)</span></h2>
+            <div class="article-type-box belirsiz">
+                <div class="article-type-title">
+                    <span>Belirsiz Artikel</span>
+                    <span style="font-size: 0.7em; color: #7f8c8d; font-weight: normal;">(ein, eine)</span>
+                </div>
+                <p style="margin-bottom: 15px; line-height: 1.6;">Bahsedilen şey/kişi herhangi biri olabilir. Herhangi bir şeyden bahsederken kullanırız. (ein, eine)<span id="indefiniteDescTR" style="display: none;"> The thing/person mentioned can be any one. We use it when talking about any thing. (ein, eine)</span></p>
+                <p style="margin-bottom: 15px; line-height: 1.6;">Türkçede bunların ikisi de "BİR" anlamına gelir. İngilizcede "A/AN" karşılığıdır.<span id="indefiniteMeaningTR" style="display: none;"> In Turkish, both of these mean "ONE". In English, they correspond to "A/AN".</span></p>
+                
+                <div class="article-examples">
+                    <div class="article-item">
+                        <div class="article-word">ein</div>
+                        <div class="article-meaning">Eril/Nötr (Masculine/Neuter)</div>
+                    </div>
+                    <div class="article-item">
+                        <div class="article-word">eine</div>
+                        <div class="article-meaning">Dişil (Feminine)</div>
+                    </div>
+                </div>
+
+                <div class="examples-list" style="margin-top: 20px;">
+                    <li>
+                        <div class="example-german">Ich brauche einen Stift.</div>
+                        <div class="example-turkish">Bir kaleme ihtiyacım var.</div>
+                        <div class="example-explanation">[Hangi kalem? → Herhangi bir kalem, fark etmez.]</div>
+                    </li>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3. Olumsuz Artikel (kein, keine)<span id="negativeTR" style="display: none;"> (Negative Articles)</span></h2>
+            <div class="article-type-box olumsuz">
+                <div class="article-type-title">
+                    <span>Olumsuz Artikel</span>
+                    <span style="font-size: 0.7em; color: #7f8c8d; font-weight: normal;">(kein, keine)</span>
+                </div>
+                <p style="margin-bottom: 15px; line-height: 1.6;">Belirsiz artikelin (ein/eine) olumsuz halidir (kein, keine)<span id="negativeDescTR" style="display: none;"> It is the negative form of the indefinite article (ein/eine) (kein, keine)</span></p>
+                <p style="margin-bottom: 15px; line-height: 1.6;">Olumsuz artikeller de Türkçede "hiç" veya "yok" anlamına gelir. İngilizcede "NO/NOT ANY" karşılığıdır.<span id="negativeMeaningTR" style="display: none;"> Negative articles also mean "none" or "no" in Turkish. In English, they correspond to "NO/NOT ANY".</span></p>
+                
+                <div class="article-examples">
+                    <div class="article-item">
+                        <div class="article-word">kein</div>
+                        <div class="article-meaning">Eril/Nötr (Masculine/Neuter)</div>
+                    </div>
+                    <div class="article-item">
+                        <div class="article-word">keine</div>
+                        <div class="article-meaning">Dişil (Feminine)</div>
+                    </div>
+                </div>
+
+                <div class="examples-list" style="margin-top: 20px;">
+                    <li>
+                        <div class="example-german">Ich habe keinen Stift.</div>
+                        <div class="example-turkish">Kalemim yok/Hiç kalemim yok.</div>
+                        <div class="example-explanation">[Kalem var mı? → Hayır, hiç yok.]</div>
+                    </li>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Başka Örneklerle Anlatayım<span id="moreExamplesTR" style="display: none;"> (More Examples)</span></h2>
+            <div class="usage-grid">
+                <div class="usage-item">
+                    <div class="usage-title">Olumlu ve Belirli:</div>
+                    <div class="usage-desc">
+                        <div class="example-german" style="margin-bottom: 5px;">Der Mann ist mein Vater.</div>
+                        <div class="example-turkish">O adam benim babam.</div>
+                        <div class="example-explanation" style="margin-top: 5px;">Spesifik ve bilinen bir adam</div>
+                    </div>
+                </div>
+                <div class="usage-item">
+                    <div class="usage-title">Olumlu ve Belirsiz:</div>
+                    <div class="usage-desc">
+                        <div class="example-german" style="margin-bottom: 5px;">Ein Mann steht dort.</div>
+                        <div class="example-turkish">Bir adam orada duruyor.</div>
+                        <div class="example-explanation" style="margin-top: 5px;">Herhangi bir adam</div>
+                    </div>
+                </div>
+                <div class="usage-item">
+                    <div class="usage-title">Olumsuz:</div>
+                    <div class="usage-desc">
+                        <div class="example-german" style="margin-bottom: 5px;">Kein Mann steht dort.</div>
+                        <div class="example-turkish">Hiç adam durmuyor orada.</div>
+                        <div class="example-explanation" style="margin-top: 5px;">Adam yok</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Pratik Kullanım<span id="practicalUsageTR" style="display: none;"> (Practical Usage)</span></h2>
+            <div class="usage-grid">
+                <div class="usage-item">
+                    <div class="usage-title">İlk kez bahsederken</div>
+                    <div class="usage-desc">→ Belirsiz artikel (ein/eine)</div>
+                </div>
+                <div class="usage-item">
+                    <div class="usage-title">Sonraki bahsetmelerde</div>
+                    <div class="usage-desc">→ Belirli artikel (der/die/das)</div>
+                </div>
+                <div class="usage-item">
+                    <div class="usage-title">Olumsuzluk durumunda</div>
+                    <div class="usage-desc">→ Olumsuz artikel (kein/keine)</div>
+                </div>
+            </div>
+            
+            <div class="info-box" style="margin-top: 20px;">
+                💡 <strong>Önemli Not:</strong> Bu üç tür, artikelin kullanım amacını belirtir. Yani bir ismi tanımlarken ne amaçla kullandığımızı gösterir.<span id="importantNote2TR" style="display: none;"> 💡 <strong>Important Note:</strong> These three types indicate the purpose of using the article. That is, they show for what purpose we use it when defining a noun.</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const trElements = document.querySelectorAll('[id$="TR"]');
+            trElements.forEach(el => {
+                el.style.display = this.checked ? 'inline' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+
