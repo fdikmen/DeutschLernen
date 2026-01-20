@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.7 W-Fragen Dialoge | W-Soruları Diyalogları</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-label {
+            font-size: 0.9em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #3498db;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 30px 20px;
+            margin: 0 auto;
+        }
+
+        .dialog-section {
+            margin-bottom: 50px;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .dialog-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .w-question-highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        .conversation {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .message.left {
+            justify-content: flex-start;
+        }
+
+        .message.right {
+            justify-content: flex-end;
+        }
+
+        .message:nth-child(1) { animation-delay: 0.1s; }
+        .message:nth-child(2) { animation-delay: 0.2s; }
+        .message:nth-child(3) { animation-delay: 0.3s; }
+        .message:nth-child(4) { animation-delay: 0.4s; }
+        .message:nth-child(5) { animation-delay: 0.5s; }
+        .message:nth-child(6) { animation-delay: 0.6s; }
+        .message:nth-child(7) { animation-delay: 0.7s; }
+        .message:nth-child(8) { animation-delay: 0.8s; }
+        .message:nth-child(9) { animation-delay: 0.9s; }
+        .message:nth-child(10) { animation-delay: 1.0s; }
+        .message:nth-child(11) { animation-delay: 1.1s; }
+        .message:nth-child(12) { animation-delay: 1.2s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .avatar.tom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .avatar.sarah {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .avatar.teacher {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .avatar.student {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .avatar.receptionist {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .avatar.guest {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+        }
+
+        .avatar.shopkeeper {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #2c3e50;
+        }
+
+        .avatar.customer {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #2c3e50;
+        }
+
+        .message-content {
+            max-width: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .message.left .message-content {
+            align-items: flex-start;
+        }
+
+        .message.right .message-content {
+            align-items: flex-end;
+        }
+
+        .speaker-name {
+            font-size: 0.75em;
+            font-weight: 600;
+            color: #7f8c8d;
+            padding: 0 8px;
+            margin-bottom: 4px;
+        }
+
+        .message.left .speaker-name {
+            color: #667eea;
+        }
+
+        .message.right .speaker-name {
+            color: #f5576c;
+        }
+
+        .bubble {
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+
+        .message.left .bubble {
+            background-color: #e8f4f8;
+            border-bottom-left-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .message.right .bubble {
+            background-color: #fff0f5;
+            border-bottom-right-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .bubble-text {
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+
+        .bubble-translation {
+            font-size: 0.85em;
+            color: #27ae60;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed #bdc3c7;
+            display: none;
+        }
+
+        .bubble-translation.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .dialog-section {
+                padding: 15px;
+            }
+
+            .message-content {
+                max-width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>W-Fragen Dialoge<span id="titleTR" style="display: none;"> (W-Soruları Diyalogları)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Dialog 1: Tanışma -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 1: Tanışma<span id="dialog1TR" style="display: none;"> (Dialogue 1: Getting to Know Each Other)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Hallo! <span class="w-question-highlight">Wie</span> heißt du?</div>
+                            <div class="bubble-translation">Merhaba! Adın ne?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Hallo! Ich heiße Sarah. Und du?</div>
+                            <div class="bubble-translation">Merhaba! Benim adım Sarah. Ya sen?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich bin Tom. <span class="w-question-highlight">Woher</span> kommst du?</div>
+                            <div class="bubble-translation">Ben Tom. Nereden geliyorsun?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich komme aus der Türkei. <span class="w-question-highlight">Woher</span> kommst du?</div>
+                            <div class="bubble-translation">Türkiye'den geliyorum. Sen nereden geliyorsun?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich komme aus Deutschland. <span class="w-question-highlight">Wo</span> wohnst du jetzt?</div>
+                            <div class="bubble-translation">Almanya'dan geliyorum. Şimdi nerede yaşıyorsun?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich wohne in Berlin. <span class="w-question-highlight">Was</span> machst du beruflich?</div>
+                            <div class="bubble-translation">Berlin'de yaşıyorum. Ne iş yapıyorsun?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich studiere Medizin. <span class="w-question-highlight">Was</span> studierst du?</div>
+                            <div class="bubble-translation">Tıp okuyorum. Sen ne okuyorsun?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich studiere Deutsch. <span class="w-question-highlight">Warum</span> lernst du Deutsch?</div>
+                            <div class="bubble-translation">Almanca okuyorum. Neden Almanca öğreniyorsun?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich möchte in Deutschland arbeiten. <span class="w-question-highlight">Wie</span> lange lernst du schon Deutsch?</div>
+                            <div class="bubble-translation">Almanya'da çalışmak istiyorum. Ne kadar zamandır Almanca öğreniyorsun?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Seit einem Jahr. <span class="w-question-highlight">Wie</span> alt bist du?</div>
+                            <div class="bubble-translation">Bir yıldır. Kaç yaşındasın?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich bin 25 Jahre alt. Und du?</div>
+                            <div class="bubble-translation">25 yaşındayım. Ya sen?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich bin 23. Es war schön, dich kennenzulernen!</div>
+                            <div class="bubble-translation">23 yaşındayım. Seninle tanışmak güzeldi!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialog 2: Sınıfta -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 2: Sınıfta<span id="dialog2TR" style="display: none;"> (Dialogue 2: In the Classroom)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar teacher">L</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Lehrerin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Guten Morgen! <span class="w-question-highlight">Wer</span> fehlt heute?</div>
+                            <div class="bubble-translation">Günaydın! Bugün kim yok?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar student">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Student</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Herr Müller fehlt heute.</div>
+                            <div class="bubble-translation">Bay Müller bugün yok.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar teacher">L</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Lehrerin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Danke. <span class="w-question-highlight">Was</span> haben wir heute?</div>
+                            <div class="bubble-translation">Teşekkürler. Bugün ne var?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar student">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Student</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Wir haben Deutsch und Mathematik.</div>
+                            <div class="bubble-translation">Almanca ve matematik var.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar teacher">L</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Lehrerin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Gut. <span class="w-question-highlight">Wann</span> beginnt die Pause?</div>
+                            <div class="bubble-translation">İyi. Teneffüs ne zaman başlıyor?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar student">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Student</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Um 10:30 Uhr.</div>
+                            <div class="bubble-translation">10:30'da.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar teacher">L</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Lehrerin</div>
+                        <div class="bubble">
+                            <div class="bubble-text"><span class="w-question-highlight">Wie</span> spät ist es jetzt?</div>
+                            <div class="bubble-translation">Şimdi saat kaç?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar student">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Student</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Es ist 9:15 Uhr.</div>
+                            <div class="bubble-translation">9:15.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialog 3: Otelde -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 3: Otelde<span id="dialog3TR" style="display: none;"> (Dialogue 3: At the Hotel)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar receptionist">R</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Rezeptionistin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Guten Tag! <span class="w-question-highlight">Wie</span> kann ich Ihnen helfen?</div>
+                            <div class="bubble-translation">İyi günler! Size nasıl yardımcı olabilirim?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar guest">G</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Gast</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Guten Tag! Ich habe eine Reservierung. <span class="w-question-highlight">Wo</span> ist das Zimmer 205?</div>
+                            <div class="bubble-translation">İyi günler! Bir rezervasyonum var. 205 numaralı oda nerede?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar receptionist">R</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Rezeptionistin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Das Zimmer ist im zweiten Stock. <span class="w-question-highlight">Wie</span> lange bleiben Sie?</div>
+                            <div class="bubble-translation">Oda ikinci katta. Ne kadar kalacaksınız?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar guest">G</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Gast</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Drei Nächte. <span class="w-question-highlight">Wann</span> ist das Frühstück?</div>
+                            <div class="bubble-translation">Üç gece. Kahvaltı ne zaman?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar receptionist">R</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Rezeptionistin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Von 7 bis 10 Uhr. <span class="w-question-highlight">Wo</span> ist das Restaurant?</div>
+                            <div class="bubble-translation">7'den 10'a kadar. Restoran nerede?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar guest">G</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Gast</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Im Erdgeschoss. <span class="w-question-highlight">Wie viel</span> kostet das Zimmer pro Nacht?</div>
+                            <div class="bubble-translation">Zemin katta. Oda gecelik ne kadar?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar receptionist">R</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Rezeptionistin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">80 Euro pro Nacht.</div>
+                            <div class="bubble-translation">Gece başına 80 Euro.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialog 4: Mağazada -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 4: Mağazada<span id="dialog4TR" style="display: none;"> (Dialogue 4: At the Store)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar shopkeeper">V</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Verkäuferin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Guten Tag! <span class="w-question-highlight">Was</span> suchen Sie?</div>
+                            <div class="bubble-translation">İyi günler! Ne arıyorsunuz?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar customer">K</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Kunde</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich suche eine Jacke. <span class="w-question-highlight">Wo</span> sind die Jacken?</div>
+                            <div class="bubble-translation">Bir ceket arıyorum. Ceketler nerede?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar shopkeeper">V</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Verkäuferin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Dort drüben. <span class="w-question-highlight">Welche</span> Größe brauchen Sie?</div>
+                            <div class="bubble-translation">Orada. Hangi beden lazım?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar customer">K</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Kunde</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Größe M. <span class="w-question-highlight">Wie viel</span> kostet diese Jacke?</div>
+                            <div class="bubble-translation">M beden. Bu ceket ne kadar?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar shopkeeper">V</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Verkäuferin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Sie kostet 59 Euro. <span class="w-question-highlight">Welche</span> Farbe möchten Sie?</div>
+                            <div class="bubble-translation">59 Euro. Hangi rengi istersiniz?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar customer">K</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Kunde</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Schwarz. <span class="w-question-highlight">Wohin</span> muss ich gehen, um zu bezahlen?</div>
+                            <div class="bubble-translation">Siyah. Ödemek için nereye gitmeliyim?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar shopkeeper">V</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Verkäuferin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Zur Kasse dort hinten. Vielen Dank!</div>
+                            <div class="bubble-translation">Arkadaki kasa. Çok teşekkürler!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialog 5: Yol Sorma -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 5: Yol Sorma<span id="dialog5TR" style="display: none;"> (Dialogue 5: Asking for Directions)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Entschuldigung! <span class="w-question-highlight">Wo</span> ist der Bahnhof?</div>
+                            <div class="bubble-translation">Özür dilerim! İstasyon nerede?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Der Bahnhof ist nicht weit. <span class="w-question-highlight">Wohin</span> möchten Sie fahren?</div>
+                            <div class="bubble-translation">İstasyon uzak değil. Nereye gitmek istiyorsunuz?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Nach München. <span class="w-question-highlight">Wie</span> komme ich zum Bahnhof?</div>
+                            <div class="bubble-translation">Münih'e. İstasyona nasıl gidebilirim?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Gehen Sie geradeaus, dann links. <span class="w-question-highlight">Wie lange</span> dauert es?</div>
+                            <div class="bubble-translation">Düz gidin, sonra sola. Ne kadar sürer?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Zu Fuß etwa 10 Minuten. <span class="w-question-highlight">Wann</span> fährt der nächste Zug?</div>
+                            <div class="bubble-translation">Yürüyerek yaklaşık 10 dakika. Bir sonraki tren ne zaman kalkıyor?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Um 14:30 Uhr. <span class="w-question-highlight">Warum</span> fahren Sie nach München?</div>
+                            <div class="bubble-translation">14:30'da. Neden Münih'e gidiyorsunuz?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich besuche meine Familie. Vielen Dank für Ihre Hilfe!</div>
+                            <div class="bubble-translation">Ailemi ziyaret ediyorum. Yardımınız için çok teşekkürler!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Gern geschehen! Gute Reise!</div>
+                            <div class="bubble-translation">Rica ederim! İyi yolculuklar!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const translations = document.querySelectorAll('.bubble-translation');
+            translations.forEach(translation => {
+                if (this.checked) {
+                    translation.classList.add('show');
+                } else {
+                    translation.classList.remove('show');
+                }
+            });
+            
+            const trElements = document.querySelectorAll('[id$="TR"]');
+            trElements.forEach(el => {
+                el.style.display = this.checked ? 'inline' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+

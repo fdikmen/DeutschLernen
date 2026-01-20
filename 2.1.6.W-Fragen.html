@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.6 W-Fragen | W-Soruları</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-label {
+            font-size: 0.9em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #3498db;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .intro {
+            background-color: #e8f4f8;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .intro p {
+            font-size: 0.9em;
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .question-box {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .question-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border-color: #3498db;
+        }
+
+        .question-header {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .question-turkish {
+            color: #e74c3c;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        .question-usage {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            font-style: italic;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .example-section {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed #bdc3c7;
+        }
+
+        .example-title {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .example-german {
+            color: #2c3e50;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .example-turkish {
+            color: #27ae60;
+            font-size: 0.9em;
+        }
+
+        .info-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .grammar-box {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .grammar-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .grammar-content {
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .grammar-content ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        .grammar-content li {
+            margin-bottom: 5px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .toggle-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .intro {
+                padding: 10px 12px;
+            }
+
+            .intro p {
+                font-size: 0.85em;
+            }
+
+            .question-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 10px;
+            }
+
+            .comparison-table {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .question-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>W-Fragen<span id="titleTR" style="display: none;"> (W-Soruları)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <p>W-Fragen (W-Soruları), Almanca'da bilgi almak için kullanılan soru kelimeleridir. Bu sorular "W" harfiyle başlar ve açık uçlu cevaplar gerektirir.<span id="introTR" style="display: none;"> W-Fragen (W-Questions) are question words used to obtain information in German. These questions start with "W" and require open-ended answers.</span></p>
+        </div>
+
+        <div class="grammar-box">
+            <div class="grammar-title">W-Fragen Yapısı<span id="structureTR" style="display: none;"> (W-Fragen Structure)</span></div>
+            <div class="grammar-content">
+                <p>W-Fragen'de soru kelimesi cümlenin başında yer alır ve fiil ikinci sırada gelir (V2 kuralı).<span id="structureDescTR" style="display: none;"> In W-Fragen, the question word is at the beginning of the sentence and the verb comes in second position (V2 rule).</span></p>
+                <ul>
+                    <li><strong>W-Fragewort + Verb + Subjekt + ...?</strong></li>
+                    <li>Örnek: <strong>Was</strong> machst <strong>du</strong> heute? (Bugün ne yapıyorsun?)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Temel W-Fragen<span id="basicWTR" style="display: none;"> (Basic W-Questions)</span></h2>
+            <div class="question-grid">
+                <div class="question-box">
+                    <div class="question-header">Wer?</div>
+                    <div class="question-turkish">Kim?</div>
+                    <div class="question-usage">Kişileri sormak için kullanılır<span id="werUsageTR" style="display: none;"> (Used to ask about people)</span></div>
+                    <div class="example-section">
+                        <div class="example-title">Örnekler:<span id="werExamplesTR" style="display: none;"> (Examples)</span></div>
+                        <div class="example-german">Wer ist das?</div>
+                        <div class="example-turkish">Bu kim?</div>
+                        <div class="example-german" style="margin-top: 8px;">Wer kommt heute?</div>
+                        <div class="example-turkish">Bugün kim geliyor?</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Was?</div>
+                    <div class="question-turkish">Ne?</div>
+                    <div class="question-usage">Nesneleri, şeyleri, eylemleri sormak için<span id="wasUsageTR" style="display: none;"> (To ask about objects, things, actions)</span></div>
+                    <div class="example-section">
+                        <div class="example-title">Örnekler:<span id="wasExamplesTR" style="display: none;"> (Examples)</span></div>
+                        <div class="example-german">Was machst du?</div>
+                        <div class="example-turkish">Ne yapıyorsun?</div>
+                        <div class="example-german" style="margin-top: 8px;">Was ist das?</div>
+                        <div class="example-turkish">Bu ne?</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Wo?</div>
+                    <div class="question-turkish">Nerede?</div>
+                    <div class="question-usage">Konum sormak için (statik)<span id="woUsageTR" style="display: none;"> (To ask about location - static)</span></div>
+                    <div class="example-section">
+                        <div class="example-title">Örnekler:<span id="woExamplesTR" style="display: none;"> (Examples)</span></div>
+                        <div class="example-german">Wo wohnst du?</div>
+                        <div class="example-turkish">Nerede yaşıyorsun?</div>
+                        <div class="example-german" style="margin-top: 8px;">Wo ist der Bahnhof?</div>
+                        <div class="example-turkish">İstasyon nerede?</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Wohin?</div>
+                    <div class="question-turkish">Nereye?</div>
+                    <div class="question-usage">Hareket yönü sormak için (Akkusativ)<span id="wohinUsageTR" style="display: none;"> (To ask about direction of movement - Accusative)</span></div>
+                    <div class="example-section">
+                        <div class="example-title">Örnekler:<span id="wohinExamplesTR" style="display: none;"> (Examples)</span></div>
+                        <div class="example-german">Wohin gehst du?</div>
+                        <div class="example-turkish">Nereye gidiyorsun?</div>
+                        <div class="example-german" style="margin-top: 8px;">Wohin fährst du?</div>
+                        <div class="example-turkish">Nereye gidiyorsun? (araçla)</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Woher?</div>
+                    <div class="question-turkish">Nereden?</div>
+                    <div class="question-usage">Kaynak/çıkış noktası sormak için<span id="woherUsageTR" style="display: none;"> (To ask about origin/source)</span></div>
+                    <div class="example-section">
+                        <div class="example-title">Örnekler:<span id="woherExamplesTR" style="display: none;"> (Examples)</span></div>
+                        <div class="example-german">Woher kommst du?</div>
+                        <div class="example-turkish">Nereden geliyorsun?</div>
+                        <div class="example-german" style="margin-top: 8px;">Woher bist du?</div>
+                        <div class="example-turkish">Nerelisin?</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Wann?</div>
+                    <div class="question-turkish">Ne zaman?</div>
+                    <div class="question-usage">Zaman sormak için<span id="wannUsageTR" style="display: none;"> (To ask about time)</span></div>
+                    <div class="example-section">
+                        <div class="example-title">Örnekler:<span id="wannExamplesTR" style="display: none;"> (Examples)</span></div>
+                        <div class="example-german">Wann kommst du?</div>
+                        <div class="example-turkish">Ne zaman geliyorsun?</div>
+                        <div class="example-german" style="margin-top: 8px;">Wann beginnt der Kurs?</div>
+                        <div class="example-turkish">Kurs ne zaman başlıyor?</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Warum?</div>
+                    <div class="question-turkish">Neden? / Niçin?</div>
+                    <div class="question-usage">Sebep sormak için<span id="warumUsageTR" style="display: none;"> (To ask about reason)</span></div>
+                    <div class="example-section">
+                        <div class="example-title">Örnekler:<span id="warumExamplesTR" style="display: none;"> (Examples)</span></div>
+                        <div class="example-german">Warum lernst du Deutsch?</div>
+                        <div class="example-turkish">Neden Almanca öğreniyorsun?</div>
+                        <div class="example-german" style="margin-top: 8px;">Warum bist du müde?</div>
+                        <div class="example-turkish">Neden yorgunsun?</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Wieso?</div>
+                    <div class="question-turkish">Neden? / Nasıl oluyor ki?</div>
+                    <div class="question-usage">Warum ile benzer, daha günlük dil<span id="wiesoUsageTR" style="display: none;"> (Similar to warum, more casual)</span></div>
+                    <div class="example-section">
+                        <div class="example-title">Örnekler:<span id="wiesoExamplesTR" style="display: none;"> (Examples)</span></div>
+                        <div class="example-german">Wieso kommst du nicht?</div>
+                        <div class="example-turkish">Neden gelmiyorsun?</div>
+                        <div class="example-german" style="margin-top: 8px;">Wieso ist das so?</div>
+                        <div class="example-turkish">Neden böyle?</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Weshalb?</div>
+                    <div class="question-turkish">Neden? / Hangi sebepten?</div>
+                    <div class="question-usage">Daha resmi, yazılı dilde yaygın<span id="weshalbUsageTR" style="display: none;"> (More formal, common in written language)</span></div>
+                    <div class="example-section">
+                        <div class="example-title">Örnekler:<span id="weshalbExamplesTR" style="display: none;"> (Examples)</span></div>
+                        <div class="example-german">Weshalb haben Sie sich entschieden?</div>
+                        <div class="example-turkish">Neden karar verdiniz?</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Wie?</div>
+                    <div class="question-turkish">Nasıl?</div>
+                    <div class="question-usage">Yöntem, şekil, durum sormak için<span id="wieUsageTR" style="display: none;"> (To ask about method, manner, condition)</span></div>
+                    <div class="example-section">
+                        <div class="example-title">Örnekler:<span id="wieExamplesTR" style="display: none;"> (Examples)</span></div>
+                        <div class="example-german">Wie geht es dir?</div>
+                        <div class="example-turkish">Nasılsın?</div>
+                        <div class="example-german" style="margin-top: 8px;">Wie heißt du?</div>
+                        <div class="example-turkish">Adın ne?</div>
+                        <div class="example-german" style="margin-top: 8px;">Wie spät ist es?</div>
+                        <div class="example-turkish">Saat kaç?</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Welche/r/s?</div>
+                    <div class="question-turkish">Hangi?</div>
+                    <div class="question-usage">Seçim yapmak için, artikel ile uyumlu<span id="welcheUsageTR" style="display: none;"> (To make a choice, agrees with article)</span></div>
+                    <div class="example-section">
+                        <div class="example-title">Örnekler:<span id="welcheExamplesTR" style="display: none;"> (Examples)</span></div>
+                        <div class="example-german">Welches Buch liest du?</div>
+                        <div class="example-turkish">Hangi kitabı okuyorsun?</div>
+                        <div class="example-german" style="margin-top: 8px;">Welche Farbe magst du?</div>
+                        <div class="example-turkish">Hangi rengi seviyorsun?</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Wie viel?</div>
+                    <div class="question-turkish">Ne kadar? (sayılamayan)</div>
+                    <div class="question-usage">Miktar sormak için (sayılamayan nesneler)<span id="wievielUsageTR" style="display: none;"> (To ask about quantity - uncountable)</span></div>
+                    <div class="example-section">
+                        <div class="example-title">Örnekler:<span id="wievielExamplesTR" style="display: none;"> (Examples)</span></div>
+                        <div class="example-german">Wie viel kostet das?</div>
+                        <div class="example-turkish">Bu ne kadar?</div>
+                        <div class="example-german" style="margin-top: 8px;">Wie viel Zeit hast du?</div>
+                        <div class="example-turkish">Ne kadar zamanın var?</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Wie viele?</div>
+                    <div class="question-turkish">Kaç tane? (sayılabilen)</div>
+                    <div class="question-usage">Sayı sormak için (sayılabilen nesneler)<span id="wievieleUsageTR" style="display: none;"> (To ask about number - countable)</span></div>
+                    <div class="example-section">
+                        <div class="example-title">Örnekler:<span id="wievieleExamplesTR" style="display: none;"> (Examples)</span></div>
+                        <div class="example-german">Wie viele Bücher hast du?</div>
+                        <div class="example-turkish">Kaç kitabın var?</div>
+                        <div class="example-german" style="margin-top: 8px;">Wie viele Personen kommen?</div>
+                        <div class="example-turkish">Kaç kişi geliyor?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Wo, Wohin, Woher Karşılaştırması<span id="comparisonTR" style="display: none;"> (Comparison of Wo, Wohin, Woher)</span></h2>
+            <div class="info-box">
+                Bu üç soru kelimesi konumla ilgili olsa da farklı durumları ifade eder. Dikkatli kullanılmalıdır.<span id="comparisonInfoTR" style="display: none;"> Although these three question words are related to location, they express different situations. They should be used carefully.</span>
+            </div>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Soru Kelimesi<span id="questionWordTR" style="display: none;"> (Question Word)</span></th>
+                        <th>Anlamı<span id="meaningTR" style="display: none;"> (Meaning)</span></th>
+                        <th>Kullanım<span id="usageTR" style="display: none;"> (Usage)</span></th>
+                        <th>Örnek<span id="exampleTR" style="display: none;"> (Example)</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Wo</strong></td>
+                        <td>Nerede</td>
+                        <td>Statik konum (Dativ)<span id="woStaticTR" style="display: none;"> (Static location - Dative)</span></td>
+                        <td>Wo bist du? (Neredesin?)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Wohin</strong></td>
+                        <td>Nereye</td>
+                        <td>Hareket yönü (Akkusativ)<span id="wohinMovementTR" style="display: none;"> (Direction of movement - Accusative)</span></td>
+                        <td>Wohin gehst du? (Nereye gidiyorsun?)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Woher</strong></td>
+                        <td>Nereden</td>
+                        <td>Kaynak/çıkış noktası<span id="woherOriginTR" style="display: none;"> (Origin/source)</span></td>
+                        <td>Woher kommst du? (Nereden geliyorsun?)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Warum, Wieso, Weshalb Farkları<span id="differencesTR" style="display: none;"> (Differences between Warum, Wieso, Weshalb)</span></h2>
+            <div class="info-box">
+                Bu üç kelime genellikle birbirinin yerine kullanılabilir, ancak ince farklar vardır.<span id="differencesInfoTR" style="display: none;"> These three words can generally be used interchangeably, but there are subtle differences.</span>
+            </div>
+            <div class="question-grid">
+                <div class="question-box">
+                    <div class="question-header">Warum</div>
+                    <div class="question-turkish">En yaygın kullanılan</div>
+                    <div class="question-usage">Günlük konuşmada en çok kullanılan<span id="warumCommonTR" style="display: none;"> (Most commonly used in daily speech)</span></div>
+                    <div class="example-section">
+                        <div class="example-german">Warum lernst du Deutsch?</div>
+                        <div class="example-turkish">Neden Almanca öğreniyorsun?</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Wieso</div>
+                    <div class="question-turkish">Daha samimi, merak ifadesi</div>
+                    <div class="question-usage">Biraz daha samimi, şaşkınlık/merak ifade eder<span id="wiesoCasualTR" style="display: none;"> (Slightly more casual, expresses surprise/curiosity)</span></div>
+                    <div class="example-section">
+                        <div class="example-german">Wieso bist du hier?</div>
+                        <div class="example-turkish">Neden buradasın? (Nasıl oluyor ki?)</div>
+                    </div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-header">Weshalb</div>
+                    <div class="question-turkish">Daha resmi, yazılı dil</div>
+                    <div class="question-usage">Resmi yazılarda, akademik metinlerde tercih edilir<span id="weshalbFormalTR" style="display: none;"> (Preferred in formal writing, academic texts)</span></div>
+                    <div class="example-section">
+                        <div class="example-german">Weshalb haben Sie sich entschieden?</div>
+                        <div class="example-turkish">Hangi sebepten karar verdiniz?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Pratik Örnekler<span id="practiceTR" style="display: none;"> (Practice Examples)</span></h2>
+            <div class="grammar-box">
+                <div class="grammar-title">Günlük Konuşma Örnekleri<span id="dailyExamplesTR" style="display: none;"> (Daily Conversation Examples)</span></div>
+                <div class="grammar-content">
+                    <p><strong>Wer:</strong> Wer ist dein Lehrer? (Öğretmenin kim?)</p>
+                    <p><strong>Was:</strong> Was machst du am Wochenende? (Hafta sonu ne yapıyorsun?)</p>
+                    <p><strong>Wo:</strong> Wo arbeitest du? (Nerede çalışıyorsun?)</p>
+                    <p><strong>Wohin:</strong> Wohin fährst du in den Urlaub? (Tatile nereye gidiyorsun?)</p>
+                    <p><strong>Woher:</strong> Woher kommst du? (Nereden geliyorsun?)</p>
+                    <p><strong>Wann:</strong> Wann beginnt der Film? (Film ne zaman başlıyor?)</p>
+                    <p><strong>Warum:</strong> Warum lernst du Deutsch? (Neden Almanca öğreniyorsun?)</p>
+                    <p><strong>Wie:</strong> Wie alt bist du? (Kaç yaşındasın?)</p>
+                    <p><strong>Welche:</strong> Welche Sprache sprichst du? (Hangi dili konuşuyorsun?)</p>
+                    <p><strong>Wie viel:</strong> Wie viel kostet das Ticket? (Bilet ne kadar?)</p>
+                    <p><strong>Wie viele:</strong> Wie viele Geschwister hast du? (Kaç kardeşin var?)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const trElements = document.querySelectorAll('[id$="TR"]');
+            trElements.forEach(el => {
+                el.style.display = this.checked ? 'inline' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+
