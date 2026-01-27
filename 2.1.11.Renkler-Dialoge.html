@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2.1.9 Renkler | Die Farben</title>
+    <title>2.1.11 Renkler Dialoge | Renkler Diyalogları</title>
     <style>
         * {
             margin: 0;
@@ -108,178 +108,15 @@
             transform: translateX(26px);
         }
 
-        .intro {
-            background-color: #e8f4f8;
-            padding: 12px 15px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            border-left: 3px solid #3498db;
-        }
-
-        .intro p {
-            font-size: 0.9em;
-            color: #2c3e50;
-            margin: 0;
-            line-height: 1.4;
-        }
-
         .container {
             width: 100%;
-            max-width: 100%;
+            max-width: 900px;
             background-color: #fff;
-            padding: 20px;
-            margin: 0;
-        }
-
-        h2 {
-            color: #2c3e50;
-            font-size: 1.8em;
-            margin-top: 30px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        h3 {
-            color: #34495e;
-            font-size: 1.3em;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-
-        .colors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .color-box {
-            background-color: #fff;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border-left: 4px solid;
-        }
-
-        .color-box:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-
-        .color-name {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-
-        .color-turkish {
-            color: #e74c3c;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .table-is-responsive {
-            overflow-x: auto;
-            margin: 20px 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-
-        table thead {
-            background-color: #3498db;
-            color: #fff;
-        }
-
-        table th {
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-            border-bottom: 2px solid #2980b9;
-        }
-
-        table td {
-            padding: 12px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        table tr:hover {
-            background-color: #f8f9fa;
-        }
-
-        .speak-button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2em;
-            padding: 0;
-            margin: 0;
-        }
-
-        .speak-button:hover {
-            opacity: 0.7;
-        }
-
-        .info-box {
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 12px;
-            border-radius: 4px;
-            margin: 15px 0;
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-
-        .grammar-box {
-            background-color: #e8f5e9;
-            border-left: 4px solid #4caf50;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 20px 0;
-        }
-
-        .grammar-title {
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-
-        .grammar-content {
-            color: #2c3e50;
-            line-height: 1.6;
-        }
-
-        .example-box {
-            background-color: #f8f9fa;
-            border-left: 3px solid #3498db;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 4px;
-        }
-
-        .example-german {
-            color: #2c3e50;
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-
-        .example-turkish {
-            color: #27ae60;
-            font-size: 0.9em;
+            padding: 30px 20px;
+            margin: 0 auto;
         }
 
         .dialog-section {
-            margin-top: 50px;
             margin-bottom: 50px;
             padding: 25px;
             background-color: #fff;
@@ -456,8 +293,8 @@
                 padding: 15px;
             }
 
-            .colors-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            .dialog-section {
+                padding: 15px;
             }
 
             .message-content {
@@ -470,7 +307,7 @@
     <div class="header-section">
         <div class="header-content">
             <div class="header-text">
-                <h1>Renkler<span id="titleTR" style="display: none;"> (Colors)</span></h1>
+                <h1>Renkler Dialoge<span id="titleTR" style="display: none;"> (Renkler Diyalogları)</span></h1>
             </div>
             <div class="toggle-container">
                 <span class="toggle-label">TR</span>
@@ -483,162 +320,6 @@
     </div>
 
     <div class="container">
-        <div class="intro">
-            <p>Almanca'da renkler, günlük konuşmada sıkça kullanılan önemli kelimelerdir. Renkler hem sıfat hem de isim olarak kullanılabilir.<span id="introTR" style="display: none;"> Colors in German are important words frequently used in daily conversation. Colors can be used both as adjectives and nouns.</span></p>
-        </div>
-
-        <h2>Temel Renkler<span id="basicColorsTR" style="display: none;"> (Basic Colors)</span></h2>
-        
-        <div class="colors-grid">
-            <div class="color-box" style="border-left-color: #000;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('schwarz');">🔊</button> Schwarz</div>
-                <div class="color-turkish">Siyah</div>
-            </div>
-            <div class="color-box" style="border-left-color: #fff;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('weiß');">🔊</button> Weiß</div>
-                <div class="color-turkish">Beyaz</div>
-            </div>
-            <div class="color-box" style="border-left-color: #ff0000;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('rot');">🔊</button> Rot</div>
-                <div class="color-turkish">Kırmızı</div>
-            </div>
-            <div class="color-box" style="border-left-color: #0000ff;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('blau');">🔊</button> Blau</div>
-                <div class="color-turkish">Mavi</div>
-            </div>
-            <div class="color-box" style="border-left-color: #00ff00;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('grün');">🔊</button> Grün</div>
-                <div class="color-turkish">Yeşil</div>
-            </div>
-            <div class="color-box" style="border-left-color: #ffff00;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('gelb');">🔊</button> Gelb</div>
-                <div class="color-turkish">Sarı</div>
-            </div>
-            <div class="color-box" style="border-left-color: #808080;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('grau');">🔊</button> Grau</div>
-                <div class="color-turkish">Gri</div>
-            </div>
-            <div class="color-box" style="border-left-color: #8b4513;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('braun');">🔊</button> Braun</div>
-                <div class="color-turkish">Kahverengi</div>
-            </div>
-            <div class="color-box" style="border-left-color: #ffc0cb;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('rosa');">🔊</button> Rosa</div>
-                <div class="color-turkish">Pembe</div>
-            </div>
-            <div class="color-box" style="border-left-color: #ffa500;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('orange');">🔊</button> Orange</div>
-                <div class="color-turkish">Turuncu</div>
-            </div>
-            <div class="color-box" style="border-left-color: #800080;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('lila');">🔊</button> Lila</div>
-                <div class="color-turkish">Mor</div>
-            </div>
-            <div class="color-box" style="border-left-color: #f5f5dc;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('beige');">🔊</button> Beige</div>
-                <div class="color-turkish">Bej</div>
-            </div>
-            <div class="color-box" style="border-left-color: #40e0d0;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('türkis');">🔊</button> Türkis</div>
-                <div class="color-turkish">Turkuaz</div>
-            </div>
-            <div class="color-box" style="border-left-color: #ffd700;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('gold');">🔊</button> Gold</div>
-                <div class="color-turkish">Altın rengi</div>
-            </div>
-            <div class="color-box" style="border-left-color: #c0c0c0;">
-                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('silber');">🔊</button> Silber</div>
-                <div class="color-turkish">Gümüş rengi</div>
-            </div>
-        </div>
-
-        <h2>Renklerin Grameri: Sıfat mı, İsim mi?<span id="grammarTR" style="display: none;"> (Grammar: Adjective or Noun?)</span></h2>
-        
-        <div class="grammar-box">
-            <div class="grammar-title">Sıfat Olarak Renkler (Adjektiv)<span id="adjectiveTR" style="display: none;"> (Colors as Adjectives)</span></div>
-            <div class="grammar-content">
-                <p>Bir ismin önüne geldiklerinde, o ismin artikeline ve haline göre çekim eki alırlar.<span id="adjectiveDescTR" style="display: none;"> When they come before a noun, they take inflection endings according to the article and case of that noun.</span></p>
-                <div class="example-box">
-                    <div class="example-german">Das ist ein <strong>rotes</strong> Auto.</div>
-                    <div class="example-turkish">Bu kırmızı bir araba.</div>
-                </div>
-                <div class="example-box">
-                    <div class="example-german">Ich habe ein <strong>blaues</strong> Kleid.</div>
-                    <div class="example-turkish">Mavi bir elbisem var.</div>
-                </div>
-                <div class="example-box">
-                    <div class="example-german">Wir wohnen in einem <strong>grünen</strong> Haus.</div>
-                    <div class="example-turkish">Yeşil bir evde yaşıyoruz.</div>
-                </div>
-                <div class="example-box">
-                    <div class="example-german">Die Blume ist <strong>rot</strong>.</div>
-                    <div class="example-turkish">Çiçek kırmızı. (Not: "sein" fiilinden sonra geldiğinde çekimlenmez.)</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="grammar-box">
-            <div class="grammar-title">İsim Olarak Renkler (Nomen)<span id="nounTR" style="display: none;"> (Colors as Nouns)</span></div>
-            <div class="grammar-content">
-                <p>Bir rengin kendisinden bir kavram olarak bahsedildiğinde, büyük harfle ve <strong>das</strong> artikeliyle kullanılır.<span id="nounDescTR" style="display: none;"> When referring to a color as a concept, it is used with a capital letter and the article <strong>das</strong>.</span></p>
-                <div class="example-box">
-                    <div class="example-german"><strong>Das Rot</strong> gefällt mir.</div>
-                    <div class="example-turkish">Kırmızı [rengi] hoşuma gidiyor.</div>
-                </div>
-                <div class="example-box">
-                    <div class="example-german"><strong>Das Blau</strong> des Himmels ist wunderschön.</div>
-                    <div class="example-turkish">Gökyüzünün mavisi harika.</div>
-                </div>
-                <div class="example-box">
-                    <div class="example-german"><strong>Das Grün</strong> der Bäume beruhigt mich.</div>
-                    <div class="example-turkish">Ağaçların yeşili beni sakinleştiriyor.</div>
-                </div>
-            </div>
-        </div>
-
-        <h2>Renk Tonları: Açık ve Koyu<span id="shadesTR" style="display: none;"> (Color Shades: Light and Dark)</span></h2>
-        
-        <div class="info-box">
-            Bir rengin tonunu belirtmek için önüne <strong>hell</strong> (açık) veya <strong>dunkel</strong> (koyu) kelimeleri getirilir ve bitişik yazılır.<span id="shadesDescTR" style="display: none;"> To specify the shade of a color, the words <strong>hell</strong> (light) or <strong>dunkel</strong> (dark) are added before it and written together.</span>
-        </div>
-
-        <div class="table-is-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>🇩🇪</th>
-                        <th>🇹🇷</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><button type="button" class="speak-button" onclick="speakText('hellblau');">🔊</button> hellblau</td>
-                        <td>Açık mavi</td>
-                    </tr>
-                    <tr>
-                        <td><button type="button" class="speak-button" onclick="speakText('dunkelgrün');">🔊</button> dunkelgrün</td>
-                        <td>Koyu yeşil</td>
-                    </tr>
-                    <tr>
-                        <td><button type="button" class="speak-button" onclick="speakText('hellrot');">🔊</button> hellrot</td>
-                        <td>Açık kırmızı</td>
-                    </tr>
-                    <tr>
-                        <td><button type="button" class="speak-button" onclick="speakText('dunkelbraun');">🔊</button> dunkelbraun</td>
-                        <td>Koyu kahverengi</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="info-box">
-            <strong>Önemli Not:</strong> Eğer bir ismi niteliyorsa (sıfat ise) <strong>küçük harfle</strong> yazılır: ein <strong>rotes</strong> Auto. Eğer bir renk kavramından bahsediliyorsa (isim ise) <strong>büyük harfle</strong> ve "das" artikeliyle yazılır: <strong>Das Rot</strong> ist schön.<span id="noteTR" style="display: none;"> <strong>Important Note:</strong> If it qualifies a noun (as an adjective), it is written in <strong>lowercase</strong>: ein <strong>rotes</strong> Auto. If referring to a color concept (as a noun), it is written with a <strong>capital letter</strong> and the article "das": <strong>Das Rot</strong> ist schön.</span>
-        </div>
-
-        <div class="info-box">
-            <strong>Renklerin Artikeli:</strong> Renkler birer isim olarak kullanıldıklarında her zaman <strong>das</strong> artikelini alırlar: das Blau, das Grün, das Gelb.<span id="articleTR" style="display: none;"> <strong>Article of Colors:</strong> When colors are used as nouns, they always take the article <strong>das</strong>: das Blau, das Grün, das Gelb.</span>
-        </div>
-
         <!-- Dialog 1: Mağazada Renk Seçimi -->
         <div class="dialog-section">
             <div class="dialog-title">Diyalog 1: Mağazada Renk Seçimi<span id="dialog1TR" style="display: none;"> (Dialogue 1: Choosing Colors at the Store)</span></div>
@@ -775,15 +456,6 @@
     </div>
 
     <script>
-        function speakText(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'de-DE';
-                utterance.rate = 0.9;
-                speechSynthesis.speak(utterance);
-            }
-        }
-
         document.getElementById('toggleTurkish').addEventListener('change', function() {
             const translations = document.querySelectorAll('.bubble-translation');
             translations.forEach(translation => {
@@ -802,4 +474,3 @@
     </script>
 </body>
 </html>
-
