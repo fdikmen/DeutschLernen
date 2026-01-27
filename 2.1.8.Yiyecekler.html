@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.8 Yiyecekler | Yemekler</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-label {
+            font-size: 0.9em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #3498db;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .intro {
+            background-color: #e8f4f8;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .intro p {
+            font-size: 0.9em;
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .table-is-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        table thead {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #2980b9;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        table img {
+            width: 20px;
+            height: auto;
+        }
+
+        .speak-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 0;
+            margin: 0;
+        }
+
+        .speak-button:hover {
+            opacity: 0.7;
+        }
+
+        .dialog-section {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .dialog-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .conversation {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .message.left {
+            justify-content: flex-start;
+        }
+
+        .message.right {
+            justify-content: flex-end;
+        }
+
+        .message:nth-child(1) { animation-delay: 0.1s; }
+        .message:nth-child(2) { animation-delay: 0.2s; }
+        .message:nth-child(3) { animation-delay: 0.3s; }
+        .message:nth-child(4) { animation-delay: 0.4s; }
+        .message:nth-child(5) { animation-delay: 0.5s; }
+        .message:nth-child(6) { animation-delay: 0.6s; }
+        .message:nth-child(7) { animation-delay: 0.7s; }
+        .message:nth-child(8) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .avatar.tom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .avatar.sarah {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .avatar.waiter {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .avatar.customer {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .message-content {
+            max-width: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .message.left .message-content {
+            align-items: flex-start;
+        }
+
+        .message.right .message-content {
+            align-items: flex-end;
+        }
+
+        .speaker-name {
+            font-size: 0.75em;
+            font-weight: 600;
+            color: #7f8c8d;
+            padding: 0 8px;
+            margin-bottom: 4px;
+        }
+
+        .message.left .speaker-name {
+            color: #667eea;
+        }
+
+        .message.right .speaker-name {
+            color: #f5576c;
+        }
+
+        .bubble {
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+
+        .message.left .bubble {
+            background-color: #e8f4f8;
+            border-bottom-left-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .message.right .bubble {
+            background-color: #fff0f5;
+            border-bottom-right-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .bubble-text {
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+
+        .bubble-translation {
+            font-size: 0.85em;
+            color: #27ae60;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed #bdc3c7;
+            display: none;
+        }
+
+        .bubble-translation.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .intro {
+                padding: 10px 12px;
+            }
+
+            .intro p {
+                font-size: 0.85em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            .message-content {
+                max-width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Yiyecekler ve İçecekler<span id="titleTR" style="display: none;"> (Food and Drinks)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <p>Almanca'da yiyecek ve içecek isimleri, günlük hayatta sıkça kullanılan kelimelerdir. Bu bölümde kahvaltı, akşam yemeği ve içeceklerle ilgili temel kelimeleri öğreneceksiniz.<span id="introTR" style="display: none;"> Food and drink names in German are words frequently used in daily life. In this section, you will learn basic words related to breakfast, dinner, and drinks.</span></p>
+        </div>
+
+        <h2>Frühstück (Kahvaltı)<span id="breakfastTR" style="display: none;"> (Breakfast)</span></h2>
+        <p>Kahvaltıda yaygın olarak kullanılan yiyecekler aşağıdaki tabloda derlenmiştir:<span id="breakfastDescTR" style="display: none;"> Foods commonly used for breakfast are compiled in the table below:</span></p>
+        
+        <div class="table-is-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>🇩🇪</th>
+                        <th>🇹🇷</th>
+                        <th>Tekil</th>
+                        <th>Çoğul</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>der Käse, –</td>
+                        <td>Peynir</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Käse');">🔊</button> der Käse</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Käse');">🔊</button> die Käse</td>
+                    </tr>
+                    <tr>
+                        <td>das Ei, er</td>
+                        <td>Yumurta</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('das Ei');">🔊</button> das Ei</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Eier');">🔊</button> die Eier</td>
+                    </tr>
+                    <tr>
+                        <td>die Olive, n</td>
+                        <td>Zeytin</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Olive');">🔊</button> die Olive</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Oliven');">🔊</button> die Oliven</td>
+                    </tr>
+                    <tr>
+                        <td>der Butter</td>
+                        <td>Tereyağı</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Butter');">🔊</button> der Butter</td>
+                        <td>–</td>
+                    </tr>
+                    <tr>
+                        <td>die Wurst, ..e</td>
+                        <td>Salam, Sosis, Sucuk</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Wurst');">🔊</button> die Wurst</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Würste');">🔊</button> die Würste</td>
+                    </tr>
+                    <tr>
+                        <td>die Sahne</td>
+                        <td>Krema, Kaymak</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Sahne');">🔊</button> die Sahne</td>
+                        <td>–</td>
+                    </tr>
+                    <tr>
+                        <td>das Brötchen, –</td>
+                        <td>Küçük ekmek</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('das Brötchen');">🔊</button> das Brötchen</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Brötchen');">🔊</button> die Brötchen</td>
+                    </tr>
+                    <tr>
+                        <td>das Brot, e</td>
+                        <td>Ekmek</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('das Brot');">🔊</button> das Brot</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Brote');">🔊</button> die Brote</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Abendessen (Akşam Yemeği)<span id="dinnerTR" style="display: none;"> (Dinner)</span></h2>
+        <p>Akşam yemeğinde yaygın olarak kullanılan yiyecekler aşağıdaki tabloda derlenmiştir:<span id="dinnerDescTR" style="display: none;"> Foods commonly used for dinner are compiled in the table below:</span></p>
+        
+        <div class="table-is-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>🇩🇪</th>
+                        <th>🇹🇷</th>
+                        <th>Tekil</th>
+                        <th>Çoğul</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>der Reis, er</td>
+                        <td>Pirinç</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Reis');">🔊</button> der Reis</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Reiser');">🔊</button> die Reiser</td>
+                    </tr>
+                    <tr>
+                        <td>die Suppe, n</td>
+                        <td>Çorba</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Suppe');">🔊</button> die Suppe</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Suppen');">🔊</button> die Suppen</td>
+                    </tr>
+                    <tr>
+                        <td>der Fisch, e</td>
+                        <td>Balık</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Fisch');">🔊</button> der Fisch</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Fische');">🔊</button> die Fische</td>
+                    </tr>
+                    <tr>
+                        <td>das Fleisch, e</td>
+                        <td>Et</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('das Fleisch');">🔊</button> das Fleisch</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Fleische');">🔊</button> die Fleische</td>
+                    </tr>
+                    <tr>
+                        <td>das Rindfleisch, e</td>
+                        <td>Sığır eti</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('das Rindfleisch');">🔊</button> das Rindfleisch</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Rindfleische');">🔊</button> die Rindfleische</td>
+                    </tr>
+                    <tr>
+                        <td>das Hühnerfleisch, e</td>
+                        <td>Tavuk eti</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('das Hühnerfleisch');">🔊</button> das Hühnerfleisch</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Hühnerfleische');">🔊</button> die Hühnerfleische</td>
+                    </tr>
+                    <tr>
+                        <td>die Nudel, n</td>
+                        <td>Makarna</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Nudel');">🔊</button> die Nudel</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Nudeln');">🔊</button> die Nudeln</td>
+                    </tr>
+                    <tr>
+                        <td>die Pommes frites</td>
+                        <td>Patates kızartması</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Pommes frites');">🔊</button> die Pommes frites</td>
+                        <td>–</td>
+                    </tr>
+                    <tr>
+                        <td>der/die/das Joghurt</td>
+                        <td>Yoğurt</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Joghurt');">🔊</button> der/die/das Joghurt</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Joghurts');">🔊</button> die Joghurts</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>İçecekler (Getränke)<span id="drinksTR" style="display: none;"> (Drinks)</span></h2>
+        <p>Almancada yaygın olarak kullanılan içecek isimleri aşağıdaki tabloda derlenmiştir:<span id="drinksDescTR" style="display: none;"> Common drink names in German are compiled in the table below:</span></p>
+        
+        <div class="table-is-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>🇩🇪</th>
+                        <th>🇹🇷</th>
+                        <th>Tekil</th>
+                        <th>Çoğul</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>das Wasser</td>
+                        <td>Su</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('das Wasser');">🔊</button> das Wasser</td>
+                        <td>–</td>
+                    </tr>
+                    <tr>
+                        <td>das Mineralwasser</td>
+                        <td>Soda, Maden suyu</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('das Mineralwasser');">🔊</button> das Mineralwasser</td>
+                        <td>–</td>
+                    </tr>
+                    <tr>
+                        <td>die Milch, e/en</td>
+                        <td>Süt</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Milch');">🔊</button> die Milch</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Milche');">🔊</button> die Milche, die Milchen</td>
+                    </tr>
+                    <tr>
+                        <td>der Kaffee, s</td>
+                        <td>Kahve</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Kaffee');">🔊</button> der Kaffee</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Kaffees');">🔊</button> die Kaffees</td>
+                    </tr>
+                    <tr>
+                        <td>der Tee, s</td>
+                        <td>Çay</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Tee');">🔊</button> der Tee</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Tees');">🔊</button> die Tees</td>
+                    </tr>
+                    <tr>
+                        <td>der schwarzer Tee, s</td>
+                        <td>Siyah çay</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der schwarzer Tee');">🔊</button> der schwarzer Tee</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die schwarzer Tees');">🔊</button> die schwarzer Tees</td>
+                    </tr>
+                    <tr>
+                        <td>der Saft, ..e</td>
+                        <td>Meyve suyu</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Saft');">🔊</button> der Saft</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Säfte');">🔊</button> die Säfte</td>
+                    </tr>
+                    <tr>
+                        <td>der Orangensaft, ..e</td>
+                        <td>Portakal suyu</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Orangensaft');">🔊</button> der Orangensaft</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Orangensäfte');">🔊</button> die Orangensäfte</td>
+                    </tr>
+                    <tr>
+                        <td>die Limonade, n</td>
+                        <td>Limonata</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Limonade');">🔊</button> die Limonade</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Limonaden');">🔊</button> die Limonaden</td>
+                    </tr>
+                    <tr>
+                        <td>das/die Cola, s</td>
+                        <td>Kola</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('das Cola');">🔊</button> das/die Cola</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Colas');">🔊</button> die Colas</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Yiyecek ve İçeceklerde Kullanılan Sıfatlar<span id="adjectivesTR" style="display: none;"> (Adjectives Used with Food and Drinks)</span></h2>
+        
+        <div class="table-is-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>🇹🇷</th>
+                        <th>🇩🇪</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tuzlu</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('salzig');">🔊</button> salzig</td>
+                    </tr>
+                    <tr>
+                        <td>Tatlı</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('süß');">🔊</button> süß</td>
+                    </tr>
+                    <tr>
+                        <td>Çok tatlı</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('zu süß');">🔊</button> zu süß</td>
+                    </tr>
+                    <tr>
+                        <td>Acı</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('bitter');">🔊</button> bitter</td>
+                    </tr>
+                    <tr>
+                        <td>Çok acı</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('zu bitter');">🔊</button> zu bitter</td>
+                    </tr>
+                    <tr>
+                        <td>Çok yağlı</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('zu fett');">🔊</button> zu fett</td>
+                    </tr>
+                    <tr>
+                        <td>Ekşi</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('sauer');">🔊</button> sauer</td>
+                    </tr>
+                    <tr>
+                        <td>Taze değil</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('nicht frisch');">🔊</button> nicht frisch</td>
+                    </tr>
+                    <tr>
+                        <td>Kuru</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('trocken');">🔊</button> trocken</td>
+                    </tr>
+                    <tr>
+                        <td>Sıcak</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('warm');">🔊</button> warm</td>
+                    </tr>
+                    <tr>
+                        <td>Soğuk</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('kalt');">🔊</button> kalt</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Yiyecek ve İçecekler İçin Kullanılan Miktar Kalıpları<span id="quantitiesTR" style="display: none;"> (Quantity Patterns for Food and Drinks)</span></h2>
+        
+        <div class="table-is-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>🇹🇷</th>
+                        <th>🇩🇪</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Kilo</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('Kilo');">🔊</button> Kilo</td>
+                    </tr>
+                    <tr>
+                        <td>Gram</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('Gramm');">🔊</button> Gramm</td>
+                    </tr>
+                    <tr>
+                        <td>Litre</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('Liter');">🔊</button> Liter</td>
+                    </tr>
+                    <tr>
+                        <td>Bir bardak</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('ein Glas');">🔊</button> ein Glas</td>
+                    </tr>
+                    <tr>
+                        <td>Bir şişe</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('eine Flasche');">🔊</button> eine Flasche</td>
+                    </tr>
+                    <tr>
+                        <td>Bir fincan</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('eine Tasse');">🔊</button> eine Tasse</td>
+                    </tr>
+                    <tr>
+                        <td>Bir kap</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('ein Becher');">🔊</button> ein Becher</td>
+                    </tr>
+                    <tr>
+                        <td>Bir tabak</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('ein Teller');">🔊</button> ein Teller</td>
+                    </tr>
+                    <tr>
+                        <td>Bir dilim</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('ein Stück');">🔊</button> ein Stück</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Dialog 1: Restoranda -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 1: Restoranda<span id="dialog1TR" style="display: none;"> (Dialogue 1: At the Restaurant)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar waiter">K</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Kellner</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Guten Tag! Was möchten Sie bestellen?</div>
+                            <div class="bubble-translation">İyi günler! Ne sipariş etmek istersiniz?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar customer">G</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Gast</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Guten Tag! Ich hätte gerne eine Suppe und ein Stück Brot.</div>
+                            <div class="bubble-translation">İyi günler! Bir çorba ve bir dilim ekmek istiyorum.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar waiter">K</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Kellner</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Sehr gut. Was möchten Sie trinken?</div>
+                            <div class="bubble-translation">Çok iyi. Ne içmek istersiniz?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar customer">G</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Gast</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ein Glas Wasser, bitte. Und eine Tasse Kaffee nach dem Essen.</div>
+                            <div class="bubble-translation">Bir bardak su, lütfen. Ve yemekten sonra bir fincan kahve.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar waiter">K</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Kellner</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Gerne. Möchten Sie noch etwas?</div>
+                            <div class="bubble-translation">Tabii. Başka bir şey ister misiniz?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar customer">G</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Gast</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Nein, danke. Das ist alles.</div>
+                            <div class="bubble-translation">Hayır, teşekkürler. Bu kadar.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialog 2: Market Alışverişi -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 2: Market Alışverişi<span id="dialog2TR" style="display: none;"> (Dialogue 2: Grocery Shopping)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Entschuldigung, wo finde ich die Milch?</div>
+                            <div class="bubble-translation">Özür dilerim, sütü nerede bulabilirim?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Verkäuferin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Die Milch ist im Kühlregal dort hinten. Wie viel Liter brauchen Sie?</div>
+                            <div class="bubble-translation">Süt oradaki soğutucuda. Kaç litre lazım?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Zwei Liter, bitte. Und ich brauche auch Brot und Käse.</div>
+                            <div class="bubble-translation">İki litre, lütfen. Ve ekmek ile peynir de lazım.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Verkäuferin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Das Brot ist in der Bäckerei-Abteilung. Welchen Käse möchten Sie?</div>
+                            <div class="bubble-translation">Ekmek fırın bölümünde. Hangi peyniri istersiniz?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich nehme 200 Gramm Käse. Und eine Flasche Orangensaft.</div>
+                            <div class="bubble-translation">200 gram peynir alacağım. Ve bir şişe portakal suyu.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Verkäuferin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Gut. Sonst noch etwas?</div>
+                            <div class="bubble-translation">İyi. Başka bir şey?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Nein, das ist alles. Wie viel kostet das?</div>
+                            <div class="bubble-translation">Hayır, bu kadar. Ne kadar tutuyor?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Verkäuferin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Das macht zusammen 12 Euro 50 Cent.</div>
+                            <div class="bubble-translation">Toplam 12 Euro 50 Cent.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'de-DE';
+                utterance.rate = 0.9;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const translations = document.querySelectorAll('.bubble-translation');
+            translations.forEach(translation => {
+                if (this.checked) {
+                    translation.classList.add('show');
+                } else {
+                    translation.classList.remove('show');
+                }
+            });
+            
+            const trElements = document.querySelectorAll('[id$="TR"]');
+            trElements.forEach(el => {
+                el.style.display = this.checked ? 'inline' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+

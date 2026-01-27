@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.10 Aile | Die Familie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-label {
+            font-size: 0.9em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #3498db;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .intro {
+            background-color: #e8f4f8;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .intro p {
+            font-size: 0.9em;
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .table-is-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        table thead {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #2980b9;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .speak-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 0;
+            margin: 0;
+        }
+
+        .speak-button:hover {
+            opacity: 0.7;
+        }
+
+        .info-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .example-box {
+            background-color: #f8f9fa;
+            border-left: 3px solid #3498db;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .example-german {
+            color: #2c3e50;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .example-turkish {
+            color: #27ae60;
+            font-size: 0.9em;
+        }
+
+        .dialog-section {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .dialog-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .conversation {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .message.left {
+            justify-content: flex-start;
+        }
+
+        .message.right {
+            justify-content: flex-end;
+        }
+
+        .message:nth-child(1) { animation-delay: 0.1s; }
+        .message:nth-child(2) { animation-delay: 0.2s; }
+        .message:nth-child(3) { animation-delay: 0.3s; }
+        .message:nth-child(4) { animation-delay: 0.4s; }
+        .message:nth-child(5) { animation-delay: 0.5s; }
+        .message:nth-child(6) { animation-delay: 0.6s; }
+        .message:nth-child(7) { animation-delay: 0.7s; }
+        .message:nth-child(8) { animation-delay: 0.8s; }
+        .message:nth-child(9) { animation-delay: 0.9s; }
+        .message:nth-child(10) { animation-delay: 1.0s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .avatar.tom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .avatar.sarah {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .avatar.anna {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .avatar.max {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .message-content {
+            max-width: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .message.left .message-content {
+            align-items: flex-start;
+        }
+
+        .message.right .message-content {
+            align-items: flex-end;
+        }
+
+        .speaker-name {
+            font-size: 0.75em;
+            font-weight: 600;
+            color: #7f8c8d;
+            padding: 0 8px;
+            margin-bottom: 4px;
+        }
+
+        .message.left .speaker-name {
+            color: #667eea;
+        }
+
+        .message.right .speaker-name {
+            color: #f5576c;
+        }
+
+        .bubble {
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+
+        .message.left .bubble {
+            background-color: #e8f4f8;
+            border-bottom-left-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .message.right .bubble {
+            background-color: #fff0f5;
+            border-bottom-right-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .bubble-text {
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+
+        .bubble-translation {
+            font-size: 0.85em;
+            color: #27ae60;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed #bdc3c7;
+            display: none;
+        }
+
+        .bubble-translation.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            .message-content {
+                max-width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Aile<span id="titleTR" style="display: none;"> (Family)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <p>Almancada aile bireylerini öğrenmek, günlük konuşmalarda kendinizi ifade etmenin en pratik yollarından biridir.<span id="introTR" style="display: none;"> Learning family members in German is one of the most practical ways to express yourself in daily conversations.</span></p>
+        </div>
+
+        <h2>Çekirdek Aile (Die Kernfamilie)<span id="coreFamilyTR" style="display: none;"> (Core Family)</span></h2>
+        
+        <div class="table-is-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>🇩🇪</th>
+                        <th>🇹🇷</th>
+                        <th>Telaffuz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>die Familie</td>
+                        <td>Aile</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Familie');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Mutter</td>
+                        <td>Anne</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Mutter');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Vater</td>
+                        <td>Baba</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Vater');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Eltern</td>
+                        <td>Ebeveynler (Anne ve Baba)</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Eltern');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Schwester</td>
+                        <td>Kız kardeş</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Schwester');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Bruder</td>
+                        <td>Erkek kardeş</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Bruder');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Geschwister</td>
+                        <td>Kardeşler (hem kız hem erkek)</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Geschwister');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Tochter</td>
+                        <td>Kız evlat</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Tochter');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Sohn</td>
+                        <td>Oğul</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Sohn');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>das Kind</td>
+                        <td>Çocuk</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('das Kind');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Kinder</td>
+                        <td>Çocuklar</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Kinder');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Ehemann</td>
+                        <td>Koca, erkek eş</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Ehemann');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Ehefrau</td>
+                        <td>Karı, kadın eş</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Ehefrau');">🔊</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Büyükanne, Büyükbaba ve Torunlar<span id="grandparentsTR" style="display: none;"> (Grandparents and Grandchildren)</span></h2>
+        
+        <div class="table-is-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>🇩🇪</th>
+                        <th>🇹🇷</th>
+                        <th>Telaffuz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>die Großmutter / Oma</td>
+                        <td>Büyükanne (Anneanne / Babaanne)</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Großmutter');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Großvater / Opa</td>
+                        <td>Büyükbaba (Dede)</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Großvater');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Großeltern</td>
+                        <td>Büyükanne ve Büyükbaba</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Großeltern');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Enkelin</td>
+                        <td>Kız torun</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Enkelin');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Enkel</td>
+                        <td>Erkek torun</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Enkel');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>das Enkelkind</td>
+                        <td>Torun</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('das Enkelkind');">🔊</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Geniş Aile ve Akrabalar (Die Verwandten)<span id="extendedFamilyTR" style="display: none;"> (Extended Family and Relatives)</span></h2>
+        
+        <div class="table-is-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>🇩🇪</th>
+                        <th>🇹🇷</th>
+                        <th>Telaffuz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>die Tante</td>
+                        <td>Teyze, hala</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Tante');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Onkel</td>
+                        <td>Amca, dayı</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Onkel');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Cousine</td>
+                        <td>Kız kuzen</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Cousine');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Cousin</td>
+                        <td>Erkek kuzen</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Cousin');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Nichte</td>
+                        <td>Kız yeğen</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Nichte');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Neffe</td>
+                        <td>Erkek yeğen</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Neffe');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Verwandte</td>
+                        <td>Erkek akraba</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Verwandte');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Verwandte</td>
+                        <td>Kadın akraba</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Verwandte');">🔊</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Evlilik Yoluyla Kurulan Akrabalıklar<span id="inLawsTR" style="display: none;"> (In-Laws)</span></h2>
+        
+        <div class="table-is-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>🇩🇪</th>
+                        <th>🇹🇷</th>
+                        <th>Telaffuz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>die Schwiegermutter</td>
+                        <td>Kayınvalide</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Schwiegermutter');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Schwiegervater</td>
+                        <td>Kayınpeder</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Schwiegervater');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Schwiegereltern</td>
+                        <td>Kayınvalide ve Kayınpeder</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Schwiegereltern');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Schwägerin</td>
+                        <td>Görümce, baldız, elti</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Schwägerin');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Schwager</td>
+                        <td>Kayınbirader, enişte, bacanak</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Schwager');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Schwiegertochter</td>
+                        <td>Gelin</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Schwiegertochter');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Schwiegersohn</td>
+                        <td>Damat</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Schwiegersohn');">🔊</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Diğer İlişkiler ve Durumlar<span id="otherRelationsTR" style="display: none;"> (Other Relationships and Situations)</span></h2>
+        
+        <div class="table-is-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>🇩🇪</th>
+                        <th>🇹🇷</th>
+                        <th>Telaffuz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>die Verlobte</td>
+                        <td>Nişanlı (kadın)</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Verlobte');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Verlobte</td>
+                        <td>Nişanlı (erkek)</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Verlobte');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Freundin</td>
+                        <td>Kız arkadaş</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Freundin');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Freund</td>
+                        <td>Erkek arkadaş</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Freund');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Stiefmutter</td>
+                        <td>Üvey anne</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Stiefmutter');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Stiefvater</td>
+                        <td>Üvey baba</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Stiefvater');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Stieftochter</td>
+                        <td>Üvey kız</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Stieftochter');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Stiefsohn</td>
+                        <td>Üvey oğul</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Stiefsohn');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>die Halbschwester</td>
+                        <td>Üvey kız kardeş (tek ebeveyn ortak)</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('die Halbschwester');">🔊</button></td>
+                    </tr>
+                    <tr>
+                        <td>der Halbbruder</td>
+                        <td>Üvey erkek kardeş (tek ebeveyn ortak)</td>
+                        <td><button type="button" class="speak-button" onclick="speakText('der Halbbruder');">🔊</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Örnek Cümleler<span id="examplesTR" style="display: none;"> (Example Sentences)</span></h2>
+        
+        <div class="example-box">
+            <div class="example-german">Meine Mutter heißt Ayşe.</div>
+            <div class="example-turkish">Annemin adı Ayşe'dir.</div>
+        </div>
+        <div class="example-box">
+            <div class="example-german">Mein Vater arbeitet als Lehrer.</div>
+            <div class="example-turkish">Babam öğretmen olarak çalışıyor.</div>
+        </div>
+        <div class="example-box">
+            <div class="example-german">Ich habe einen Bruder und eine Schwester.</div>
+            <div class="example-turkish">Bir erkek kardeşim ve bir kız kardeşim var.</div>
+        </div>
+        <div class="example-box">
+            <div class="example-german">Meine Eltern leben in Istanbul.</div>
+            <div class="example-turkish">Ebeveynlerim İstanbul'da yaşıyor.</div>
+        </div>
+        <div class="example-box">
+            <div class="example-german">Hast du Geschwister?</div>
+            <div class="example-turkish">Kardeşlerin var mı?</div>
+        </div>
+        <div class="example-box">
+            <div class="example-german">Meine Oma backt sehr guten Kuchen.</div>
+            <div class="example-turkish">Büyükannem çok güzel kek yapar.</div>
+        </div>
+        <div class="example-box">
+            <div class="example-german">Mein Onkel wohnt in Berlin.</div>
+            <div class="example-turkish">Amcam/Dayım Berlin'de oturuyor.</div>
+        </div>
+        <div class="example-box">
+            <div class="example-german">Alle meine Verwandten kommen zur Hochzeit.</div>
+            <div class="example-turkish">Tüm akrabalarım düğüne geliyor.</div>
+        </div>
+
+        <div class="info-box">
+            <strong>Önemli Notlar:</strong><br>
+            • <strong>Onkel:</strong> Hem "amca" hem de "dayı" için kullanılır.<br>
+            • <strong>Tante:</strong> Hem "teyze" hem de "hala" için kullanılır.<br>
+            • <strong>Schwager:</strong> Hem "kayınbirader" hem "enişte" hem de "bacanak" anlamlarına gelir.<br>
+            • <strong>Geschwister:</strong> Bu kelime, tek başına "kardeşler" anlamına gelen çoğul bir kelimedir.<br>
+            • <strong>Stief-</strong> ve <strong>Halb-</strong> Farkı: Stief- evlilik yoluyla kazanılan akrabalıkları ifade eder (kan bağı yoktur). Halb- sadece bir ebeveyni ortak olan kardeşleri ifade eder (kan bağı vardır).<span id="notesTR" style="display: none;"> <strong>Important Notes:</strong><br>
+            • <strong>Onkel:</strong> Used for both "uncle (father's side)" and "uncle (mother's side)".<br>
+            • <strong>Tante:</strong> Used for both "aunt (father's side)" and "aunt (mother's side)".<br>
+            • <strong>Schwager:</strong> Means "brother-in-law", "brother-in-law (wife's brother)", and "brother-in-law (sister's husband)".<br>
+            • <strong>Geschwister:</strong> This word is a plural word meaning "siblings" by itself.<br>
+            • <strong>Stief-</strong> and <strong>Halb-</strong> Difference: Stief- refers to relationships gained through marriage (no blood relation). Halb- refers to siblings who share only one parent (blood relation exists).</span>
+        </div>
+
+        <!-- Dialog 1: Aile Hakkında Konuşma -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 1: Aile Hakkında Konuşma<span id="dialog1TR" style="display: none;"> (Dialogue 1: Talking About Family)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Hallo Sarah! Wie geht es dir?</div>
+                            <div class="bubble-translation">Merhaba Sarah! Nasılsın?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Gut, danke! Und dir? Hast du Geschwister?</div>
+                            <div class="bubble-translation">İyiyim, teşekkürler! Ya sen? Kardeşlerin var mı?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ja, ich habe einen Bruder und eine Schwester. Meine Schwester heißt Anna.</div>
+                            <div class="bubble-translation">Evet, bir erkek kardeşim ve bir kız kardeşim var. Kız kardeşimin adı Anna.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Das ist schön! Wo leben deine Eltern?</div>
+                            <div class="bubble-translation">Bu güzel! Ebeveynlerin nerede yaşıyor?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Meine Eltern leben in München. Meine Mutter arbeitet als Lehrerin und mein Vater ist Arzt.</div>
+                            <div class="bubble-translation">Ebeveynlerim Münih'te yaşıyor. Annem öğretmen olarak çalışıyor ve babam doktor.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Interessant! Hast du auch Großeltern?</div>
+                            <div class="bubble-translation">İlginç! Büyükanne ve büyükbaban da var mı?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ja, meine Oma und mein Opa wohnen in Hamburg. Sie besuchen uns oft.</div>
+                            <div class="bubble-translation">Evet, büyükannem ve büyükbabam Hamburg'da yaşıyor. Bizi sık sık ziyaret ediyorlar.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Das ist sehr nett! Meine Großeltern leben auch nicht weit von uns.</div>
+                            <div class="bubble-translation">Bu çok hoş! Büyükanne ve büyükbabam da bizden uzakta yaşamıyor.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialog 2: Aile Toplantısı -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 2: Aile Toplantısı<span id="dialog2TR" style="display: none;"> (Dialogue 2: Family Gathering)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar anna">A</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Anna</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Max, kommst du am Wochenende zur Familienfeier?</div>
+                            <div class="bubble-translation">Max, hafta sonu aile toplantısına geliyor musun?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar max">M</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Max</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ja, natürlich! Wer kommt alles?</div>
+                            <div class="bubble-translation">Evet, tabii ki! Herkes kim geliyor?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar anna">A</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Anna</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Alle Verwandten: Onkel Peter, Tante Maria, meine Cousine Lisa und mein Cousin David.</div>
+                            <div class="bubble-translation">Tüm akrabalar: Amca Peter, Teyze Maria, kuzenim Lisa ve kuzenim David.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar max">M</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Max</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Super! Und deine Nichte kommt auch, oder?</div>
+                            <div class="bubble-translation">Süper! Ve yeğenin de geliyor, değil mi?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar anna">A</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Anna</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ja, meine Nichte Emma kommt mit ihrer Mutter, meiner Schwester.</div>
+                            <div class="bubble-translation">Evet, yeğenim Emma annesiyle, yani kız kardeşimle geliyor.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar max">M</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Max</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Das wird eine schöne Feier! Ich freue mich darauf.</div>
+                            <div class="bubble-translation">Bu güzel bir toplantı olacak! Bunu dört gözle bekliyorum.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'de-DE';
+                utterance.rate = 0.9;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const translations = document.querySelectorAll('.bubble-translation');
+            translations.forEach(translation => {
+                if (this.checked) {
+                    translation.classList.add('show');
+                } else {
+                    translation.classList.remove('show');
+                }
+            });
+            
+            const trElements = document.querySelectorAll('[id$="TR"]');
+            trElements.forEach(el => {
+                el.style.display = this.checked ? 'inline' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+

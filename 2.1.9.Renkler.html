@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.9 Renkler | Die Farben</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-label {
+            font-size: 0.9em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #3498db;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .intro {
+            background-color: #e8f4f8;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .intro p {
+            font-size: 0.9em;
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .colors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .color-box {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid;
+        }
+
+        .color-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .color-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .color-turkish {
+            color: #e74c3c;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .table-is-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        table thead {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #2980b9;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .speak-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 0;
+            margin: 0;
+        }
+
+        .speak-button:hover {
+            opacity: 0.7;
+        }
+
+        .info-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .grammar-box {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .grammar-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .grammar-content {
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .example-box {
+            background-color: #f8f9fa;
+            border-left: 3px solid #3498db;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .example-german {
+            color: #2c3e50;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .example-turkish {
+            color: #27ae60;
+            font-size: 0.9em;
+        }
+
+        .dialog-section {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .dialog-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .conversation {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .message.left {
+            justify-content: flex-start;
+        }
+
+        .message.right {
+            justify-content: flex-end;
+        }
+
+        .message:nth-child(1) { animation-delay: 0.1s; }
+        .message:nth-child(2) { animation-delay: 0.2s; }
+        .message:nth-child(3) { animation-delay: 0.3s; }
+        .message:nth-child(4) { animation-delay: 0.4s; }
+        .message:nth-child(5) { animation-delay: 0.5s; }
+        .message:nth-child(6) { animation-delay: 0.6s; }
+        .message:nth-child(7) { animation-delay: 0.7s; }
+        .message:nth-child(8) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .avatar.tom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .avatar.sarah {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .avatar.shopkeeper {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .avatar.customer {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .message-content {
+            max-width: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .message.left .message-content {
+            align-items: flex-start;
+        }
+
+        .message.right .message-content {
+            align-items: flex-end;
+        }
+
+        .speaker-name {
+            font-size: 0.75em;
+            font-weight: 600;
+            color: #7f8c8d;
+            padding: 0 8px;
+            margin-bottom: 4px;
+        }
+
+        .message.left .speaker-name {
+            color: #667eea;
+        }
+
+        .message.right .speaker-name {
+            color: #f5576c;
+        }
+
+        .bubble {
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+
+        .message.left .bubble {
+            background-color: #e8f4f8;
+            border-bottom-left-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .message.right .bubble {
+            background-color: #fff0f5;
+            border-bottom-right-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .bubble-text {
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+
+        .bubble-translation {
+            font-size: 0.85em;
+            color: #27ae60;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed #bdc3c7;
+            display: none;
+        }
+
+        .bubble-translation.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .colors-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .message-content {
+                max-width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Renkler<span id="titleTR" style="display: none;"> (Colors)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <p>Almanca'da renkler, günlük konuşmada sıkça kullanılan önemli kelimelerdir. Renkler hem sıfat hem de isim olarak kullanılabilir.<span id="introTR" style="display: none;"> Colors in German are important words frequently used in daily conversation. Colors can be used both as adjectives and nouns.</span></p>
+        </div>
+
+        <h2>Temel Renkler<span id="basicColorsTR" style="display: none;"> (Basic Colors)</span></h2>
+        
+        <div class="colors-grid">
+            <div class="color-box" style="border-left-color: #000;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('schwarz');">🔊</button> Schwarz</div>
+                <div class="color-turkish">Siyah</div>
+            </div>
+            <div class="color-box" style="border-left-color: #fff;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('weiß');">🔊</button> Weiß</div>
+                <div class="color-turkish">Beyaz</div>
+            </div>
+            <div class="color-box" style="border-left-color: #ff0000;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('rot');">🔊</button> Rot</div>
+                <div class="color-turkish">Kırmızı</div>
+            </div>
+            <div class="color-box" style="border-left-color: #0000ff;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('blau');">🔊</button> Blau</div>
+                <div class="color-turkish">Mavi</div>
+            </div>
+            <div class="color-box" style="border-left-color: #00ff00;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('grün');">🔊</button> Grün</div>
+                <div class="color-turkish">Yeşil</div>
+            </div>
+            <div class="color-box" style="border-left-color: #ffff00;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('gelb');">🔊</button> Gelb</div>
+                <div class="color-turkish">Sarı</div>
+            </div>
+            <div class="color-box" style="border-left-color: #808080;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('grau');">🔊</button> Grau</div>
+                <div class="color-turkish">Gri</div>
+            </div>
+            <div class="color-box" style="border-left-color: #8b4513;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('braun');">🔊</button> Braun</div>
+                <div class="color-turkish">Kahverengi</div>
+            </div>
+            <div class="color-box" style="border-left-color: #ffc0cb;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('rosa');">🔊</button> Rosa</div>
+                <div class="color-turkish">Pembe</div>
+            </div>
+            <div class="color-box" style="border-left-color: #ffa500;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('orange');">🔊</button> Orange</div>
+                <div class="color-turkish">Turuncu</div>
+            </div>
+            <div class="color-box" style="border-left-color: #800080;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('lila');">🔊</button> Lila</div>
+                <div class="color-turkish">Mor</div>
+            </div>
+            <div class="color-box" style="border-left-color: #f5f5dc;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('beige');">🔊</button> Beige</div>
+                <div class="color-turkish">Bej</div>
+            </div>
+            <div class="color-box" style="border-left-color: #40e0d0;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('türkis');">🔊</button> Türkis</div>
+                <div class="color-turkish">Turkuaz</div>
+            </div>
+            <div class="color-box" style="border-left-color: #ffd700;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('gold');">🔊</button> Gold</div>
+                <div class="color-turkish">Altın rengi</div>
+            </div>
+            <div class="color-box" style="border-left-color: #c0c0c0;">
+                <div class="color-name"><button type="button" class="speak-button" onclick="speakText('silber');">🔊</button> Silber</div>
+                <div class="color-turkish">Gümüş rengi</div>
+            </div>
+        </div>
+
+        <h2>Renklerin Grameri: Sıfat mı, İsim mi?<span id="grammarTR" style="display: none;"> (Grammar: Adjective or Noun?)</span></h2>
+        
+        <div class="grammar-box">
+            <div class="grammar-title">Sıfat Olarak Renkler (Adjektiv)<span id="adjectiveTR" style="display: none;"> (Colors as Adjectives)</span></div>
+            <div class="grammar-content">
+                <p>Bir ismin önüne geldiklerinde, o ismin artikeline ve haline göre çekim eki alırlar.<span id="adjectiveDescTR" style="display: none;"> When they come before a noun, they take inflection endings according to the article and case of that noun.</span></p>
+                <div class="example-box">
+                    <div class="example-german">Das ist ein <strong>rotes</strong> Auto.</div>
+                    <div class="example-turkish">Bu kırmızı bir araba.</div>
+                </div>
+                <div class="example-box">
+                    <div class="example-german">Ich habe ein <strong>blaues</strong> Kleid.</div>
+                    <div class="example-turkish">Mavi bir elbisem var.</div>
+                </div>
+                <div class="example-box">
+                    <div class="example-german">Wir wohnen in einem <strong>grünen</strong> Haus.</div>
+                    <div class="example-turkish">Yeşil bir evde yaşıyoruz.</div>
+                </div>
+                <div class="example-box">
+                    <div class="example-german">Die Blume ist <strong>rot</strong>.</div>
+                    <div class="example-turkish">Çiçek kırmızı. (Not: "sein" fiilinden sonra geldiğinde çekimlenmez.)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grammar-box">
+            <div class="grammar-title">İsim Olarak Renkler (Nomen)<span id="nounTR" style="display: none;"> (Colors as Nouns)</span></div>
+            <div class="grammar-content">
+                <p>Bir rengin kendisinden bir kavram olarak bahsedildiğinde, büyük harfle ve <strong>das</strong> artikeliyle kullanılır.<span id="nounDescTR" style="display: none;"> When referring to a color as a concept, it is used with a capital letter and the article <strong>das</strong>.</span></p>
+                <div class="example-box">
+                    <div class="example-german"><strong>Das Rot</strong> gefällt mir.</div>
+                    <div class="example-turkish">Kırmızı [rengi] hoşuma gidiyor.</div>
+                </div>
+                <div class="example-box">
+                    <div class="example-german"><strong>Das Blau</strong> des Himmels ist wunderschön.</div>
+                    <div class="example-turkish">Gökyüzünün mavisi harika.</div>
+                </div>
+                <div class="example-box">
+                    <div class="example-german"><strong>Das Grün</strong> der Bäume beruhigt mich.</div>
+                    <div class="example-turkish">Ağaçların yeşili beni sakinleştiriyor.</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Renk Tonları: Açık ve Koyu<span id="shadesTR" style="display: none;"> (Color Shades: Light and Dark)</span></h2>
+        
+        <div class="info-box">
+            Bir rengin tonunu belirtmek için önüne <strong>hell</strong> (açık) veya <strong>dunkel</strong> (koyu) kelimeleri getirilir ve bitişik yazılır.<span id="shadesDescTR" style="display: none;"> To specify the shade of a color, the words <strong>hell</strong> (light) or <strong>dunkel</strong> (dark) are added before it and written together.</span>
+        </div>
+
+        <div class="table-is-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>🇩🇪</th>
+                        <th>🇹🇷</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><button type="button" class="speak-button" onclick="speakText('hellblau');">🔊</button> hellblau</td>
+                        <td>Açık mavi</td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="speak-button" onclick="speakText('dunkelgrün');">🔊</button> dunkelgrün</td>
+                        <td>Koyu yeşil</td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="speak-button" onclick="speakText('hellrot');">🔊</button> hellrot</td>
+                        <td>Açık kırmızı</td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="speak-button" onclick="speakText('dunkelbraun');">🔊</button> dunkelbraun</td>
+                        <td>Koyu kahverengi</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="info-box">
+            <strong>Önemli Not:</strong> Eğer bir ismi niteliyorsa (sıfat ise) <strong>küçük harfle</strong> yazılır: ein <strong>rotes</strong> Auto. Eğer bir renk kavramından bahsediliyorsa (isim ise) <strong>büyük harfle</strong> ve "das" artikeliyle yazılır: <strong>Das Rot</strong> ist schön.<span id="noteTR" style="display: none;"> <strong>Important Note:</strong> If it qualifies a noun (as an adjective), it is written in <strong>lowercase</strong>: ein <strong>rotes</strong> Auto. If referring to a color concept (as a noun), it is written with a <strong>capital letter</strong> and the article "das": <strong>Das Rot</strong> ist schön.</span>
+        </div>
+
+        <div class="info-box">
+            <strong>Renklerin Artikeli:</strong> Renkler birer isim olarak kullanıldıklarında her zaman <strong>das</strong> artikelini alırlar: das Blau, das Grün, das Gelb.<span id="articleTR" style="display: none;"> <strong>Article of Colors:</strong> When colors are used as nouns, they always take the article <strong>das</strong>: das Blau, das Grün, das Gelb.</span>
+        </div>
+
+        <!-- Dialog 1: Mağazada Renk Seçimi -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 1: Mağazada Renk Seçimi<span id="dialog1TR" style="display: none;"> (Dialogue 1: Choosing Colors at the Store)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar shopkeeper">V</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Verkäuferin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Guten Tag! Kann ich Ihnen helfen?</div>
+                            <div class="bubble-translation">İyi günler! Size yardımcı olabilir miyim?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar customer">K</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Kunde</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ja, bitte. Ich suche ein T-Shirt. Welche Farben haben Sie?</div>
+                            <div class="bubble-translation">Evet, lütfen. Bir tişört arıyorum. Hangi renkleriniz var?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar shopkeeper">V</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Verkäuferin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Wir haben rot, blau, grün, schwarz und weiß. Welche Farbe möchten Sie?</div>
+                            <div class="bubble-translation">Kırmızı, mavi, yeşil, siyah ve beyaz var. Hangi rengi istersiniz?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar customer">K</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Kunde</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich mag das Blau. Haben Sie auch ein hellblaues T-Shirt?</div>
+                            <div class="bubble-translation">Maviyi seviyorum. Açık mavi bir tişörtünüz de var mı?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar shopkeeper">V</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Verkäuferin</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ja, hier ist ein hellblaues T-Shirt. Das passt sehr gut zu Ihnen!</div>
+                            <div class="bubble-translation">Evet, işte açık mavi bir tişört. Bu size çok yakışıyor!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar customer">K</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Kunde</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Perfekt! Ich nehme es. Das Blau ist wirklich schön.</div>
+                            <div class="bubble-translation">Mükemmel! Bunu alıyorum. Mavi gerçekten güzel.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialog 2: Ev Dekorasyonu -->
+        <div class="dialog-section">
+            <div class="dialog-title">Diyalog 2: Ev Dekorasyonu<span id="dialog2TR" style="display: none;"> (Dialogue 2: Home Decoration)</span></div>
+            <div class="conversation">
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Sarah, welche Farbe sollen wir für das Wohnzimmer wählen?</div>
+                            <div class="bubble-translation">Sarah, oturma odası için hangi rengi seçmeliyiz?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich denke, ein warmes Beige oder ein helles Grün wäre schön. Was denkst du?</div>
+                            <div class="bubble-translation">Bence sıcak bir bej veya açık yeşil güzel olur. Sen ne düşünüyorsun?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Das Grün der Bäume beruhigt mich. Vielleicht sollten wir grün wählen.</div>
+                            <div class="bubble-translation">Ağaçların yeşili beni sakinleştiriyor. Belki yeşil seçmeliyiz.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Gute Idee! Und für die Vorhänge? Sollen sie weiß oder grau sein?</div>
+                            <div class="bubble-translation">İyi fikir! Peki perde için? Beyaz mı gri mi olsun?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message left">
+                    <div class="avatar tom">T</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Tom</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Ich bevorzuge weiß. Es macht den Raum heller.</div>
+                            <div class="bubble-translation">Beyazı tercih ederim. Odayı daha aydınlık yapar.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message right">
+                    <div class="avatar sarah">S</div>
+                    <div class="message-content">
+                        <div class="speaker-name">Sarah</div>
+                        <div class="bubble">
+                            <div class="bubble-text">Perfekt! Dann haben wir ein grünes Wohnzimmer mit weißen Vorhängen.</div>
+                            <div class="bubble-translation">Mükemmel! O zaman beyaz perdeli yeşil bir oturma odamız olacak.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'de-DE';
+                utterance.rate = 0.9;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const translations = document.querySelectorAll('.bubble-translation');
+            translations.forEach(translation => {
+                if (this.checked) {
+                    translation.classList.add('show');
+                } else {
+                    translation.classList.remove('show');
+                }
+            });
+            
+            const trElements = document.querySelectorAll('[id$="TR"]');
+            trElements.forEach(el => {
+                el.style.display = this.checked ? 'inline' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+
