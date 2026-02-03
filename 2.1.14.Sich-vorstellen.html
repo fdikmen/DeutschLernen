@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sich vorstellen | Kendini Tanıtma (A1)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .level-badge {
+            font-size: 0.7em;
+            background: #3498db;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-label {
+            font-size: 0.9em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #3498db;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .intro {
+            background-color: #e8f4f8;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin: 15px 20px;
+            border-left: 3px solid #3498db;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .intro p {
+            font-size: 0.9em;
+            color: #2c3e50;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 30px 20px;
+            margin: 0 auto;
+        }
+
+        .presentation-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .conversation {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .message.left {
+            justify-content: flex-start;
+        }
+
+        .message:nth-child(1) { animation-delay: 0.1s; }
+        .message:nth-child(2) { animation-delay: 0.2s; }
+        .message:nth-child(3) { animation-delay: 0.3s; }
+        .message:nth-child(4) { animation-delay: 0.4s; }
+        .message:nth-child(5) { animation-delay: 0.5s; }
+        .message:nth-child(6) { animation-delay: 0.6s; }
+        .message:nth-child(7) { animation-delay: 0.7s; }
+        .message:nth-child(8) { animation-delay: 0.8s; }
+        .message:nth-child(9) { animation-delay: 0.9s; }
+        .message:nth-child(10) { animation-delay: 1.0s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .avatar.lina {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .message-content {
+            max-width: 75%;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .message.left .message-content {
+            align-items: flex-start;
+        }
+
+        .speaker-name {
+            font-size: 0.75em;
+            font-weight: 600;
+            color: #7f8c8d;
+            padding: 0 8px;
+            margin-bottom: 4px;
+        }
+
+        .message.left .speaker-name {
+            color: #667eea;
+        }
+
+        .bubble {
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+
+        .message.left .bubble {
+            background-color: #e8f4f8;
+            border-bottom-left-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .bubble-text {
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+
+        .bubble-translation {
+            font-size: 0.85em;
+            color: #27ae60;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed #bdc3c7;
+            display: none;
+        }
+
+        .bubble-translation.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Sich vorstellen<span class="level-badge">A1</span><span id="titleTR" style="display: none;"> (Kendini Tanıtma)</span></h1>
+            </div>
+            <div class="toggle-container">
+                <span class="toggle-label">TR</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleTurkish">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="intro">
+        <p>Bu bölümde A1 seviyesini bitirmiş birinin kendini tanıtması yer alır. Sadece A1 konuları kullanılmıştır: selamlaşma, ad, yaş, memleket, şehir, aile, meslek/öğrencilik ve basit tercihler.<span id="introTR" style="display: none;"> This section contains a self-introduction at A1 level, using only A1 topics: greetings, name, age, origin, city, family, job/studies and simple preferences.</span></p>
+    </div>
+
+    <div class="container">
+        <div class="presentation-title">Lina stellt sich vor<span id="subtitleTR" style="display: none;"> (Lina kendini tanıtıyor)</span></div>
+        <div class="conversation">
+            <div class="message left">
+                <div class="avatar lina">L</div>
+                <div class="message-content">
+                    <div class="speaker-name">Lina</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Hallo! Guten Tag!</div>
+                        <div class="bubble-translation">Merhaba! İyi günler!</div>
+                    </div>
+                </div>
+            </div>
+            <div class="message left">
+                <div class="avatar lina">L</div>
+                <div class="message-content">
+                    <div class="speaker-name">Lina</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Ich heiße Lina. Ich bin 24 Jahre alt.</div>
+                        <div class="bubble-translation">Benim adım Lina. 24 yaşındayım.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="message left">
+                <div class="avatar lina">L</div>
+                <div class="message-content">
+                    <div class="speaker-name">Lina</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Ich komme aus der Türkei. Ich wohne in Istanbul.</div>
+                        <div class="bubble-translation">Türkiye'den geliyorum. İstanbul'da yaşıyorum.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="message left">
+                <div class="avatar lina">L</div>
+                <div class="message-content">
+                    <div class="speaker-name">Lina</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Ich habe eine Mutter, einen Vater und einen Bruder. Meine Mutter heißt Ayşe, mein Vater heißt Mehmet.</div>
+                        <div class="bubble-translation">Bir annem, bir babam ve bir erkek kardeşim var. Annemin adı Ayşe, babamın adı Mehmet.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="message left">
+                <div class="avatar lina">L</div>
+                <div class="message-content">
+                    <div class="speaker-name">Lina</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Ich bin Studentin. Ich lerne Deutsch.</div>
+                        <div class="bubble-translation">Öğrenciyim. Almanca öğreniyorum.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="message left">
+                <div class="avatar lina">L</div>
+                <div class="message-content">
+                    <div class="speaker-name">Lina</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Ich trinke gern Kaffee und Tee. Zum Frühstück esse ich Brot und Käse.</div>
+                        <div class="bubble-translation">Kahve ve çay içmeyi seviyorum. Kahvaltıda ekmek ve peynir yiyorum.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="message left">
+                <div class="avatar lina">L</div>
+                <div class="message-content">
+                    <div class="speaker-name">Lina</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Meine Lieblingsfarbe ist Blau. Ich mag auch Grün.</div>
+                        <div class="bubble-translation">En sevdiğim renk mavi. Yeşili de seviyorum.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="message left">
+                <div class="avatar lina">L</div>
+                <div class="message-content">
+                    <div class="speaker-name">Lina</div>
+                    <div class="bubble">
+                        <div class="bubble-text">Das ist alles. Danke! Tschüss!</div>
+                        <div class="bubble-translation">Bu kadar. Teşekkürler! Hoşça kal!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleTurkish').addEventListener('change', function() {
+            const translations = document.querySelectorAll('.bubble-translation');
+            translations.forEach(translation => {
+                if (this.checked) {
+                    translation.classList.add('show');
+                } else {
+                    translation.classList.remove('show');
+                }
+            });
+            const trElements = document.querySelectorAll('[id$="TR"]');
+            trElements.forEach(el => {
+                el.style.display = this.checked ? 'inline' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
