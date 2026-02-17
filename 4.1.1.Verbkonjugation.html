@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Fiil Çekimleri | Verbkonjugation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: #fff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100vw;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            text-align: center;
+            margin: 24px 0 8px 0;
+            color: #222;
+            font-size: 1.35rem;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+        .split {
+            display: flex;
+            width: 100vw;
+            max-width: 1200px;
+            gap: 48px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .side {
+            flex: 1;
+            min-width: 280px;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .side-title {
+            text-align: center;
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: #222;
+            margin: 0 0 8px 0;
+            letter-spacing: 0.5px;
+        }
+        .fiil-table {
+            width: 100%;
+            border-radius: 4px;
+            background: #f6f7f9;
+            box-shadow: 0 1px 4px rgba(40,40,40,0.04);
+            font-size: 0.97rem;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+            border: 1px solid #d1d5db;
+        }
+        th {
+            background: #23272f;
+            color: #f3f4f6;
+            font-size: 1rem;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            height: 38px;
+            border-bottom: 2px solid #d1d5db;
+        }
+        td {
+            padding: 6px 10px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #222;
+            vertical-align: middle;
+            background: #fff;
+        }
+        .fiil-table tr:nth-child(even) td {
+            background: #f0f1f3;
+        }
+        .fiil-table tr:nth-child(odd) td {
+            background: #f6f7f9;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .fiil {
+            font-weight: 500;
+            color: #23272f;
+        }
+        .meaning {
+            color: #444;
+            font-style: italic;
+        }
+        .pronoun {
+            font-weight: 600;
+            color: #374151;
+            min-width: 72px;
+        }
+        .endung {
+            color: #059669;
+            font-weight: 500;
+        }
+        .info-box {
+            background: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            padding: 12px 14px;
+            margin: 0 16px 24px 16px;
+            max-width: 1168px;
+            font-size: 0.9rem;
+            color: #334155;
+            border-radius: 0 6px 6px 0;
+        }
+        .info-box strong {
+            color: #0c4a6e;
+        }
+        @media (max-width: 900px) {
+            .split {
+                flex-direction: column;
+                align-items: center;
+                max-width: 100vw;
+            }
+            .side {
+                width: 100%;
+                max-width: 100%;
+            }
+            .fiil-table {
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lektion 4: Grammatik · 4.1.1</h1>
+        <p class="subtitle">Fiil Çekimleri | Verbkonjugation</p>
+
+        <div class="info-box">
+            <strong>Präsens (Şimdiki/Geniş zaman):</strong> Fiil kökü (Stamm) + kişi eki. Düzenli fiillerde kök sabit kalır; sadece şahsa göre <strong>-e, -st, -t, -en, -t, -en</strong> eklenir.
+        </div>
+
+        <div class="split">
+            <div class="side">
+                <div class="side-title">Präsens – Kişi ekleri (Endungen)</div>
+                <table class="fiil-table">
+                    <tr><th>Person</th><th>Pronomen</th><th>Endung</th></tr>
+                    <tr><td>1. Pers. Sg.</td><td class="pronoun">ich</td><td class="endung">-e</td></tr>
+                    <tr><td>2. Pers. Sg.</td><td class="pronoun">du</td><td class="endung">-st</td></tr>
+                    <tr><td>3. Pers. Sg.</td><td class="pronoun">er / sie / es</td><td class="endung">-t</td></tr>
+                    <tr><td>1. Pers. Pl.</td><td class="pronoun">wir</td><td class="endung">-en</td></tr>
+                    <tr><td>2. Pers. Pl.</td><td class="pronoun">ihr</td><td class="endung">-t</td></tr>
+                    <tr><td>3. Pers. Pl. / Höfl.</td><td class="pronoun">sie / Sie</td><td class="endung">-en</td></tr>
+                </table>
+            </div>
+            <div class="side">
+                <div class="side-title">lernen (öğrenmek) – Präsens</div>
+                <table class="fiil-table">
+                    <tr><th>Pronomen</th><th>Konjugation</th><th>Bedeutung</th></tr>
+                    <tr><td class="pronoun">ich</td><td class="fiil">lern<strong>e</strong></td><td class="meaning">öğreniyorum</td></tr>
+                    <tr><td class="pronoun">du</td><td class="fiil">lern<strong>st</strong></td><td class="meaning">öğreniyorsun</td></tr>
+                    <tr><td class="pronoun">er / sie / es</td><td class="fiil">lern<strong>t</strong></td><td class="meaning">öğreniyor</td></tr>
+                    <tr><td class="pronoun">wir</td><td class="fiil">lern<strong>en</strong></td><td class="meaning">öğreniyoruz</td></tr>
+                    <tr><td class="pronoun">ihr</td><td class="fiil">lern<strong>t</strong></td><td class="meaning">öğreniyorsunuz</td></tr>
+                    <tr><td class="pronoun">sie / Sie</td><td class="fiil">lern<strong>en</strong></td><td class="meaning">öğreniyor(lar) / öğreniyorsunuz</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="split">
+            <div class="side">
+                <div class="side-title">wohnen (oturmak) – Präsens</div>
+                <table class="fiil-table">
+                    <tr><th>Pronomen</th><th>Konjugation</th><th>Bedeutung</th></tr>
+                    <tr><td class="pronoun">ich</td><td class="fiil">wohn<strong>e</strong></td><td class="meaning">oturuyorum</td></tr>
+                    <tr><td class="pronoun">du</td><td class="fiil">wohn<strong>st</strong></td><td class="meaning">oturuyorsun</td></tr>
+                    <tr><td class="pronoun">er / sie / es</td><td class="fiil">wohn<strong>t</strong></td><td class="meaning">oturuyor</td></tr>
+                    <tr><td class="pronoun">wir</td><td class="fiil">wohn<strong>en</strong></td><td class="meaning">oturuyoruz</td></tr>
+                    <tr><td class="pronoun">ihr</td><td class="fiil">wohn<strong>t</strong></td><td class="meaning">oturuyorsunuz</td></tr>
+                    <tr><td class="pronoun">sie / Sie</td><td class="fiil">wohn<strong>en</strong></td><td class="meaning">oturuyor(lar) / oturuyorsunuz</td></tr>
+                </table>
+            </div>
+            <div class="side">
+                <div class="side-title">machen (yapmak) – Präsens</div>
+                <table class="fiil-table">
+                    <tr><th>Pronomen</th><th>Konjugation</th><th>Bedeutung</th></tr>
+                    <tr><td class="pronoun">ich</td><td class="fiil">mach<strong>e</strong></td><td class="meaning">yapıyorum</td></tr>
+                    <tr><td class="pronoun">du</td><td class="fiil">mach<strong>st</strong></td><td class="meaning">yapıyorsun</td></tr>
+                    <tr><td class="pronoun">er / sie / es</td><td class="fiil">mach<strong>t</strong></td><td class="meaning">yapıyor</td></tr>
+                    <tr><td class="pronoun">wir</td><td class="fiil">mach<strong>en</strong></td><td class="meaning">yapıyoruz</td></tr>
+                    <tr><td class="pronoun">ihr</td><td class="fiil">mach<strong>t</strong></td><td class="meaning">yapıyorsunuz</td></tr>
+                    <tr><td class="pronoun">sie / Sie</td><td class="fiil">mach<strong>en</strong></td><td class="meaning">yapıyor(lar) / yapıyorsunuz</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
