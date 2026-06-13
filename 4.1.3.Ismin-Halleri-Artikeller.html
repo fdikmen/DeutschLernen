@@ -42,10 +42,15 @@
             border-color: #94a3b8;
         }
 
+        .toolbar button.btn-bw:hover {
+            background: #f4f4f5;
+            border-color: #52525b;
+        }
+
         .page-header {
             text-align: center;
             margin-bottom: 20px;
-            padding-right: 120px;
+            padding-right: 220px;
         }
 
         .page-header h1 {
@@ -328,6 +333,64 @@
                 font-weight: 700 !important;
                 color: #1a1a1a !important;
             }
+
+            body.print-bw * {
+                -webkit-print-color-adjust: economy;
+                print-color-adjust: economy;
+            }
+
+            body.print-bw .print-area,
+            body.print-bw table,
+            body.print-bw th,
+            body.print-bw td,
+            body.print-bw .case-cell,
+            body.print-bw .article-type,
+            body.print-bw .gender-header,
+            body.print-bw .gender-short {
+                background: #fff !important;
+                box-shadow: none !important;
+            }
+
+            body.print-bw .tr,
+            body.print-bw .article-type,
+            body.print-bw .note,
+            body.print-bw .note strong,
+            body.print-bw .print-area h2,
+            body.print-bw .page-header .subtitle .tr {
+                color: #555 !important;
+            }
+
+            body.print-bw .de,
+            body.print-bw table td,
+            body.print-bw .page-header .subtitle .de,
+            body.print-bw .page-header h1 {
+                color: #000 !important;
+            }
+
+            body.print-bw .chg {
+                color: #000 !important;
+                font-weight: 700 !important;
+            }
+
+            body.print-bw table {
+                border: 2px solid #000;
+            }
+
+            body.print-bw th,
+            body.print-bw td,
+            body.print-bw tbody tr.case-group-end td,
+            body.print-bw tbody tr:last-child td,
+            body.print-bw thead tr:last-child th {
+                border-left-color: #000 !important;
+                border-right-color: #000 !important;
+                border-top-color: #000 !important;
+                border-bottom-color: #000 !important;
+            }
+
+            body.print-bw tbody tr:not(.case-group-end):not(:last-child) td {
+                border-top-color: #aaa !important;
+                border-bottom-color: #aaa !important;
+            }
         }
     </style>
 </head>
@@ -349,6 +412,14 @@
                 <rect x="6" y="14" width="12" height="8"></rect>
             </svg>
             Yazdır
+        </button>
+        <button type="button" id="printBwBtn" class="btn-bw" title="Siyah-beyaz yazdır">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="1"></rect>
+                <line x1="12" y1="3" x2="12" y2="21"></line>
+                <path d="M3 9h18M3 15h18"></path>
+            </svg>
+            S/B Yazdır
         </button>
     </div>
 
@@ -483,7 +554,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
         document.getElementById('printBtn').addEventListener('click', function () {
+            document.body.classList.remove('print-bw');
             window.print();
+        });
+
+        document.getElementById('printBwBtn').addEventListener('click', function () {
+            document.body.classList.add('print-bw');
+            window.print();
+        });
+
+        window.addEventListener('afterprint', function () {
+            document.body.classList.remove('print-bw');
         });
 
         document.getElementById('pdfBtn').addEventListener('click', function () {
