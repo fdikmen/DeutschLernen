@@ -98,7 +98,7 @@
         }
 
         th, td {
-            padding: 8px 10px;
+            padding: 6px 8px;
             vertical-align: middle;
             text-align: center;
             border-left: 1px solid #333;
@@ -131,8 +131,8 @@
         .case-cell {
             background-color: #f9f9f9;
             text-align: center;
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 8px;
+            padding-right: 8px;
         }
 
         .article-type {
@@ -140,24 +140,37 @@
             background-color: #fef9e6;
             color: #888;
             font-weight: 400;
+            font-size: 14px;
+        }
+
+        table th .tr,
+        table td .tr {
+            font-size: 14px;
+        }
+
+        table th .de,
+        table td .de,
+        tbody td:not(.case-cell):not(.article-type),
+        .chg {
+            font-size: 19px;
         }
 
         tbody tr.art-belirli td:not(.case-cell) {
             text-align: left;
-            padding-left: 22px;
-            padding-right: 58px;
+            padding-left: 14px;
+            padding-right: 40px;
         }
 
         tbody tr.art-belirsiz td:not(.case-cell) {
             text-align: center;
-            padding-left: 36px;
-            padding-right: 36px;
+            padding-left: 22px;
+            padding-right: 22px;
         }
 
         tbody tr.art-olumsuz td:not(.case-cell) {
             text-align: right;
-            padding-left: 58px;
-            padding-right: 22px;
+            padding-left: 40px;
+            padding-right: 14px;
         }
 
         .gender-header {
@@ -181,14 +194,14 @@
 
         .gender-short {
             background-color: #f2f2f2;
-            font-size: 1.75rem;
+            font-size: 2.2rem;
             font-weight: 400;
-            line-height: 1.2;
-            padding: 10px 8px;
+            line-height: 1.15;
+            padding: 8px 6px;
         }
 
         .gender-short .de {
-            font-size: 1.75rem;
+            font-size: 2.2rem;
             font-weight: 400;
         }
 
@@ -250,11 +263,25 @@
             }
 
             table {
-                font-size: 11px;
+                font-size: 12px;
+            }
+
+            table th .tr,
+            table td .tr,
+            .article-type {
+                font-size: 12px;
+            }
+
+            table th .de,
+            table td .de,
+            tbody td:not(.case-cell):not(.article-type),
+            .chg,
+            .gender-short .de {
+                font-size: 15px;
             }
 
             th, td {
-                padding: 6px 8px;
+                padding: 5px 6px;
             }
 
             th, td,
