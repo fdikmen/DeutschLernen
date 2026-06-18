@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.1.1 Deutsche Ressourcen | Almanca Kaynakları</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .lang-tr {
+            display: none;
+        }
+
+        body.show-tr .lang-de {
+            display: none;
+        }
+
+        body.show-tr .lang-tr {
+            display: block;
+        }
+
+        body.show-tr .lang-tr.inline,
+        .lang-de.inline {
+            display: inline;
+        }
+
+        .section-desc.lang-de,
+        .notizbuch-intro > p.lang-de {
+            display: block;
+        }
+
+        body.show-tr .section-desc.lang-tr,
+        body.show-tr .notizbuch-intro > p.lang-tr {
+            display: block;
+        }
+
+        .resource-desc.lang-de {
+            display: block;
+        }
+
+        body.show-tr .resource-desc.lang-tr {
+            display: block;
+        }
+
+        .header-section {
+            background-color: #fff;
+            padding: 15px 24px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            margin-top: 4px;
+        }
+
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .lang-toggle button {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: #64748b;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .lang-toggle button:hover {
+            background: #f1f5f9;
+        }
+
+        .lang-toggle button.active {
+            background: #3498db;
+            color: #fff;
+        }
+
+        .content {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 24px 20px 48px;
+        }
+
+        .resources-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr;
+        }
+
+        .resource-section {
+            background: #fff;
+            border-radius: 10px;
+            padding: 22px 24px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #3498db;
+            height: 100%;
+        }
+
+        .resource-section.media {
+            border-left-color: #e74c3c;
+        }
+
+        .resource-section.library {
+            border-left-color: #27ae60;
+        }
+
+        .resource-section.courses {
+            border-left-color: #f39c12;
+        }
+
+        .resource-section.materials {
+            border-left-color: #9b59b6;
+        }
+
+        .resource-section.other {
+            border-left-color: #667eea;
+        }
+
+        .resource-section h2 {
+            color: #2c3e50;
+            font-size: 1.25em;
+            margin-bottom: 6px;
+        }
+
+        .section-desc {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 16px;
+        }
+
+        .section-body {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: 1fr;
+        }
+
+        .resource-group h3 {
+            font-size: 1em;
+            color: #34495e;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .resource-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resource-list li {
+            padding: 9px 0;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 0.92em;
+        }
+
+        .resource-list li:last-child {
+            border-bottom: none;
+        }
+
+        .resource-list a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        .resource-list a:hover {
+            text-decoration: underline;
+        }
+
+        .resource-list a.external::after {
+            content: " ↗";
+            font-size: 0.8em;
+            color: #95a5a6;
+            font-weight: 400;
+        }
+
+        .resource-desc {
+            color: #7f8c8d;
+            font-size: 0.88em;
+            margin-top: 2px;
+            font-weight: 400;
+        }
+
+        .notizbuch-intro {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 22px 24px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .notizbuch-intro p {
+            margin-bottom: 12px;
+            font-size: 0.95em;
+            opacity: 0.95;
+        }
+
+        .notizbuch-intro p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .notizbuch-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .notizbuch-links a {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            transition: background 0.2s;
+        }
+
+        .notizbuch-links a:hover {
+            background: rgba(255, 255, 255, 0.32);
+        }
+
+        .notizbuch-links a.external::after {
+            content: " ↗";
+            font-size: 0.85em;
+        }
+
+        .other-footer {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: #7f8c8d;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .back-link:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+
+        @media (min-width: 720px) {
+            .content {
+                padding: 24px 28px 48px;
+            }
+
+            .resources-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .span-full {
+                grid-column: 1 / -1;
+            }
+
+            .section-body.cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .other-footer {
+                grid-template-columns: 1fr 1fr;
+                align-items: start;
+            }
+        }
+
+        @media (min-width: 1100px) {
+            .content {
+                padding: 28px 32px 56px;
+            }
+
+            .resources-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .resource-section.courses .section-body {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .resource-section.media .section-body {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.25em;
+            }
+
+            .resource-section {
+                padding: 18px 16px;
+            }
+
+            .notizbuch-intro {
+                padding: 18px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>
+                    <span class="lang-de">Deutsche Ressourcen</span>
+                    <span class="lang-tr">Almanca Kaynakları</span>
+                </h1>
+                <div class="subtitle">
+                    <span class="lang-de">Links zum Deutschlernen — basierend auf Das Notizbuch</span>
+                    <span class="lang-tr">Almanca öğrenmek için bağlantılar — Das Notizbuch temel alınarak</span>
+                </div>
+            </div>
+            <div class="lang-toggle" role="group" aria-label="Sprache / Dil">
+                <button type="button" id="btnDE" class="active" aria-pressed="true">DE</button>
+                <button type="button" id="btnTR" aria-pressed="false">TR</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="resources-grid">
+
+            <section class="resource-section">
+                <h2>
+                    <span class="lang-de">Wörterbuch</span>
+                    <span class="lang-tr">Sözlükler</span>
+                </h2>
+                <p class="section-desc lang-de">Online-Wörterbücher für Wortsuche, Übersetzung und Grammatikprüfung.</p>
+                <p class="section-desc lang-tr">Kelime arama, çeviri ve gramer kontrolü için çevrimiçi sözlükler.</p>
+
+                <div class="section-body cols-2">
+                    <div class="resource-group">
+                        <h3>Leo · Pons · Duden</h3>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://www.leo.org/german-english" class="external" target="_blank" rel="noopener">LEO Deutsch–Englisch</a>
+                                <span class="resource-desc lang-de">Deutsch–Englisch Wörterbuch mit Forum und Aussprache</span>
+                                <span class="resource-desc lang-tr">Almanca–İngilizce sözlük, forum ve telaffuz desteği</span>
+                            </li>
+                            <li>
+                                <a href="https://en.pons.com/translate" class="external" target="_blank" rel="noopener">PONS Übersetzer</a>
+                                <span class="resource-desc lang-de">Mehrsprachiger Übersetzer und Wörterbuch</span>
+                                <span class="resource-desc lang-tr">Çok dilli çeviri ve sözlük</span>
+                            </li>
+                            <li>
+                                <a href="https://www.duden.de/" class="external" target="_blank" rel="noopener">Duden</a>
+                                <span class="resource-desc lang-de">Offizielle Referenz für Rechtschreibung und Grammatik</span>
+                                <span class="resource-desc lang-tr">Almanca yazım ve gramer için resmi referans</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-group">
+                        <h3>
+                            <span class="lang-de">Weitere Wörterbücher</span>
+                            <span class="lang-tr">Diğer sözlükler</span>
+                        </h3>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://www.dwds.de/" class="external" target="_blank" rel="noopener">DWDS</a>
+                                <span class="resource-desc lang-de">Digitales Wörterbuch der deutschen Sprache</span>
+                                <span class="resource-desc lang-tr">Almanca dijital sözlük</span>
+                            </li>
+                            <li>
+                                <a href="https://www.linguee.com/" class="external" target="_blank" rel="noopener">Linguee</a>
+                                <span class="resource-desc lang-de">Übersetzungen aus echten Texten und Dokumenten</span>
+                                <span class="resource-desc lang-tr">Gerçek metinlerden örnekli çeviri</span>
+                            </li>
+                            <li>
+                                <a href="https://www.hueber.de/woerterbuch/online" class="external" target="_blank" rel="noopener">Hueber Wörterbuch</a>
+                                <span class="resource-desc lang-de">Wörterbuch des DaF-Verlags Hueber</span>
+                                <span class="resource-desc lang-tr">Hueber yayınevinin Almanca sözlüğü</span>
+                            </li>
+                            <li>
+                                <a href="https://www.verbformen.com/" class="external" target="_blank" rel="noopener">verbformen.com</a>
+                                <span class="resource-desc lang-de">Verben konjugieren, Nomen deklinieren</span>
+                                <span class="resource-desc lang-tr">Fiil çekimi ve isim halleri</span>
+                            </li>
+                            <li>
+                                <a href="https://www.korrekturen.de" class="external" target="_blank" rel="noopener">korrekturen.de</a>
+                                <span class="resource-desc lang-de">Komparativ und Superlativ — Regeln und Beispiele</span>
+                                <span class="resource-desc lang-tr">Komparativ ve süperlativ kuralları</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="resource-section library">
+                <h2>
+                    <span class="lang-de">Bibliothek</span>
+                    <span class="lang-tr">Kütüphaneler</span>
+                </h2>
+                <p class="section-desc lang-de">Digitale Bibliotheken und Ausleihdienste des Goethe-Instituts.</p>
+                <p class="section-desc lang-tr">Goethe-Institut dijital kütüphaneleri ve ödünç alma hizmetleri.</p>
+                <ul class="resource-list">
+                    <li>
+                        <a href="https://my.goethe.de/" class="external" target="_blank" rel="noopener">Mein Goethe</a>
+                        <span class="resource-desc lang-de">Persönlicher Bereich des Goethe-Instituts</span>
+                        <span class="resource-desc lang-tr">Goethe-Institut kişisel hesap alanı</span>
+                    </li>
+                    <li>
+                        <a href="http://www2.onleihe.de/goethe-institut/frontend/welcome,51-0-0-100-0-0-1-0-0-0-0.html?lK=656e" class="external" target="_blank" rel="noopener">Onleihe — Goethe-Institut</a>
+                        <span class="resource-desc lang-de">E-Books und Hörbücher online ausleihen</span>
+                        <span class="resource-desc lang-tr">E-kitap ve sesli kitap ödünç alma</span>
+                    </li>
+                    <li>
+                        <a href="https://ankara.bibliothek.goethe.de" class="external" target="_blank" rel="noopener">Ankara Bibliothek</a>
+                        <span class="resource-desc lang-de">Goethe-Institut Bibliothek in Ankara</span>
+                        <span class="resource-desc lang-tr">Ankara Goethe-Institut kütüphanesi</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="resource-section materials">
+                <h2>
+                    <span class="lang-de">Lehrmaterial</span>
+                    <span class="lang-tr">Ders materyalleri</span>
+                </h2>
+                <p class="section-desc lang-de">Online-Übungen aus Hueber <em>Menschen</em> und anderen Verlagen — nach Niveau.</p>
+                <p class="section-desc lang-tr">Hueber <em>Menschen</em> ve diğer yayınevlerinin seviyeye göre çevrimiçi alıştırmaları.</p>
+                <ul class="resource-list">
+                    <li>
+                        <a href="https://hueber.de/shared/uebungen/menschen/kb/a1/livebook/l01/index.php" class="external" target="_blank" rel="noopener">Menschen A1 — Livebook</a>
+                        <span class="resource-desc lang-de">Interaktives Übungsbuch A1</span>
+                        <span class="resource-desc lang-tr">A1 etkileşimli alıştırma kitabı</span>
+                    </li>
+                    <li>
+                        <a href="https://hueber.de/shared/uebungen/menschen/kb/a2/menu.php" class="external" target="_blank" rel="noopener">Menschen A2</a>
+                        <span class="resource-desc lang-de">Übungen und Lösungen A2</span>
+                        <span class="resource-desc lang-tr">A2 alıştırmalar ve çözümler</span>
+                    </li>
+                    <li>
+                        <a href="https://hueber.de/shared/uebungen/menschen/kb/b1/menu.php" class="external" target="_blank" rel="noopener">Menschen B1</a>
+                        <span class="resource-desc lang-de">Übungen und Lösungen B1</span>
+                        <span class="resource-desc lang-tr">B1 alıştırmalar ve çözümler</span>
+                    </li>
+                    <li>
+                        <a href="https://www.hueber.de/lernen/deutsch-als-fremdsprache" class="external" target="_blank" rel="noopener">Hueber — Deutsch als Fremdsprache</a>
+                        <span class="resource-desc lang-de">Übersicht aller DaF-Materialien</span>
+                        <span class="resource-desc lang-tr">Tüm yabancılara Almanca materyalleri</span>
+                    </li>
+                    <li>
+                        <a href="https://www.cornelsen.de/reihen/studio-d-deutsch-als-fremdsprache-120000010000" class="external" target="_blank" rel="noopener">Cornelsen — Studio d</a>
+                        <span class="resource-desc lang-de">Lehrwerkreihe Studio d</span>
+                        <span class="resource-desc lang-tr">Studio d ders kitabı serisi</span>
+                    </li>
+                    <li>
+                        <a href="https://www.klett-sprachen.de/deutsch-im-krankenhaus-neu/r-1/78#reiter=titel&niveau=A2-B2" class="external" target="_blank" rel="noopener">Deutsch im Krankenhaus</a>
+                        <span class="resource-desc lang-de">Medizinisches Deutsch A2–B2</span>
+                        <span class="resource-desc lang-tr">Sağlık alanı Almancası A2–B2</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="resource-section courses span-full">
+                <h2>
+                    <span class="lang-de">Kurse &amp; Üben</span>
+                    <span class="lang-tr">Kurslar ve alıştırmalar</span>
+                </h2>
+                <p class="section-desc lang-de">Kostenlose Online-Kurse, Einstufungstests und Übungen.</p>
+                <p class="section-desc lang-tr">Ücretsiz çevrimiçi kurslar, seviye testleri ve alıştırmalar.</p>
+
+                <div class="section-body">
+                    <div class="resource-group">
+                        <h3>DW — Deutsch lernen</h3>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://learngerman.dw.com/en/placementDashboard" class="external" target="_blank" rel="noopener">Placement Test</a>
+                                <span class="resource-desc lang-de">Deutsch-Niveau testen</span>
+                                <span class="resource-desc lang-tr">Almanca seviye belirleme testi</span>
+                            </li>
+                            <li>
+                                <a href="https://www.dw.com/tr/almanca-%C3%B6%C4%9Frenin/deutsch-interaktiv/s-11205" class="external" target="_blank" rel="noopener">Deutsch Interaktiv (A1–B1)</a>
+                                <span class="resource-desc lang-de">Interaktiver Online-Kurs</span>
+                                <span class="resource-desc lang-tr">Etkileşimli çevrimiçi kurs</span>
+                            </li>
+                            <li>
+                                <a href="https://www.dw.com/tr/almanca-%C3%B6%C4%9Frenin/deutsch-warum-nicht/s-2609" class="external" target="_blank" rel="noopener">Deutsch — warum nicht?</a>
+                                <span class="resource-desc lang-de">Klassischer Audio-Kurs als Podcast</span>
+                                <span class="resource-desc lang-tr">Klasik sesli kurs / podcast</span>
+                            </li>
+                            <li>
+                                <a href="https://www.dw.com/tr/almanca-%C3%B6%C4%9Frenin/mission-europe/s-11206" class="external" target="_blank" rel="noopener">Mission Europe (A1)</a>
+                                <span class="resource-desc lang-de">Krimi-Serie zum Deutschlernen</span>
+                                <span class="resource-desc lang-tr">Almanca öğrenmek için polisiye dizisi</span>
+                            </li>
+                            <li>
+                                <a href="https://www.dw.com/tr/almanca-%C3%B6%C4%9Frenin/radio-d-1-b%C3%B6l%C3%BCm/s-11211" class="external" target="_blank" rel="noopener">Radio D (A1)</a>
+                                <span class="resource-desc lang-de">Audiosprachkurs für Anfänger</span>
+                                <span class="resource-desc lang-tr">Başlangıç seviyesi sesli kurs</span>
+                            </li>
+                            <li>
+                                <a href="https://www.dw.com/tr/almanca-%C3%B6%C4%9Frenin/audiotrainer/s-11213" class="external" target="_blank" rel="noopener">Audio-Trainer (A1–A2)</a>
+                                <span class="resource-desc lang-de">Hörübungen mit Alltagsthemen</span>
+                                <span class="resource-desc lang-tr">Günlük konularla dinleme alıştırmaları</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-group">
+                        <h3>Goethe-Institut</h3>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://www.goethe.de/de/spr/ueb.html" class="external" target="_blank" rel="noopener">
+                                    <span class="lang-de inline">Kostenlos Deutsch üben</span>
+                                    <span class="lang-tr inline">Ücretsiz Almanca alıştırma</span>
+                                </a>
+                                <span class="resource-desc lang-de">Übungen und Lernmaterialien</span>
+                                <span class="resource-desc lang-tr">Alıştırmalar ve öğrenme materyalleri</span>
+                            </li>
+                            <li>
+                                <a href="https://www.goethe.de/prj/mwd/de/index.html" class="external" target="_blank" rel="noopener">Mein Weg nach Deutschland</a>
+                                <span class="resource-desc lang-de">Kurs für Zuwanderer in Deutschland</span>
+                                <span class="resource-desc lang-tr">Almanya'ya göç edenler için kurs</span>
+                            </li>
+                            <li>
+                                <a href="https://www.goethe.de/de/spr/kup/prf/prf.html" class="external" target="_blank" rel="noopener">Deutschprüfungen</a>
+                                <span class="resource-desc lang-de">Informationen zu Goethe-Prüfungen</span>
+                                <span class="resource-desc lang-tr">Goethe sınavları hakkında bilgi</span>
+                            </li>
+                            <li>
+                                <a href="https://www.goethe.de/ins/tr/de/sta/ank/prf.html" class="external" target="_blank" rel="noopener">
+                                    <span class="lang-de inline">Prüfungen — Ankara</span>
+                                    <span class="lang-tr inline">Sınavlar — Ankara</span>
+                                </a>
+                                <span class="resource-desc lang-de">Prüfungstermine in Ankara</span>
+                                <span class="resource-desc lang-tr">Ankara sınav tarihleri</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-group">
+                        <h3>
+                            <span class="lang-de">Weitere Kurse</span>
+                            <span class="lang-tr">Diğer kurslar</span>
+                        </h3>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://www.deutschakademie.de/online-deutschkurs/audio-course/" class="external" target="_blank" rel="noopener">DeutschAkademie — Audio-Kurs</a>
+                                <span class="resource-desc lang-de">Kostenloser Audio-Deutschkurs</span>
+                                <span class="resource-desc lang-tr">Ücretsiz sesli Almanca kursu</span>
+                            </li>
+                            <li>
+                                <a href="https://seedlang.com/" class="external" target="_blank" rel="noopener">Seedlang</a>
+                                <span class="resource-desc lang-de">Vokabeln und Grammatik mit Videos</span>
+                                <span class="resource-desc lang-tr">Video destekli kelime ve gramer</span>
+                            </li>
+                            <li>
+                                <a href="https://www.coursera.org/learn/digital-humanities/home/welcome" class="external" target="_blank" rel="noopener">Coursera — Sprachtechnologie</a>
+                                <span class="resource-desc lang-de">MOOC zu Sprache und Digital Humanities</span>
+                                <span class="resource-desc lang-tr">Dil teknolojisi MOOC kursu</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="resource-section media span-full">
+                <h2>
+                    <span class="lang-de">Medien</span>
+                    <span class="lang-tr">Medya</span>
+                </h2>
+                <p class="section-desc lang-de">Hörverstehen durch Fernsehen, Podcasts, YouTube und Musik.</p>
+                <p class="section-desc lang-tr">TV, podcast, YouTube ve müzikle dinleme pratiği.</p>
+
+                <div class="section-body">
+                    <div class="resource-group">
+                        <h3>
+                            <span class="lang-de">Fernsehen</span>
+                            <span class="lang-tr">Televizyon</span>
+                        </h3>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://www.ardmediathek.de/tv" class="external" target="_blank" rel="noopener">ARD Mediathek</a>
+                                <span class="resource-desc lang-de">Öffentlich-rechtliche TV-Mediathek</span>
+                                <span class="resource-desc lang-tr">Kamu yayıncılığı TV arşivi</span>
+                            </li>
+                            <li>
+                                <a href="https://www.zdf.de/" class="external" target="_blank" rel="noopener">ZDF</a>
+                                <span class="resource-desc lang-de">Zweites Deutsches Fernsehen</span>
+                                <span class="resource-desc lang-tr">Alman ikinci televizyon kanalı</span>
+                            </li>
+                            <li>
+                                <a href="https://www.daserste.de/" class="external" target="_blank" rel="noopener">Das Erste</a>
+                                <span class="resource-desc lang-de">Erstes deutsches Fernsehprogramm</span>
+                                <span class="resource-desc lang-tr">Alman birinci televizyon kanalı</span>
+                            </li>
+                            <li>
+                                <a href="https://www.ndr.de/" class="external" target="_blank" rel="noopener">NDR</a>
+                                <span class="resource-desc lang-de">Norddeutscher Rundfunk</span>
+                                <span class="resource-desc lang-tr">Kuzey Alman radyo-televizyonu</span>
+                            </li>
+                            <li>
+                                <a href="https://www.n-tv.de/mediathek/livestream/" class="external" target="_blank" rel="noopener">n-tv Livestream</a>
+                                <span class="resource-desc lang-de">Nachrichtensender — Livestream</span>
+                                <span class="resource-desc lang-tr">Haber kanalı — canlı yayın</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-group">
+                        <h3>Podcast &amp; YouTube</h3>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://soundcloud.com/dw-learngerman" class="external" target="_blank" rel="noopener">DW Learn German — SoundCloud</a>
+                                <span class="resource-desc lang-de">Podcasts zum Deutschlernen</span>
+                                <span class="resource-desc lang-tr">Almanca öğrenme podcastleri</span>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/channel/UCbxb2fqe9oNgglAoYqsYOtQ" class="external" target="_blank" rel="noopener">Easy German — YouTube</a>
+                                <span class="resource-desc lang-de">Deutsch lernen auf der Straße — mit Untertiteln</span>
+                                <span class="resource-desc lang-tr">Sokak röportajlarıyla Almanca — altyazılı</span>
+                            </li>
+                            <li>
+                                <a href="http://www.spiegel.de/spiegel/" class="external" target="_blank" rel="noopener">Der Spiegel</a>
+                                <span class="resource-desc lang-de">Deutsches Nachrichtenmagazin — Lesepraxis</span>
+                                <span class="resource-desc lang-tr">Alman haber dergisi — okuma pratiği</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="resource-section other span-full">
+                <h2>
+                    <span class="lang-de">Weitere Ressourcen</span>
+                    <span class="lang-tr">Diğer kaynaklar</span>
+                </h2>
+
+                <div class="other-footer">
+                    <div class="notizbuch-intro">
+                        <p class="lang-de">
+                            <strong>Das Notizbuch</strong> ist eine Sammlung von Wörterbüchern, Bibliotheken, Medien und Kursen zum Deutschlernen.
+                            Diese Seite fasst die wichtigsten Ressourcen zusammen — die vollständige Liste finden Sie über die Links in diesem Abschnitt.
+                        </p>
+                        <p class="lang-tr">
+                            <strong>Das Notizbuch</strong>, Almanca öğrenmek için derlenmiş sözlükler, kütüphaneler, medya ve kurs bağlantılarından oluşur.
+                            Bu sayfa en önemli kaynakların özetidir — tam listeye bu bölümdeki bağlantılardan ulaşabilirsiniz.
+                        </p>
+                        <div class="notizbuch-links">
+                            <a href="https://sbalci.github.io/DeutschLernen/Notizbuch.html" class="external" target="_blank" rel="noopener">
+                                <span class="lang-de inline">Das Notizbuch (Desktop)</span>
+                                <span class="lang-tr inline">Das Notizbuch (Masaüstü)</span>
+                            </a>
+                            <a href="https://sbalci.github.io/DeutschLernen/Notizbuch.nb.html" class="external" target="_blank" rel="noopener">
+                                <span class="lang-de inline">Das Notizbuch (Mobile)</span>
+                                <span class="lang-tr inline">Das Notizbuch (Mobil)</span>
+                            </a>
+                            <a href="https://github.com/sbalci/DeutschLernen/blob/master/Notizbuch.Rmd" class="external" target="_blank" rel="noopener">
+                                <span class="lang-de inline">GitHub — Notizbuch.Rmd</span>
+                                <span class="lang-tr inline">GitHub — Notizbuch.Rmd</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <ul class="resource-list">
+                        <li>
+                            <a href="https://github.com/sbalci/DeutschLernen" class="external" target="_blank" rel="noopener">DeutschLernen — GitHub Repository</a>
+                            <span class="resource-desc lang-de">Projektseite mit Quellcode und weiteren Materialien</span>
+                            <span class="resource-desc lang-tr">Kaynak kod ve ek materyallerin bulunduğu proje sayfası</span>
+                        </li>
+                        <li>
+                            <a href="https://github.com/sbalci/DeutschLernen/blob/master/Notizbuch.Rmd" class="external" target="_blank" rel="noopener">Notizbuch.Rmd</a>
+                            <span class="resource-desc lang-de">Vollständige und laufend aktualisierte Ressourcenliste</span>
+                            <span class="resource-desc lang-tr">Tam ve sürekli güncellenen kaynak listesi</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+
+        <a href="0.0.0.Inhaltsverzeichnis.html" class="back-link">
+            <span class="lang-de">← Inhaltsverzeichnis</span>
+            <span class="lang-tr">← İçindekiler</span>
+        </a>
+    </div>
+
+    <script>
+        (function () {
+            var btnDE = document.getElementById('btnDE');
+            var btnTR = document.getElementById('btnTR');
+            var storageKey = 'deutschlernen-lang';
+
+            function setLang(lang) {
+                var isTR = lang === 'tr';
+                document.body.classList.toggle('show-tr', isTR);
+                document.documentElement.lang = isTR ? 'tr' : 'de';
+                btnDE.classList.toggle('active', !isTR);
+                btnTR.classList.toggle('active', isTR);
+                btnDE.setAttribute('aria-pressed', String(!isTR));
+                btnTR.setAttribute('aria-pressed', String(isTR));
+                try { localStorage.setItem(storageKey, lang); } catch (e) {}
+            }
+
+            btnDE.addEventListener('click', function () { setLang('de'); });
+            btnTR.addEventListener('click', function () { setLang('tr'); });
+
+            try {
+                var saved = localStorage.getItem(storageKey);
+                if (saved === 'tr') {
+                    setLang('tr');
+                } else {
+                    setLang('de');
+                }
+            } catch (e) {
+                setLang('de');
+            }
+        })();
+    </script>
+</body>
+</html>
